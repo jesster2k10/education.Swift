@@ -8,11 +8,11 @@
 
 import UIKit
 
-var tempOneValue : Int = 0
-var tempTwoValue : Int = 0
+var tempOneValue : Int? = 0
+var tempTwoValue : Int? = 0
 var tempSign : String = ""
 var equalCheck : Bool = false
-
+var signCheck : Bool = false
 
 
 class ViewController: UIViewController {
@@ -38,29 +38,44 @@ class ViewController: UIViewController {
         if let text = sender.titleLabel?.text {
             switch(text) {
             case "1","2","3","4","5","6","7","8","9","0": displayLabel.text?.appendContentsOf(text)
-            case "+", "-": tempOneValue = display!
-                           tempSign = sender.titleLabel!.text!
+                
+            case "+", "-": //TO simplify:
+                           if (displayLabel.text != "") { displayLabel.placeholder = displayLabel.text }
             
-            //TODO
-            displayLabel.
+                           displayLabel.text = nil
+                           //If sign push twice:
+                           if (signCheck) {
+                                tempTwoValue = display
+                                displayLabel.placeholder = calculate(tempOneValue, tempTwoValue ,tempSign)
+                           }
+                           signCheck = true
+                           
+                           tempOneValue = Int(displayLabel.placeholder!)!
+                           tempSign = sender.titleLabel!.text!
                            equalCheck = false
-            case "C": displayLabel.text = ""
-            default: if (!equalCheck) {
-                        tempTwoValue = display!
+                
+            case "C": displayLabel.text = nil
+                      displayLabel.placeholder = "0"
+                      tempSign = ""
+                      signCheck = false
+            default: if (!equalCheck && displayLabel.text != "") {
+                        tempTwoValue = display
                         displayLabel.text = calculate(tempOneValue, tempTwoValue ,tempSign)
                         equalCheck = true }
-                     else {
-                        displayLabel.text = calculate(display!, tempTwoValue ,tempSign)
+                     else if(equalCheck && displayLabel.text != "") {
+                        displayLabel.text = calculate(display, tempTwoValue ,tempSign)
                      }
+                     signCheck = false
             }
+        }
+    }
+    
+    func calculate(oldValue : Int?, _ newValue : Int?, _ sign : String) -> String {
+        switch(sign) {
+        case "+": return String(newValue! + oldValue!)
+        case "-": return String(oldValue! - newValue!)
+        default: return String(newValue!)
         }
     }
 }
 
-func calculate(oldValue : Int, _ newValue : Int, _ sign : String) -> String {
-    switch(sign) {
-        case "+": return String(newValue + oldValue)
-        case "-": return String(oldValue - newValue)
-        default: return "0"
-    }
-}
