@@ -8,12 +8,13 @@
 
 import UIKit
 
-var tempOneValue : Int? = 0
-var tempTwoValue : Int? = 0
+var tempOneValue : Float? = 0
+var tempTwoValue : Float? = 0
 var tempSign : String = ""
 var equalCheck : Bool = false
 var signCheck : Bool = false
-
+var dotCheck : Bool = false
+var numberCheck : Bool = false
 
 class ViewController: UIViewController {
     override func viewDidLoad() {
@@ -33,31 +34,39 @@ class ViewController: UIViewController {
     
     
     @IBAction func allButton(sender : UIButton) {
-        let display : Int? = Int(displayLabel.text!)
+        let display : Float? = Float(displayLabel.text!)
         
         if let text = sender.titleLabel?.text {
             switch(text) {
             case "1","2","3","4","5","6","7","8","9","0": displayLabel.text?.appendContentsOf(text)
+                                                          if (!numberCheck) { dotCheck = true }
                 
-            case "+", "-": //TO simplify:
-                           if (displayLabel.text != "") { displayLabel.placeholder = displayLabel.text }
+            case "+", "-", "/", "*": //TO simplify:
+                                    if (displayLabel.text != "") { displayLabel.placeholder = displayLabel.text }
             
-                           displayLabel.text = nil
-                           //If sign push twice:
-                           if (signCheck) {
-                                tempTwoValue = display
-                                displayLabel.placeholder = calculate(tempOneValue, tempTwoValue ,tempSign)
-                           }
-                           signCheck = true
-                           
-                           tempOneValue = Int(displayLabel.placeholder!)!
-                           tempSign = sender.titleLabel!.text!
-                           equalCheck = false
+                                    //If sign push twice:
+                                    if (signCheck && displayLabel.text != "") {
+                                        tempTwoValue = display
+                                        displayLabel.placeholder = calculate(tempOneValue, tempTwoValue ,tempSign)
+                                    }
+                                    signCheck = true
+                                    
+                                    displayLabel.text = nil
+                                    tempOneValue = Float(displayLabel.placeholder!)!
+                                    tempSign = sender.titleLabel!.text!
+                                    equalCheck = false
+                                    numberCheck = false
                 
             case "C": displayLabel.text = nil
                       displayLabel.placeholder = "0"
                       tempSign = ""
                       signCheck = false
+                      numberCheck = false
+                
+            case ".": if (dotCheck) { displayLabel.text?.appendContentsOf(text) }
+                      dotCheck = false
+                      numberCheck = true
+                
             default: if (!equalCheck && displayLabel.text != "") {
                         tempTwoValue = display
                         displayLabel.text = calculate(tempOneValue, tempTwoValue ,tempSign)
@@ -66,14 +75,16 @@ class ViewController: UIViewController {
                         displayLabel.text = calculate(display, tempTwoValue ,tempSign)
                      }
                      signCheck = false
+                     numberCheck = false
             }
         }
     }
     
-    func calculate(oldValue : Int?, _ newValue : Int?, _ sign : String) -> String {
+    func calculate(oldValue : Float?, _ newValue : Float?, _ sign : String) -> String {
         switch(sign) {
         case "+": return String(newValue! + oldValue!)
         case "-": return String(oldValue! - newValue!)
+        case "/": return String(oldValue! / newValue!)
         default: return String(newValue!)
         }
     }
