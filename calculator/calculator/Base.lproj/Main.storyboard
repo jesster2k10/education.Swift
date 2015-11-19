@@ -113,7 +113,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pk8-PN-up5">
-                                <rect key="frame" x="285" y="336" width="30" height="30"/>
+                                <rect key="frame" x="285" y="285" width="30" height="30"/>
                                 <animations/>
                                 <state key="normal" title="+"/>
                                 <connections>
@@ -121,7 +121,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxZ-md-273">
-                                <rect key="frame" x="285" y="394" width="30" height="30"/>
+                                <rect key="frame" x="285" y="336" width="30" height="30"/>
                                 <animations/>
                                 <state key="normal" title="-"/>
                                 <connections>
@@ -148,6 +148,22 @@
                                 <state key="normal" title="."/>
                                 <connections>
                                     <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XDR-rf-IGi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xhc-te-XuH">
+                                <rect key="frame" x="285" y="394" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="*"/>
+                                <connections>
+                                    <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kEQ-AP-85E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3X9-Xb-Djs">
+                                <rect key="frame" x="191" y="285" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="%"/>
+                                <connections>
+                                    <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="13x-cl-loM"/>
                                 </connections>
                             </button>
                         </subviews>

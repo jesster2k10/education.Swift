@@ -31,34 +31,41 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleButtons: UIButton!
     @IBOutlet weak var displayLabel: UITextField!
     
-    
-    
     @IBAction func allButton(sender : UIButton) {
         let display : Float? = Float(displayLabel.text!)
+        let displayPlaceholder : Float? = Float(displayLabel.placeholder!)!
         
         if let text = sender.titleLabel?.text {
             switch(text) {
             case "1","2","3","4","5","6","7","8","9","0": displayLabel.text?.appendContentsOf(text)
                                                           if (!numberCheck) { dotCheck = true }
                 
-            case "+", "-", "/", "*": //TO simplify:
+            case "+", "-", "/", "*", "%": //TO simplify:
                                     if (displayLabel.text != "") { displayLabel.placeholder = displayLabel.text }
-            
-                                    //If sign push twice:
-                                    if (signCheck && displayLabel.text != "") {
+                                    
+                                    if (sender.titleLabel!.text! == "%") {
                                         tempTwoValue = display
-                                        displayLabel.placeholder = calculate(tempOneValue, tempTwoValue ,tempSign)
+                                        displayLabel.text = calculate(tempOneValue, tempTwoValue ,"/100")
+                                    }
+                                    //If sign push twice:
+                                    else if (signCheck && displayLabel.text != "") {
+                                        tempTwoValue = display
+                                        calculate(tempOneValue, tempTwoValue ,tempSign)
+                                        tempOneValue = Float(displayLabel.placeholder!)!
+
+                                    } else {
+                                        tempOneValue = Float(displayLabel.placeholder!)!
                                     }
                                     signCheck = true
-                                    
                                     displayLabel.text = nil
-                                    tempOneValue = Float(displayLabel.placeholder!)!
                                     tempSign = sender.titleLabel!.text!
                                     equalCheck = false
                                     numberCheck = false
                 
             case "C": displayLabel.text = nil
                       displayLabel.placeholder = "0"
+                      tempOneValue = nil
+                      tempTwoValue = nil
                       tempSign = ""
                       signCheck = false
                       numberCheck = false
@@ -67,12 +74,16 @@ class ViewController: UIViewController {
                       dotCheck = false
                       numberCheck = true
                 
-            default: if (!equalCheck && displayLabel.text != "") {
-                        tempTwoValue = display
-                        displayLabel.text = calculate(tempOneValue, tempTwoValue ,tempSign)
+            default: if (!equalCheck) {
+                        display == nil ? (tempTwoValue = displayPlaceholder) : (tempTwoValue = display)
+                        calculate(tempOneValue, tempTwoValue ,tempSign)
+                        displayLabel.text = nil
+
                         equalCheck = true }
-                     else if(equalCheck && displayLabel.text != "") {
-                        displayLabel.text = calculate(display, tempTwoValue ,tempSign)
+                     else if(equalCheck) {
+                        calculate(displayPlaceholder, tempTwoValue ,tempSign)
+                        displayLabel.text = nil
+
                      }
                      signCheck = false
                      numberCheck = false
@@ -80,13 +91,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func signSymbol (sender : String) {
+        
+    }
+    
     func calculate(oldValue : Float?, _ newValue : Float?, _ sign : String) -> String {
         switch(sign) {
-        case "+": return String(newValue! + oldValue!)
-        case "-": return String(oldValue! - newValue!)
-        case "/": return String(oldValue! / newValue!)
-        default: return String(newValue!)
+        case "+": displayLabel.placeholder = String(newValue! + oldValue!)
+        case "-": displayLabel.placeholder = String(oldValue! - newValue!)
+        case "/": displayLabel.placeholder = String(oldValue! / newValue!)
+        case "*": displayLabel.placeholder = String(oldValue! * newValue!)
+        case "%": displayLabel.placeholder = String(oldValue! * newValue!)
+        case "/100": displayLabel.placeholder = String(newValue! / 100)
+        default: displayLabel.placeholder = "0"
         }
+        return displayLabel.placeholder!
     }
 }
 
