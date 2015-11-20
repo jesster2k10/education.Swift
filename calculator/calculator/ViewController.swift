@@ -8,19 +8,20 @@
 
 import UIKit
 
-var tempOneValue : Float? = 0
-var tempTwoValue : Float? = 0
-var tempSign : String = ""
-var equalCheck : Bool = false
-var signCheck : Bool = false
-var dotCheck : Bool = false
-var numberCheck : Bool = false
-
 class ViewController: UIViewController {
+    
+    var firstValue : Double? = nil
+    var secondValue : Double? = nil
+    var tempValue : Double? = nil
+    var lastSign : String = ""
+    var checkEqual = false
+    var checkSign = false
+    var checkButton = false
+    var dotCheck = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
+        displayLabel.text = "0"
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,84 +29,69 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var titleButtons: UIButton!
-    @IBOutlet weak var displayLabel: UITextField!
-    
-    @IBAction func allButton(sender : UIButton) {
-        let display : Float? = Float(displayLabel.text!)
-        let displayPlaceholder : Float? = Float(displayLabel.placeholder!)!
+    func calculateIt () {
+        checkEqual ? (firstValue = Double(displayLabel.text!)) : (secondValue = Double(displayLabel.text!))
         
-        if let text = sender.titleLabel?.text {
-            switch(text) {
-            case "1","2","3","4","5","6","7","8","9","0": displayLabel.text?.appendContentsOf(text)
-                                                          if (!numberCheck) { dotCheck = true }
-                
-            case "+", "-", "/", "*", "%": //TO simplify:
-                                    if (displayLabel.text != "") { displayLabel.placeholder = displayLabel.text }
-                                    
-                                    if (sender.titleLabel!.text! == "%") {
-                                        tempTwoValue = display
-                                        displayLabel.text = calculate(tempOneValue, tempTwoValue ,"/100")
-                                    }
-                                    //If sign push twice:
-                                    else if (signCheck && displayLabel.text != "") {
-                                        tempTwoValue = display
-                                        calculate(tempOneValue, tempTwoValue ,tempSign)
-                                        tempOneValue = Float(displayLabel.placeholder!)!
+        switch(lastSign) {
+        case "+" : tempValue = firstValue! + secondValue!
+        case "-" : tempValue = firstValue! - secondValue!
+        case "*" : tempValue = firstValue! * secondValue!
+        case "/" : tempValue = firstValue! / secondValue!
+        default: break
+        }
+        checkSign = false
+        checkEqual = true
+        checkButton = true
+        displayLabel.text =  String(tempValue!)
+    }
+    
+    
+    func signPress () {
+        if (checkSign) {
+            secondValue = Double(displayLabel.text!)
+        }
+        else if (!checkSign) {
+            firstValue = Double(displayLabel.text!)
+        }
+        checkEqual = false
+        checkSign = true
+        checkButton = true
+        dotCheck = false
 
-                                    } else {
-                                        tempOneValue = Float(displayLabel.placeholder!)!
-                                    }
-                                    signCheck = true
-                                    displayLabel.text = nil
-                                    tempSign = sender.titleLabel!.text!
-                                    equalCheck = false
-                                    numberCheck = false
-                
-            case "C": displayLabel.text = nil
-                      displayLabel.placeholder = "0"
-                      tempOneValue = nil
-                      tempTwoValue = nil
-                      tempSign = ""
-                      signCheck = false
-                      numberCheck = false
-                
-            case ".": if (dotCheck) { displayLabel.text?.appendContentsOf(text) }
-                      dotCheck = false
-                      numberCheck = true
-                
-            default: if (!equalCheck) {
-                        display == nil ? (tempTwoValue = displayPlaceholder) : (tempTwoValue = display)
-                        calculate(tempOneValue, tempTwoValue ,tempSign)
-                        displayLabel.text = nil
-
-                        equalCheck = true }
-                     else if(equalCheck) {
-                        calculate(displayPlaceholder, tempTwoValue ,tempSign)
-                        displayLabel.text = nil
-
-                     }
-                     signCheck = false
-                     numberCheck = false
+    }
+    
+    func clearDisplay () {
+        firstValue = nil
+        secondValue = nil
+        checkEqual = false
+        checkSign = false
+        checkButton = false
+        dotCheck = false
+        displayLabel.text = "0"
+    }
+        
+    @IBOutlet weak var displayLabel: UILabel!
+    @IBAction func allButton(sender : UIButton) {
+        //let display = displayLabel.text!
+        if let buttonLabel = sender.titleLabel?.text {
+            switch(buttonLabel) {
+            case "1","2","3","4","5","6","7","8","9","0": if (displayLabel.text == "0") { displayLabel.text = "" }
+                                                          if (checkButton) { displayLabel.text = "" }
+                                                          displayLabel.text?.appendContentsOf(buttonLabel)
+                                                          checkButton = false
+            case "+", "-", "/", "*", "%": if (checkSign && !checkButton) {
+                                            calculateIt()
+                                            firstValue = Double(displayLabel.text!)}
+                                          signPress()
+                                          lastSign = buttonLabel
+            case "C": clearDisplay()
+            case ".": if(!dotCheck) { displayLabel.text?.appendContentsOf(".")
+                        dotCheck = true}
+            case "=": calculateIt()
+            default: break
             }
         }
     }
     
-    func signSymbol (sender : String) {
-        
-    }
-    
-    func calculate(oldValue : Float?, _ newValue : Float?, _ sign : String) -> String {
-        switch(sign) {
-        case "+": displayLabel.placeholder = String(newValue! + oldValue!)
-        case "-": displayLabel.placeholder = String(oldValue! - newValue!)
-        case "/": displayLabel.placeholder = String(oldValue! / newValue!)
-        case "*": displayLabel.placeholder = String(oldValue! * newValue!)
-        case "%": displayLabel.placeholder = String(oldValue! * newValue!)
-        case "/100": displayLabel.placeholder = String(newValue! / 100)
-        default: displayLabel.placeholder = "0"
-        }
-        return displayLabel.placeholder!
-    }
 }
 
