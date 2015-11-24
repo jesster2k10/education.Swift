@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var checkEqual = false
     var checkSign = false
     var checkButton = false
+    var dotCheck = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,19 +31,18 @@ class ViewController: UIViewController {
     
     func calculateIt () {
         checkEqual ? (firstValue = Double(displayLabel.text!)) : (secondValue = Double(displayLabel.text!))
-        if (firstValue != nil && secondValue != nil) {
-            switch(lastSign) {
-            case "+" : tempValue = firstValue! + secondValue!
-            case "-" : tempValue = firstValue! - secondValue!
-            case "*" : tempValue = firstValue! * secondValue!
-            case "/" : tempValue = firstValue! / secondValue!
-            default: break
-            }
+        
+        switch(lastSign) {
+        case "+" : tempValue = firstValue! + secondValue!
+        case "-" : tempValue = firstValue! - secondValue!
+        case "*" : tempValue = firstValue! * secondValue!
+        case "/" : tempValue = firstValue! / secondValue!
+        default: break
+        }
         checkSign = false
         checkEqual = true
         checkButton = true
         displayLabel.text =  String(tempValue!)
-        }
     }
     
     
@@ -53,9 +53,10 @@ class ViewController: UIViewController {
         else if (!checkSign) {
             firstValue = Double(displayLabel.text!)
         }
+        checkEqual = false
         checkSign = true
         checkButton = true
-        checkEqual = false
+        dotCheck = false
     }
     
     func clearDisplay () {
@@ -64,34 +65,26 @@ class ViewController: UIViewController {
         checkEqual = false
         checkSign = false
         checkButton = false
+        dotCheck = false
         displayLabel.text = "0"
     }
         
     @IBOutlet weak var displayLabel: UILabel!
     @IBAction func allButton(sender : UIButton) {
-        let display = displayLabel.text!
+        //let display = displayLabel.text!
         if let buttonLabel = sender.titleLabel?.text {
             switch(buttonLabel) {
-            case "1","2","3","4","5","6","7","8","9","0", "000": if (display == "0" || checkButton) { displayLabel.text = "" }
-                                                                 if (display == "0" && buttonLabel == "000") { displayLabel.text = "0" }
-                                                                 else {
-                                                                 displayLabel.text?.appendContentsOf(buttonLabel)
-                                                                 }
-                                                                 checkButton = false
-            case "+", "-", "/", "*": if (checkSign && !checkButton) {
-                                        calculateIt()
-                                        firstValue = Double(display)
-                                     }
-                                     signPress()
-                                     lastSign = buttonLabel
-            case "%" : secondValue = Double(display)
-                       firstValue != nil ? (displayLabel.text = String((secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
+            case "1","2","3","4","5","6","7","8","9","0": if (displayLabel.text == "0" || checkButton) { displayLabel.text = "" }
+                                                          displayLabel.text?.appendContentsOf(buttonLabel)
+                                                          checkButton = false
+            case "+", "-", "/", "*", "%": if (checkSign && !checkButton) {
+                                            calculateIt()
+                                            firstValue = Double(displayLabel.text!)}
+                                          signPress()
+                                          lastSign = buttonLabel
             case "C": clearDisplay()
-            case "+/-": if (display[display.startIndex] != "-" && display != "0") { ( displayLabel.text?.insert("-", atIndex: display.startIndex)) }
-                        else if (display[display.startIndex] == "-") { (displayLabel.text?.removeAtIndex(display.startIndex)) }
-            case ".": if(!display.containsString(".")) {
-                        displayLabel.text?.appendContentsOf(".")
-                      }
+            case ".": if(!dotCheck) { displayLabel.text?.appendContentsOf(".")
+                        dotCheck = true}
             case "=": calculateIt()
             default: break
             }
