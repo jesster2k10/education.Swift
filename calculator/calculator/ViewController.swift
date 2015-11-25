@@ -21,6 +21,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayLabel.text = "0"
+        //Buttons border:
+        for view in self.view.subviews
+        {
+            if view.isKindOfClass(UIButton)
+            {
+                view.layer.borderWidth = 0.5
+                view.layer.borderColor = UIColor.blackColor().CGColor
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +50,7 @@ class ViewController: UIViewController {
         checkSign = false
         checkEqual = true
         checkButton = true
-        displayLabel.text =  String(tempValue!)
+        displayLabel.text =  String(tempValue!) + "\nLLL"
         }
     }
     
@@ -66,8 +75,11 @@ class ViewController: UIViewController {
         checkButton = false
         displayLabel.text = "0"
     }
-        
+    
+    
+    
     @IBOutlet weak var displayLabel: UILabel!
+    @IBOutlet weak var secondDisplay: UILabel!
     @IBAction func allButton(sender : UIButton) {
         let display = displayLabel.text!
         if let buttonLabel = sender.titleLabel?.text {
@@ -84,6 +96,7 @@ class ViewController: UIViewController {
                                      }
                                      signPress()
                                      lastSign = buttonLabel
+                                     secondDisplay.text = lastSign
             case "%" : secondValue = Double(display)
                        firstValue != nil ? (displayLabel.text = String((secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
             case "C": clearDisplay()
