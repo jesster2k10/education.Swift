@@ -57,6 +57,7 @@ class ViewController: UIViewController {
         checkSign = true
         checkButton = true
         dotCheck = false
+
     }
     
     func clearDisplay () {
@@ -74,7 +75,8 @@ class ViewController: UIViewController {
         //let display = displayLabel.text!
         if let buttonLabel = sender.titleLabel?.text {
             switch(buttonLabel) {
-            case "1","2","3","4","5","6","7","8","9","0": if (displayLabel.text == "0" || checkButton) { displayLabel.text = "" }
+            case "1","2","3","4","5","6","7","8","9","0": if (displayLabel.text == "0") { displayLabel.text = "" }
+                                                          if (checkButton) { displayLabel.text = "" }
                                                           displayLabel.text?.appendContentsOf(buttonLabel)
                                                           checkButton = false
             case "+", "-", "/", "*", "%": if (checkSign && !checkButton) {
