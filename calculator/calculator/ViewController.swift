@@ -48,8 +48,8 @@ class ViewController: UIViewController {
             switch(lastSign) {
             case "+" : tempValue = firstValue! + secondValue!
             case "-" : tempValue = firstValue! - secondValue!
-            case "*" : tempValue = firstValue! * secondValue!
-            case "/" : tempValue = firstValue! / secondValue!
+            case "×" : tempValue = firstValue! * secondValue!
+            case "÷" : tempValue = firstValue! / secondValue!
             default: break
             }
         checkSign = false
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
                                                                  displayLabel.text?.appendContentsOf(buttonLabel)
                                                                  checkButton = false
                 
-            case "+", "-", "/", "*": if (checkSign && !checkButton) {
+            case "+", "-", "÷", "×": if (checkSign && !checkButton) {
                                         calculateIt()
                                         firstValue = Double(display)
                                      }
@@ -109,24 +109,24 @@ class ViewController: UIViewController {
                 
             case "1/x": if (display != "0") { displayLabel.text = String( 1 / Double(display)!) }
                 
-            case "sq": displayLabel.text = String( sqrt(Double(display)!))
+            case "√": displayLabel.text = String( sqrt(Double(display)!))
                 
             case "%" : secondValue = Double(display)
                        firstValue != nil ? (displayLabel.text = String((secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
                 
-            case "x2": secondValue = Double(display)
+            case "x²": secondValue = Double(display)
                        displayLabel.text = String(secondValue! * secondValue!)
                 
             case "C": clearDisplay()
                 
             case "CE": displayLabel.text = "0"
                 
-            case "<-": deleteLastSymbol()
+            case "←": deleteLastSymbol()
                 
-            case "+/-": if (display[display.startIndex] != "-" && display != "0") { ( displayLabel.text?.insert("-", atIndex: display.startIndex)) }
+            case "±": if (display[display.startIndex] != "-" && display != "0") { ( displayLabel.text?.insert("-", atIndex: display.startIndex)) }
                         else if (display[display.startIndex] == "-") { (displayLabel.text?.removeAtIndex(display.startIndex)) }
                 
-            case ".": if(!display.containsString(".")) {
+            case ",": if(!display.containsString(".")) {
                         displayLabel.text?.appendContentsOf(".")
                       }
                 
