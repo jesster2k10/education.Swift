@@ -192,7 +192,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <size key="titleShadowOffset" width="2.2250738585072014e-308" height="2.2250738585072014e-308"/>
-                                <state key="normal" title="CE"/>
+                                <state key="normal" title="C"/>
                                 <connections>
                                     <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r4v-Gd-gyG"/>
                                 </connections>
@@ -282,7 +282,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <size key="titleShadowOffset" width="2.2250738585072014e-308" height="2.2250738585072014e-308"/>
-                                <state key="normal" title="C"/>
+                                <state key="normal" title="CE"/>
                                 <connections>
                                     <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="34b-1g-HR1"/>
                                 </connections>
