@@ -21,20 +21,25 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayLabel.text = "0"
-        //Buttons border:
-        for view in self.view.subviews
-        {
-            if view.isKindOfClass(UIButton)
-            {
-                view.layer.borderWidth = 0.5
-                view.layer.borderColor = UIColor.blackColor().CGColor
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setButtonBorder (size : CGFloat = 0.0,_ object : UIButton? = nil) {
+        for view in self.view.subviews
+        {
+            if ((object) != nil) {
+                object?.layer.borderWidth = size
+            }
+            else {
+                view.isKindOfClass(UIButton)
+                view.layer.borderWidth = size
+                view.layer.borderColor = UIColor.blackColor().CGColor
+            }
+        }
     }
     
     func calculateIt () {
@@ -50,7 +55,7 @@ class ViewController: UIViewController {
         checkSign = false
         checkEqual = true
         checkButton = true
-        displayLabel.text =  String(tempValue!) + "\nLLL"
+        displayLabel.text =  String(tempValue!)
         }
     }
     
@@ -76,35 +81,55 @@ class ViewController: UIViewController {
         displayLabel.text = "0"
     }
     
-    
+    func deleteLastSymbol() {
+        displayLabel.text?.removeAtIndex(displayLabel.text!.endIndex.predecessor())
+        if(displayLabel.text!.isEmpty) {
+            displayLabel.text = "0"
+        }
+        checkButton = false
+    }
     
     @IBOutlet weak var displayLabel: UILabel!
-    @IBOutlet weak var secondDisplay: UILabel!
     @IBAction func allButton(sender : UIButton) {
         let display = displayLabel.text!
+        setButtonBorder()
         if let buttonLabel = sender.titleLabel?.text {
             switch(buttonLabel) {
-            case "1","2","3","4","5","6","7","8","9","0", "000": if (display == "0" || checkButton) { displayLabel.text = "" }
-                                                                 if (display == "0" && buttonLabel == "000") { displayLabel.text = "0" }
-                                                                 else {
+            case "1","2","3","4","5","6","7","8","9","0": if (display == "0" || checkButton) { displayLabel.text = "" }
                                                                  displayLabel.text?.appendContentsOf(buttonLabel)
-                                                                 }
                                                                  checkButton = false
+                
             case "+", "-", "/", "*": if (checkSign && !checkButton) {
                                         calculateIt()
                                         firstValue = Double(display)
                                      }
                                      signPress()
                                      lastSign = buttonLabel
-                                     secondDisplay.text = lastSign
+                                     setButtonBorder(2, sender)
+                
+            case "1/x": if (display != "0") { displayLabel.text = String( 1 / Double(display)!) }
+                
+            case "sq": displayLabel.text = String( sqrt(Double(display)!))
+                
             case "%" : secondValue = Double(display)
                        firstValue != nil ? (displayLabel.text = String((secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
+                
+            case "x2": secondValue = Double(display)
+                       displayLabel.text = String(secondValue! * secondValue!)
+                
             case "C": clearDisplay()
+                
+            case "CE": displayLabel.text = "0"
+                
+            case "<-": deleteLastSymbol()
+                
             case "+/-": if (display[display.startIndex] != "-" && display != "0") { ( displayLabel.text?.insert("-", atIndex: display.startIndex)) }
                         else if (display[display.startIndex] == "-") { (displayLabel.text?.removeAtIndex(display.startIndex)) }
+                
             case ".": if(!display.containsString(".")) {
                         displayLabel.text?.appendContentsOf(".")
                       }
+                
             case "=": calculateIt()
             default: break
             }
