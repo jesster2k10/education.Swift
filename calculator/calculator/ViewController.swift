@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     func setButtonBorder (size : CGFloat = 0.0,_ object : UIButton? = nil) {
         for view in self.view.subviews
         {
+          //  let tempColor : CGColorRef = object!.layer.backgroundColor
             if ((object) != nil) {
                 object?.layer.borderWidth = size
             }
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
         checkSign = false
         checkEqual = true
         checkButton = true
-        displayLabel.text =  String(tempValue!)
+        displayLabel.text =  String(format: "%g", tempValue!)
         }
     }
     
@@ -89,14 +90,22 @@ class ViewController: UIViewController {
         checkButton = false
     }
     
+    func checkDisplayLengh ( buttonLabel : String) {
+        if (displayLabel.text?.characters.count < 10) {
+            displayLabel.text?.appendContentsOf(buttonLabel)
+        }
+    }
+    
     @IBOutlet weak var displayLabel: UILabel!
     @IBAction func allButton(sender : UIButton) {
         let display = displayLabel.text!
+        
         setButtonBorder()
+        
         if let buttonLabel = sender.titleLabel?.text {
             switch(buttonLabel) {
             case "1","2","3","4","5","6","7","8","9","0": if (display == "0" || checkButton) { displayLabel.text = "" }
-                                                                 displayLabel.text?.appendContentsOf(buttonLabel)
+                                                                 checkDisplayLengh(buttonLabel)
                                                                  checkButton = false
                 
             case "+", "-", "÷", "×": if (checkSign && !checkButton) {
@@ -105,17 +114,17 @@ class ViewController: UIViewController {
                                      }
                                      signPress()
                                      lastSign = buttonLabel
-                                     setButtonBorder(2, sender)
+                                     setButtonBorder(3, sender)
                 
-            case "1/x": if (display != "0") { displayLabel.text = String( 1 / Double(display)!) }
+            case "¹/x": if (display != "0") { displayLabel.text = String(format: "%g", 1 / Double(display)!) }
                 
-            case "√": displayLabel.text = String( sqrt(Double(display)!))
+            case "√": displayLabel.text = String(format: "%g", sqrt(Double(display)!))
                 
             case "%" : secondValue = Double(display)
-                       firstValue != nil ? (displayLabel.text = String((secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
+                       firstValue != nil ? (displayLabel.text = String(format: "%g", (secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
                 
             case "x²": secondValue = Double(display)
-                       displayLabel.text = String(secondValue! * secondValue!)
+                       displayLabel.text = String(format: "%g", secondValue! * secondValue!)
                 
             case "C": clearDisplay()
                 
@@ -127,7 +136,7 @@ class ViewController: UIViewController {
                         else if (display[display.startIndex] == "-") { (displayLabel.text?.removeAtIndex(display.startIndex)) }
                 
             case ",": if(!display.containsString(".")) {
-                        displayLabel.text?.appendContentsOf(".")
+                        checkDisplayLengh(".")
                       }
                 
             case "=": calculateIt()
@@ -135,6 +144,5 @@ class ViewController: UIViewController {
             }
         }
     }
-    
 }
 
