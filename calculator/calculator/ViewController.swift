@@ -96,6 +96,7 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var operationsLabel: UILabel!
     @IBOutlet weak var displayLabel: UILabel!
     @IBAction func allButton(sender : UIButton) {
         let display = displayLabel.text!
@@ -106,14 +107,18 @@ class ViewController: UIViewController {
             switch(buttonLabel) {
             case "1","2","3","4","5","6","7","8","9","0": if (display == "0" || checkButton) { displayLabel.text = "" }
                                                                  checkDisplayLengh(buttonLabel)
-                                                                 checkButton = false
-                
+                                                          checkButton = false
             case "+", "-", "÷", "×": if (checkSign && !checkButton) {
                                         calculateIt()
                                         firstValue = Double(display)
                                      }
-                                     signPress()
+            
+            //operationsLabel.text?.appendContentsOf(" " + display + " " + lastSign)
+            //operationsLabel.text?.removeAtIndex(operationsLabel.text!.endIndex.predecessor())
+            //operationsLabel.text?.appendContentsOf(lastSign + " ")
+            
                                      lastSign = buttonLabel
+                                     signPress()
                                      setButtonBorder(3, sender)
                 
             case "¹/x": if (display != "0") { displayLabel.text = String(format: "%g", 1 / Double(display)!) }
