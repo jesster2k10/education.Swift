@@ -14,8 +14,9 @@ class ViewController: UIViewController {
     var secondValue : Double? = nil
     var tempValue : Double? = nil
     var lastSign : String = ""
+    var tempSign : String = ""
     var checkEqual = false
-    var checkSign = false
+    //var checkSign = false
     var checkButton = false
     
     override func viewDidLoad() {
@@ -45,41 +46,39 @@ class ViewController: UIViewController {
     
     func calculateIt () {
         checkEqual ? (firstValue = Double(displayLabel.text!)) : (secondValue = Double(displayLabel.text!))
-        if (firstValue != nil && secondValue != nil) {
-            switch(lastSign) {
-            case "+" : tempValue = firstValue! + secondValue!
-            case "-" : tempValue = firstValue! - secondValue!
-            case "×" : tempValue = firstValue! * secondValue!
-            case "÷" : tempValue = firstValue! / secondValue!
-            default: break
+        if (!checkButton) {
+            if (firstValue != nil && secondValue != nil) {
+                switch(tempSign) {
+                case "+" : tempValue = firstValue! + secondValue!
+                case "-" : tempValue = firstValue! - secondValue!
+                case "×" : tempValue = firstValue! * secondValue!
+                case "÷" : tempValue = firstValue! / secondValue!
+                default: break
+                }
+                //checkSign = false
+                checkButton = true
+                displayLabel.text =  String(format: "%g", tempValue!)
             }
-        checkSign = false
-        checkEqual = true
-        checkButton = true
-        displayLabel.text =  String(format: "%g", tempValue!)
         }
+        tempSign = lastSign
     }
     
     
     func signPress () {
-        if (checkSign) {
-            secondValue = Double(displayLabel.text!)
-        }
-        else if (!checkSign) {
-            firstValue = Double(displayLabel.text!)
-        }
-        checkSign = true
+        firstValue = Double(displayLabel.text!)
         checkButton = true
         checkEqual = false
+        //checkSign = true
     }
     
     func clearDisplay () {
         firstValue = nil
         secondValue = nil
         checkEqual = false
-        checkSign = false
+        //checkSign = false
         checkButton = false
         displayLabel.text = "0"
+        operationsLabel.text! = ""
     }
     
     func deleteLastSymbol() {
@@ -96,6 +95,16 @@ class ViewController: UIViewController {
         }
     }
     
+    func operationDisplay() {
+        if (!checkButton || checkEqual) {
+            operationsLabel.text?.appendContentsOf(" " + displayLabel.text! + " " + lastSign)
+        }
+        else {
+            operationsLabel.text?.removeAtIndex(operationsLabel.text!.endIndex.predecessor())
+            operationsLabel.text?.appendContentsOf(lastSign)
+        }
+    }
+    
     @IBOutlet weak var operationsLabel: UILabel!
     @IBOutlet weak var displayLabel: UILabel!
     @IBAction func allButton(sender : UIButton) {
@@ -108,16 +117,10 @@ class ViewController: UIViewController {
             case "1","2","3","4","5","6","7","8","9","0": if (display == "0" || checkButton) { displayLabel.text = "" }
                                                                  checkDisplayLengh(buttonLabel)
                                                           checkButton = false
-            case "+", "-", "÷", "×": if (checkSign && !checkButton) {
-                                        calculateIt()
-                                        firstValue = Double(display)
-                                     }
-            
-            //operationsLabel.text?.appendContentsOf(" " + display + " " + lastSign)
-            //operationsLabel.text?.removeAtIndex(operationsLabel.text!.endIndex.predecessor())
-            //operationsLabel.text?.appendContentsOf(lastSign + " ")
-            
-                                     lastSign = buttonLabel
+            case "+", "-", "÷", "×": lastSign = buttonLabel
+                                     operationDisplay()
+                                     //checkEqual = false
+                                     calculateIt()
                                      signPress()
                                      setButtonBorder(3, sender)
                 
@@ -145,6 +148,8 @@ class ViewController: UIViewController {
                       }
                 
             case "=": calculateIt()
+                      checkEqual = true
+                      operationsLabel.text! = ""
             default: break
             }
         }
