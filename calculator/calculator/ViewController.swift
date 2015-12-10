@@ -14,10 +14,8 @@ class ViewController: UIViewController {
     var secondValue : Double? = nil
     var tempValue : Double? = nil
     var lastSign : String = ""
-    var tempSign : String = ""
-    var checkEqual = false
-    //var checkSign = false
     var checkButton = false
+    var checkEqual = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,37 +44,30 @@ class ViewController: UIViewController {
     
     func calculateIt () {
         checkEqual ? (firstValue = Double(displayLabel.text!)) : (secondValue = Double(displayLabel.text!))
-        if (!checkButton) {
+        checkButton = true
             if (firstValue != nil && secondValue != nil) {
-                switch(tempSign) {
+                switch(lastSign) {
                 case "+" : tempValue = firstValue! + secondValue!
                 case "-" : tempValue = firstValue! - secondValue!
                 case "×" : tempValue = firstValue! * secondValue!
                 case "÷" : tempValue = firstValue! / secondValue!
-                default: break
+                default: return
                 }
-                //checkSign = false
-                checkButton = true
-                displayLabel.text =  String(format: "%g", tempValue!)
+                displayLabel.text = String(format: "%g", tempValue!)
             }
-        }
-        tempSign = lastSign
     }
-    
     
     func signPress () {
         firstValue = Double(displayLabel.text!)
         checkButton = true
         checkEqual = false
-        //checkSign = true
     }
     
     func clearDisplay () {
         firstValue = nil
         secondValue = nil
-        checkEqual = false
-        //checkSign = false
         checkButton = false
+        checkEqual = false
         displayLabel.text = "0"
         operationsLabel.text! = ""
     }
@@ -86,7 +77,6 @@ class ViewController: UIViewController {
         if(displayLabel.text!.isEmpty) {
             displayLabel.text = "0"
         }
-        checkButton = false
     }
     
     func checkDisplayLengh ( buttonLabel : String) {
@@ -95,13 +85,13 @@ class ViewController: UIViewController {
         }
     }
     
-    func operationDisplay() {
-        if (!checkButton || checkEqual) {
-            operationsLabel.text?.appendContentsOf(" " + displayLabel.text! + " " + lastSign)
+    func operationDisplay(lblButton : String) {
+        if (!checkButton || operationsLabel.text == "") {
+            operationsLabel.text?.appendContentsOf(" " + displayLabel.text! + " " + lblButton)
         }
         else {
             operationsLabel.text?.removeAtIndex(operationsLabel.text!.endIndex.predecessor())
-            operationsLabel.text?.appendContentsOf(lastSign)
+            operationsLabel.text?.appendContentsOf(lblButton)
         }
     }
     
@@ -117,10 +107,11 @@ class ViewController: UIViewController {
             case "1","2","3","4","5","6","7","8","9","0": if (display == "0" || checkButton) { displayLabel.text = "" }
                                                                  checkDisplayLengh(buttonLabel)
                                                           checkButton = false
-            case "+", "-", "÷", "×": lastSign = buttonLabel
-                                     operationDisplay()
-                                     //checkEqual = false
-                                     calculateIt()
+            case "+", "-", "÷", "×": operationDisplay(buttonLabel)
+                                     if (!checkButton) {
+                                        calculateIt()
+                                     }
+                                     lastSign = buttonLabel
                                      signPress()
                                      setButtonBorder(3, sender)
                 
@@ -140,10 +131,14 @@ class ViewController: UIViewController {
                 
             case "←": deleteLastSymbol()
                 
-            case "±": if (display[display.startIndex] != "-" && display != "0") { ( displayLabel.text?.insert("-", atIndex: display.startIndex)) }
-                        else if (display[display.startIndex] == "-") { (displayLabel.text?.removeAtIndex(display.startIndex)) }
+            case "±": if (display[display.startIndex] != "-" && display != "0") {
+                         displayLabel.text?.insert("-", atIndex: display.startIndex)
+                      }
+                      else if (display[display.startIndex] == "-") {
+                         displayLabel.text?.removeAtIndex(display.startIndex)
+                      }
                 
-            case ",": if(!display.containsString(".")) {
+            case ",": if(!display.containsString(".") && !checkEqual) {
                         checkDisplayLengh(".")
                       }
                 
