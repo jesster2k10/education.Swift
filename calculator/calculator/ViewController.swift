@@ -42,19 +42,29 @@ class ViewController: UIViewController {
         }
     }
     
-    func calculateIt () {
+    func calculateIt (sign : String) {
         checkEqual ? (firstValue = Double(displayLabel.text!)) : (secondValue = Double(displayLabel.text!))
         checkButton = true
-            if (firstValue != nil && secondValue != nil) {
-                switch(lastSign) {
-                case "+" : tempValue = firstValue! + secondValue!
-                case "-" : tempValue = firstValue! - secondValue!
-                case "×" : tempValue = firstValue! * secondValue!
-                case "÷" : tempValue = firstValue! / secondValue!
-                default: return
-                }
-                displayLabel.text = String(format: "%g", tempValue!)
+        
+        switch(sign) {
+        case "√" : tempValue = sqrt(Double(displayLabel.text!)!)
+        case "x²" : tempValue = Double(displayLabel.text!)! * Double(displayLabel.text!)!
+        case "%" : firstValue != nil ? (tempValue = (secondValue! * firstValue!) / 100) : (tempValue = (secondValue! * 1) / 100)
+        case "¹/x": displayLabel.text! != "0" ? (tempValue = 1 / Double(displayLabel.text!)!) : (displayLabel.text = "Error")
+        default: break
+        }
+        if (firstValue != nil && secondValue != nil) {
+            switch(sign) {
+            case "+" : tempValue = firstValue! + secondValue!
+            case "-" : tempValue = firstValue! - secondValue!
+            case "×" : tempValue = firstValue! * secondValue!
+            case "÷" : tempValue = firstValue! / secondValue!
+            default: break
             }
+        }
+        if (tempValue != nil) {
+            displayLabel.text = String(format: "%g", tempValue!)
+        }
     }
     
     func signPress () {
@@ -66,6 +76,8 @@ class ViewController: UIViewController {
     func clearDisplay () {
         firstValue = nil
         secondValue = nil
+        tempValue = nil
+        lastSign = ""
         checkButton = false
         checkEqual = false
         displayLabel.text = "0"
@@ -108,22 +120,16 @@ class ViewController: UIViewController {
                                                                  checkDisplayLengh(buttonLabel)
                                                           checkButton = false
             case "+", "-", "÷", "×": operationDisplay(buttonLabel)
-                                     if (!checkButton) {
-                                        calculateIt()
+                                     tempValue = Double(display)!
+                                     if (!checkButton && !checkEqual) {
+                                        calculateIt(lastSign)
                                      }
                                      lastSign = buttonLabel
                                      signPress()
                                      setButtonBorder(3, sender)
                 
-            case "¹/x": if (display != "0") { displayLabel.text = String(format: "%g", 1 / Double(display)!) }
-                
-            case "√": displayLabel.text = String(format: "%g", sqrt(Double(display)!))
-                
-            case "%" : secondValue = Double(display)
-                       firstValue != nil ? (displayLabel.text = String(format: "%g", (secondValue! * firstValue!) / 100)) : (displayLabel.text = String((secondValue! * 1) / 100))
-                
-            case "x²": secondValue = Double(display)
-                       displayLabel.text = String(format: "%g", secondValue! * secondValue!)
+            case "√", "%", "¹/x", "x²": calculateIt(buttonLabel)
+                                        lastSign = buttonLabel
                 
             case "C": clearDisplay()
                 
@@ -142,7 +148,7 @@ class ViewController: UIViewController {
                         checkDisplayLengh(".")
                       }
                 
-            case "=": calculateIt()
+            case "=": calculateIt(lastSign)
                       checkEqual = true
                       operationsLabel.text! = ""
             default: break
