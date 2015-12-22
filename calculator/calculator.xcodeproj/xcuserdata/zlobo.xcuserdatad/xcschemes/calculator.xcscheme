@@ -20,6 +20,20 @@
                ReferencedContainer = "container:calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "20ED84751BD7AECD00BE469C"
+               BuildableName = "calculatorTests.xctest"
+               BlueprintName = "calculatorTests"
+               ReferencedContainer = "container:calculator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

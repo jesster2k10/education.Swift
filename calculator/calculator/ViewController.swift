@@ -130,6 +130,7 @@ class ViewController: UIViewController {
                 
             case "√", "%", "¹/x", "x²": calculateIt(buttonLabel)
                                         lastSign = buttonLabel
+                                        checkEqual = true
                 
             case "C": clearDisplay()
                 
