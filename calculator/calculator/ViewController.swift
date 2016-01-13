@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension Double {
+    var square : Double {return self * self}
+}
+
 class ViewController: UIViewController {
     
     var firstValue : Double? = nil
@@ -48,7 +52,7 @@ class ViewController: UIViewController {
         
         switch(sign) {
         case "√" : tempValue = sqrt(Double(displayLabel.text!)!)
-        case "x²" : tempValue = Double(displayLabel.text!)! * Double(displayLabel.text!)!
+        case "x²" : tempValue = Double(displayLabel.text!)!.square
         case "%" : firstValue != nil ? (tempValue = (secondValue! * firstValue!) / 100) : (tempValue = (secondValue! * 1) / 100)
         case "¹/x": displayLabel.text! != "0" ? (tempValue = 1 / Double(displayLabel.text!)!) : (displayLabel.text = "Error")
         default: break
