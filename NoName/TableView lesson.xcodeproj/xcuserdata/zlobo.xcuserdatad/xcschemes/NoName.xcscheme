@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "200D46331C47ED7D009C9596"
-               BuildableName = "NoName.app"
-               BlueprintName = "NoName"
-               ReferencedContainer = "container:NoName.xcodeproj">
+               BuildableName = "TableView lesson.app"
+               BlueprintName = "TableView lesson"
+               ReferencedContainer = "container:TableView lesson.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "200D46471C47ED7D009C9596"
-               BuildableName = "NoNameTests.xctest"
-               BlueprintName = "NoNameTests"
-               ReferencedContainer = "container:NoName.xcodeproj">
+               BuildableName = "TableView lesson.xctest"
+               BlueprintName = "TableView lessonTests"
+               ReferencedContainer = "container:TableView lesson.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "200D46521C47ED7D009C9596"
-               BuildableName = "NoNameUITests.xctest"
-               BlueprintName = "NoNameUITests"
-               ReferencedContainer = "container:NoName.xcodeproj">
+               BuildableName = "TableView lesson.xctest"
+               BlueprintName = "TableView lessonUITests"
+               ReferencedContainer = "container:TableView lesson.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "200D46331C47ED7D009C9596"
-            BuildableName = "NoName.app"
-            BlueprintName = "NoName"
-            ReferencedContainer = "container:NoName.xcodeproj">
+            BuildableName = "TableView lesson.app"
+            BlueprintName = "TableView lesson"
+            ReferencedContainer = "container:TableView lesson.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "200D46331C47ED7D009C9596"
-            BuildableName = "NoName.app"
-            BlueprintName = "NoName"
-            ReferencedContainer = "container:NoName.xcodeproj">
+            BuildableName = "TableView lesson.app"
+            BlueprintName = "TableView lesson"
+            ReferencedContainer = "container:TableView lesson.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "200D46331C47ED7D009C9596"
-            BuildableName = "NoName.app"
-            BlueprintName = "NoName"
-            ReferencedContainer = "container:NoName.xcodeproj">
+            BuildableName = "TableView lesson.app"
+            BlueprintName = "TableView lesson"
+            ReferencedContainer = "container:TableView lesson.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

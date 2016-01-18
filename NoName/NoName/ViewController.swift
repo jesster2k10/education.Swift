@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let callActionHandler = { (action: UIAlertAction) -> Void in
             let alertMessage = UIAlertController(title: "Сервис недоступен", message: "Читай это сообщение два раза сверху вниз, справо налево, до прозрения.", preferredStyle: .Alert)
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            alertMessage.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: nil))
             self.presentViewController(alertMessage, animated: true, completion: nil)
         }
         
@@ -74,13 +74,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         optionMenu.addAction(cancelMenu)
         optionMenu.addAction(callAction)
-        
         if visitedDataSource[indexPath.row] {
             optionMenu.addAction(notVisitedAction)
         } else {
             optionMenu.addAction(isVisitedAction)
         }
         self.presentViewController(optionMenu, animated: true, completion: nil)
+    }
+    
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath    indexPath: NSIndexPath) {
+//        
+//    }
+    
+    //Действие при свапе вдоль ячейки:
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let shareAction = UITableViewRowAction(style: .Default, title: "Поделиться", handler: { (action, indexPath) -> Void in
+            let defaultText = "Just checking in at" + self.dataSource[indexPath.row]
+            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            self.presentViewController(activityController, animated: true, completion: nil)
+            })
+        
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Удалить", handler: { (action, indexPath) -> Void in
+            self.dataSource.removeAtIndex(indexPath.row)
+            self.locationDataSource.removeAtIndex(indexPath.row)
+            self.typeDataSource.removeAtIndex(indexPath.row)
+            self.visitedDataSource.removeAtIndex(indexPath.row)
+                
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            })
+        
+        shareAction.backgroundColor = UIColor.blueColor()
+        return [deleteAction, shareAction]
     }
     
     //Убрать статус бар:

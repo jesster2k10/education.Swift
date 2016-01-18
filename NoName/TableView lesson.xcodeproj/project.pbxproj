@@ -35,17 +35,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		200D46341C47ED7D009C9596 /* NoName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoName.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200D46341C47ED7D009C9596 /* TableView lesson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TableView lesson.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200D46371C47ED7D009C9596 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200D46391C47ED7D009C9596 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		200D463C1C47ED7D009C9596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		200D463E1C47ED7D009C9596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		200D46411C47ED7D009C9596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		200D46431C47ED7D009C9596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200D46481C47ED7D009C9596 /* NoNameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoNameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		200D46481C47ED7D009C9596 /* TableView lesson.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TableView lesson.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200D464C1C47ED7D009C9596 /* NoNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameTests.swift; sourceTree = "<group>"; };
 		200D464E1C47ED7D009C9596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200D46531C47ED7D009C9596 /* NoNameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoNameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		200D46531C47ED7D009C9596 /* TableView lesson.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TableView lesson.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200D46571C47ED7D009C9596 /* NoNameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameUITests.swift; sourceTree = "<group>"; };
 		200D46591C47ED7D009C9596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200D46671C47F541009C9596 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = ../CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,9 +89,9 @@
 		200D46351C47ED7D009C9596 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				200D46341C47ED7D009C9596 /* NoName.app */,
-				200D46481C47ED7D009C9596 /* NoNameTests.xctest */,
-				200D46531C47ED7D009C9596 /* NoNameUITests.xctest */,
+				200D46341C47ED7D009C9596 /* TableView lesson.app */,
+				200D46481C47ED7D009C9596 /* TableView lesson.xctest */,
+				200D46531C47ED7D009C9596 /* TableView lesson.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		200D46331C47ED7D009C9596 /* NoName */ = {
+		200D46331C47ED7D009C9596 /* TableView lesson */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 200D465C1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoName" */;
+			buildConfigurationList = 200D465C1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lesson" */;
 			buildPhases = (
 				200D46301C47ED7D009C9596 /* Sources */,
 				200D46311C47ED7D009C9596 /* Frameworks */,
@@ -143,14 +143,14 @@
 			);
 			dependencies = (
 			);
-			name = NoName;
+			name = "TableView lesson";
 			productName = NoName;
-			productReference = 200D46341C47ED7D009C9596 /* NoName.app */;
+			productReference = 200D46341C47ED7D009C9596 /* TableView lesson.app */;
 			productType = "com.apple.product-type.application";
 		};
-		200D46471C47ED7D009C9596 /* NoNameTests */ = {
+		200D46471C47ED7D009C9596 /* TableView lessonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 200D465F1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoNameTests" */;
+			buildConfigurationList = 200D465F1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lessonTests" */;
 			buildPhases = (
 				200D46441C47ED7D009C9596 /* Sources */,
 				200D46451C47ED7D009C9596 /* Frameworks */,
@@ -161,14 +161,14 @@
 			dependencies = (
 				200D464A1C47ED7D009C9596 /* PBXTargetDependency */,
 			);
-			name = NoNameTests;
+			name = "TableView lessonTests";
 			productName = NoNameTests;
-			productReference = 200D46481C47ED7D009C9596 /* NoNameTests.xctest */;
+			productReference = 200D46481C47ED7D009C9596 /* TableView lesson.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		200D46521C47ED7D009C9596 /* NoNameUITests */ = {
+		200D46521C47ED7D009C9596 /* TableView lessonUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 200D46621C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoNameUITests" */;
+			buildConfigurationList = 200D46621C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lessonUITests" */;
 			buildPhases = (
 				200D464F1C47ED7D009C9596 /* Sources */,
 				200D46501C47ED7D009C9596 /* Frameworks */,
@@ -179,9 +179,9 @@
 			dependencies = (
 				200D46551C47ED7D009C9596 /* PBXTargetDependency */,
 			);
-			name = NoNameUITests;
+			name = "TableView lessonUITests";
 			productName = NoNameUITests;
-			productReference = 200D46531C47ED7D009C9596 /* NoNameUITests.xctest */;
+			productReference = 200D46531C47ED7D009C9596 /* TableView lesson.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +210,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 200D462F1C47ED7D009C9596 /* Build configuration list for PBXProject "NoName" */;
+			buildConfigurationList = 200D462F1C47ED7D009C9596 /* Build configuration list for PBXProject "TableView lesson" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -223,9 +223,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				200D46331C47ED7D009C9596 /* NoName */,
-				200D46471C47ED7D009C9596 /* NoNameTests */,
-				200D46521C47ED7D009C9596 /* NoNameUITests */,
+				200D46331C47ED7D009C9596 /* TableView lesson */,
+				200D46471C47ED7D009C9596 /* TableView lessonTests */,
+				200D46521C47ED7D009C9596 /* TableView lessonUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -289,12 +289,12 @@
 /* Begin PBXTargetDependency section */
 		200D464A1C47ED7D009C9596 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 200D46331C47ED7D009C9596 /* NoName */;
+			target = 200D46331C47ED7D009C9596 /* TableView lesson */;
 			targetProxy = 200D46491C47ED7D009C9596 /* PBXContainerItemProxy */;
 		};
 		200D46551C47ED7D009C9596 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 200D46331C47ED7D009C9596 /* NoName */;
+			target = 200D46331C47ED7D009C9596 /* TableView lesson */;
 			targetProxy = 200D46541C47ED7D009C9596 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -407,7 +407,7 @@
 				INFOPLIST_FILE = NoName/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoName;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TableView lesson";
 			};
 			name = Debug;
 		};
@@ -418,7 +418,7 @@
 				INFOPLIST_FILE = NoName/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoName;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TableView lesson";
 			};
 			name = Release;
 		};
@@ -429,8 +429,8 @@
 				INFOPLIST_FILE = NoNameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoNameTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoName.app/NoName";
+				PRODUCT_NAME = "TableView lesson";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableView lesson.app/TableView lesson";
 			};
 			name = Debug;
 		};
@@ -441,8 +441,8 @@
 				INFOPLIST_FILE = NoNameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoNameTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoName.app/NoName";
+				PRODUCT_NAME = "TableView lesson";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableView lesson.app/TableView lesson";
 			};
 			name = Release;
 		};
@@ -452,7 +452,7 @@
 				INFOPLIST_FILE = NoNameUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoNameUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TableView lesson";
 				TEST_TARGET_NAME = NoName;
 				USES_XCTRUNNER = YES;
 			};
@@ -464,7 +464,7 @@
 				INFOPLIST_FILE = NoNameUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.self.NoNameUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TableView lesson";
 				TEST_TARGET_NAME = NoName;
 				USES_XCTRUNNER = YES;
 			};
@@ -473,7 +473,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		200D462F1C47ED7D009C9596 /* Build configuration list for PBXProject "NoName" */ = {
+		200D462F1C47ED7D009C9596 /* Build configuration list for PBXProject "TableView lesson" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				200D465A1C47ED7D009C9596 /* Debug */,
@@ -482,29 +482,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		200D465C1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoName" */ = {
+		200D465C1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lesson" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				200D465D1C47ED7D009C9596 /* Debug */,
 				200D465E1C47ED7D009C9596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		200D465F1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoNameTests" */ = {
+		200D465F1C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lessonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				200D46601C47ED7D009C9596 /* Debug */,
 				200D46611C47ED7D009C9596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		200D46621C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "NoNameUITests" */ = {
+		200D46621C47ED7D009C9596 /* Build configuration list for PBXNativeTarget "TableView lessonUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				200D46631C47ED7D009C9596 /* Debug */,
 				200D46641C47ED7D009C9596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
