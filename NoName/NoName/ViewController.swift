@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var dataSource = ["zTest 1", "zTest 2","zTest 3","zTest 4","zTest 5"]
     var locationDataSource = ["location zTest 1", "location zTest 2","location zTest 3","location zTest 4","location zTest 5"]
     var typeDataSource = ["type zTest 1", "type zTest 2","type zTest 3","type zTest 4","type zTest 5"]
@@ -105,6 +107,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         shareAction.backgroundColor = UIColor.blueColor()
         return [deleteAction, shareAction]
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destinationViewController as! DetailViewController
+                destinationController.cellImage = "nnm"
+                destinationController.nameLabel = dataSource[indexPath.row]
+                destinationController.locationLabel = locationDataSource[indexPath.row]
+            }
+        }
     }
     
     //Убрать статус бар:

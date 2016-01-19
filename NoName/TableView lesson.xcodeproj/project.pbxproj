@@ -15,6 +15,7 @@
 		200D464D1C47ED7D009C9596 /* NoNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D464C1C47ED7D009C9596 /* NoNameTests.swift */; };
 		200D46581C47ED7D009C9596 /* NoNameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D46571C47ED7D009C9596 /* NoNameUITests.swift */; };
 		200D46681C47F541009C9596 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D46671C47F541009C9596 /* CustomTableViewCell.swift */; };
+		200D466A1C4E84E0009C9596 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D46691C4E84E0009C9596 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		200D46571C47ED7D009C9596 /* NoNameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameUITests.swift; sourceTree = "<group>"; };
 		200D46591C47ED7D009C9596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200D46671C47F541009C9596 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = ../CustomTableViewCell.swift; sourceTree = "<group>"; };
+		200D46691C4E84E0009C9596 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				200D46671C47F541009C9596 /* CustomTableViewCell.swift */,
 				200D46371C47ED7D009C9596 /* AppDelegate.swift */,
 				200D46391C47ED7D009C9596 /* ViewController.swift */,
+				200D46691C4E84E0009C9596 /* DetailViewController.swift */,
 				200D463B1C47ED7D009C9596 /* Main.storyboard */,
 				200D463E1C47ED7D009C9596 /* Assets.xcassets */,
 				200D46401C47ED7D009C9596 /* LaunchScreen.storyboard */,
@@ -265,6 +268,7 @@
 				200D46681C47F541009C9596 /* CustomTableViewCell.swift in Sources */,
 				200D463A1C47ED7D009C9596 /* ViewController.swift in Sources */,
 				200D46381C47ED7D009C9596 /* AppDelegate.swift in Sources */,
+				200D466A1C4E84E0009C9596 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
