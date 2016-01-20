@@ -22,7 +22,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         DataSource(name: "zTest 2", type: "zType 2", location: "zLocate 2", isVisited: false),
         DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3", isVisited: false),
         DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true)]
+        DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,11 +154,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! DetailViewController
-                destinationController.cellImage = "nnm"
-                destinationController.nameLabel = dataSource[indexPath.row].name
-                destinationController.locationLabel = dataSource[indexPath.row].location
+                destinationController.data = dataSource[indexPath.row]
             }
         }
+    }
+    
+    //Спрятать navigation bar при свайпе
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
+        
+        tableView.reloadData()
+        
     }
     
     //Убрать статус бар:
