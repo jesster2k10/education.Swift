@@ -12,10 +12,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    var dataSource = ["zTest 1", "zTest 2","zTest 3","zTest 4","zTest 5"]
-    var locationDataSource = ["location zTest 1", "location zTest 2","location zTest 3","location zTest 4","location zTest 5"]
-    var typeDataSource = ["type zTest 1", "type zTest 2","type zTest 3","type zTest 4","type zTest 5"]
-    var visitedDataSource = [true,false,false,false,false]
+//    var dataSource = ["zTest 1", "zTest 2","zTest 3","zTest 4","zTest 5"]
+//    var locationDataSource = ["location zTest 1", "location zTest 2","location zTest 3","location zTest 4","location zTest 5"]
+//    var typeDataSource = ["type zTest 1", "type zTest 2","type zTest 3","type zTest 4","type zTest 5"]
+//    var visitedDataSource = [true,false,false,false,false]
+    
+    var dataSource : [DataSource] = [
+        DataSource(name: "zTest 1", type: "zType 1", location: "zLocate 1", isVisited: true),
+        DataSource(name: "zTest 2", type: "zType 2", location: "zLocate 2", isVisited: false),
+        DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3", isVisited: false),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
+        DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +42,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomTableViewCell
         
         cell.thumbnailImageView?.image = UIImage(named: "nnm")
-        cell.nameLabel?.text = dataSource[indexPath.row]
-        cell.locationLabel?.text = locationDataSource[indexPath.row]
-        cell.typeLabel?.text = typeDataSource[indexPath.row]
+        cell.nameLabel?.text = dataSource[indexPath.row].name
+        cell.locationLabel?.text = dataSource[indexPath.row].location
+        cell.typeLabel?.text = dataSource[indexPath.row].type
         
-        if visitedDataSource[indexPath.row] {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
-        }
+        dataSource[indexPath.row].isVisited ? (cell.accessoryType = .Checkmark) : (cell.accessoryType = .None)
         
         cell.thumbnailImageView.layer.cornerRadius = 10.0
         //Разрешает быть картинке обрезанной:
@@ -53,35 +56,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let optionMenu = UIAlertController(title: nil, message: "Что сделать?", preferredStyle: .ActionSheet)
-        let cancelMenu = UIAlertAction(title: "Отменить", style: .Cancel, handler: nil)
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let isVisitedAction = UIAlertAction(title: "Я был сдесь", style: .Default, handler: { (action: UIAlertAction) -> Void in
-            cell?.accessoryType = .Checkmark
-            self.visitedDataSource[indexPath.row] = true
-        })
-        let notVisitedAction = UIAlertAction(title: "Меня сдеть не было", style: .Default, handler: { (action: UIAlertAction) -> Void in
-            cell?.accessoryType = .None
-            self.visitedDataSource[indexPath.row] = false
-            })
-        
-        let callActionHandler = { (action: UIAlertAction) -> Void in
-            let alertMessage = UIAlertController(title: "Сервис недоступен", message: "Читай это сообщение два раза сверху вниз, справо налево, до прозрения.", preferredStyle: .Alert)
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: nil))
-            self.presentViewController(alertMessage, animated: true, completion: nil)
-        }
-        
-        let callAction = UIAlertAction(title: "Набрать " + "\(indexPath.row)", style: .Default, handler: callActionHandler)
-        
-        optionMenu.addAction(cancelMenu)
-        optionMenu.addAction(callAction)
-        if visitedDataSource[indexPath.row] {
-            optionMenu.addAction(notVisitedAction)
-        } else {
-            optionMenu.addAction(isVisitedAction)
-        }
-        self.presentViewController(optionMenu, animated: true, completion: nil)
+//        let optionMenu = UIAlertController(title: nil, message: "Что сделать?", preferredStyle: .ActionSheet)
+//        let cancelMenu = UIAlertAction(title: "Отменить", style: .Cancel, handler: nil)
+//        
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)
+//        let isVisitedAction = UIAlertAction(title: "Я был сдесь", style: .Default, handler: { (action: UIAlertAction) -> Void in
+//            cell?.accessoryType = .Checkmark
+//            self.visitedDataSource[indexPath.row] = true
+//        })
+//        let notVisitedAction = UIAlertAction(title: "Меня сдеть не было", style: .Default, handler: { (action: UIAlertAction) -> Void in
+//            cell?.accessoryType = .None
+//            self.visitedDataSource[indexPath.row] = false
+//            })
+//        
+//        let callActionHandler = { (action: UIAlertAction) -> Void in
+//            let alertMessage = UIAlertController(title: "Сервис недоступен", message: "Читай это сообщение два раза сверху вниз, справо налево, до прозрения.", preferredStyle: .Alert)
+//            alertMessage.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: nil))
+//            self.presentViewController(alertMessage, animated: true, completion: nil)
+//        }
+//        
+//        let callAction = UIAlertAction(title: "Набрать " + "\(indexPath.row)", style: .Default, handler: callActionHandler)
+//        
+//        optionMenu.addAction(cancelMenu)
+//        optionMenu.addAction(callAction)
+//        if visitedDataSource[indexPath.row] {
+//            optionMenu.addAction(notVisitedAction)
+//        } else {
+//            optionMenu.addAction(isVisitedAction)
+//        }
+//        self.presentViewController(optionMenu, animated: true, completion: nil)
     }
     
 //    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath    indexPath: NSIndexPath) {
@@ -90,23 +93,56 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Действие при свапе вдоль ячейки:
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let shareAction = UITableViewRowAction(style: .Default, title: "Поделиться", handler: { (action, indexPath) -> Void in
-            let defaultText = "Just checking in at" + self.dataSource[indexPath.row]
-            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
-            self.presentViewController(activityController, animated: true, completion: nil)
-            })
+//        let shareAction = UITableViewRowAction(style: .Default, title: "Поделиться", handler: { (action, indexPath) -> Void in
+//            let defaultText = "Just checking in at" + self.dataSource[indexPath.row].name
+//            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+//            self.presentViewController(activityController, animated: true, completion: nil)
+//            })
         
         let deleteAction = UITableViewRowAction(style: .Default, title: "Удалить", handler: { (action, indexPath) -> Void in
             self.dataSource.removeAtIndex(indexPath.row)
-            self.locationDataSource.removeAtIndex(indexPath.row)
-            self.typeDataSource.removeAtIndex(indexPath.row)
-            self.visitedDataSource.removeAtIndex(indexPath.row)
                 
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             })
         
-        shareAction.backgroundColor = UIColor.blueColor()
-        return [deleteAction, shareAction]
+        let moreAction = UITableViewRowAction(style: .Default, title: "Еще", handler: {(action, indexPath) -> Void in
+            let optionMenu = UIAlertController(title: nil, message: "Выберите действие:" , preferredStyle: .ActionSheet)
+            let cancelAction = UIAlertAction(title: "Отменить", style: .Cancel, handler: nil)
+            
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            
+            let isVisited = UIAlertAction(title: "Я был тут", style: .Default, handler: { (action) -> Void in
+                cell?.accessoryType = .Checkmark
+                self.dataSource[indexPath.row].isVisited = true
+            })
+            let notVisited = UIAlertAction(title: "Я тут не был", style: .Default, handler: {(action) -> Void in
+                cell?.accessoryType = .None
+                self.dataSource[indexPath.row].isVisited = false
+            })
+            
+            let callAction = UIAlertAction(title: "Позвонить " + "\(self.dataSource[indexPath.row].name)", style: .Default, handler: {(action) -> Void in
+                let alertMessage = UIAlertController(title: "Ошибка", message: "В данный момент невозможно позвонить на этот номер", preferredStyle: .Alert)
+                alertMessage.addAction(UIAlertAction(title: "Ок", style: .Destructive, handler: nil))
+                self.presentViewController(alertMessage, animated: true, completion: nil)
+            })
+            
+            let shareAction = UIAlertAction(title: "Поделиться", style: .Default, handler: {(action) -> Void in
+                let defaultText = "Я тут: " + self.dataSource[indexPath.row].name
+                let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+                self.presentViewController(activityController, animated: true, completion: nil)
+            })
+            
+            self.dataSource[indexPath.row].isVisited ? optionMenu.addAction(notVisited) : optionMenu.addAction(isVisited)
+            optionMenu.addAction(cancelAction)
+            optionMenu.addAction(callAction)
+            optionMenu.addAction(shareAction)
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+            //Скрыть ActionsForRow
+            tableView.setEditing(false, animated: true)
+        })
+        
+        moreAction.backgroundColor = UIColor.grayColor()
+        return [deleteAction, moreAction]
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -114,8 +150,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! DetailViewController
                 destinationController.cellImage = "nnm"
-                destinationController.nameLabel = dataSource[indexPath.row]
-                destinationController.locationLabel = locationDataSource[indexPath.row]
+                destinationController.nameLabel = dataSource[indexPath.row].name
+                destinationController.locationLabel = dataSource[indexPath.row].location
             }
         }
     }
