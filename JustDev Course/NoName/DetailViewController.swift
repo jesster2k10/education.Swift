@@ -11,6 +11,7 @@ import UIKit
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     
     var data = DataSource(name: "", type: "", location: "", isVisited: false)
     
@@ -19,6 +20,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         imageView.image = UIImage(named: "nnm")
         
         // Do any additional setup after loading the view.
+        tableView.backgroundColor = UIColor.grayColor()
+        
+        title = data.name
+        
+        //cell resize
+        tableView.estimatedRowHeight = 36.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +40,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! DetailViewCustomTableViewCell
+        cell.backgroundColor = UIColor.grayColor()
         
         switch indexPath.row {
         case 0:

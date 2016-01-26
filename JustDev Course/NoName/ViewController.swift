@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dataSource : [DataSource] = [
         DataSource(name: "zTest 1", type: "zType 1", location: "zLocate 1", isVisited: true),
         DataSource(name: "zTest 2", type: "zType 2", location: "zLocate 2", isVisited: false),
-        DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3", isVisited: false),
+        DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3-test-test-test-test-test-test-test-test", isVisited: false),
         DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
         DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true),
         DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
@@ -32,6 +32,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //cell resize
+        tableView.estimatedRowHeight = 36.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
