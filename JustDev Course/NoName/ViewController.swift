@@ -18,16 +18,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    var visitedDataSource = [true,false,false,false,false]
     
     var dataSource : [DataSource] = [
-        DataSource(name: "zTest 1", type: "zType 1", location: "zLocate 1", isVisited: true),
-        DataSource(name: "zTest 2", type: "zType 2", location: "zLocate 2", isVisited: false),
-        DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3-test-test-test-test-test-test-test-test", isVisited: false),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false),
-        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false)]
+        DataSource(name: "zTest 1", type: "zType 1", location: "zLocate 1", isVisited: true, rating: "dislike"),
+        DataSource(name: "zTest 2", type: "zType 2", location: "zLocate 2", isVisited: false, rating: "great"),
+        DataSource(name: "zTest 3", type: "zType 3", location: "zLocate 3-test-test-test-test-test-test-test-test", isVisited: false, rating: "good"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating"),
+        DataSource(name: "zTest 5", type: "zType 5", location: "zLocate 5", isVisited: true, rating: "rating"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating"),
+        DataSource(name: "zTest 4", type: "zType 4", location: "zLocate 4", isVisited: false, rating: "rating")]
     
     override func viewDidLoad() {
         super.viewDidLoad()

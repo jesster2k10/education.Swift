@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iN8-Gg-Goa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iN8-Gg-Goa">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -177,10 +177,30 @@
                                     <outlet property="delegate" destination="nyf-EZ-Xqi" id="Eth-T8-GUK"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIM-K4-GOH">
+                                <rect key="frame" x="540" y="72" width="40" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kwh-0T-XNN"/>
+                                    <constraint firstAttribute="width" constant="40" id="noI-c5-WuK"/>
+                                </constraints>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="rating"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="fiv-GL-TTR" kind="presentation" id="5co-Ef-gjH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eAq-yI-TMh" firstAttribute="top" secondItem="oT2-GW-2Fk" secondAttribute="topMargin" id="KzB-ZF-TtQ"/>
+                            <constraint firstItem="pIM-K4-GOH" firstAttribute="trailing" secondItem="oT2-GW-2Fk" secondAttribute="trailingMargin" id="Q9J-qE-tRv"/>
+                            <constraint firstItem="pIM-K4-GOH" firstAttribute="top" secondItem="Um3-LJ-VlV" secondAttribute="bottom" constant="8" id="UQM-Xg-kIp"/>
                             <constraint firstItem="3iT-ug-GaA" firstAttribute="top" secondItem="eAq-yI-TMh" secondAttribute="bottom" id="cUV-TL-5u0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eAq-yI-TMh" secondAttribute="trailing" constant="-20" id="f2p-fv-uSe"/>
                             <constraint firstItem="eAq-yI-TMh" firstAttribute="leading" secondItem="oT2-GW-2Fk" secondAttribute="leadingMargin" constant="-20" id="w3F-gg-3O8"/>
@@ -188,12 +208,140 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="aam-ua-D5V" id="w9Q-ft-rEl"/>
+                        <outlet property="rateButton" destination="pIM-K4-GOH" id="p9o-6c-Obh"/>
                         <outlet property="tableView" destination="eAq-yI-TMh" id="DTe-LF-ANx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvD-t3-7XQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957" y="389"/>
+            <point key="canvasLocation" x="2007" y="433"/>
+        </scene>
+        <!--Modality View Controller-->
+        <scene sceneID="fgi-jB-7w8">
+            <objects>
+                <viewController id="fiv-GL-TTR" customClass="ModalityViewController" customModule="TableView_lesson" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8gQ-Gg-Z8z"/>
+                        <viewControllerLayoutGuide type="bottom" id="ezt-yf-F8E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sPf-Vv-Tlh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nnm" translatesAutoresizingMaskIntoConstraints="NO" id="XAy-wx-Vat">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate IT!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ets-jg-Tz3">
+                                <rect key="frame" x="180" y="117" width="240" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="d0F-1y-Fvk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MrA-Qg-Fud">
+                                <rect key="frame" x="140" y="250" width="310" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pH-kx-WQq">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Ebw-HB-fEL"/>
+                                            <constraint firstAttribute="width" constant="100" id="PMX-4c-U9s"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="dislike"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="50"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="rateSelect:" destination="fiv-GL-TTR" eventType="touchUpInside" id="2zt-nd-Ol4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbZ-kC-L6Q">
+                                        <rect key="frame" x="105" y="0.0" width="100" height="100"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="9s7-8F-PYt"/>
+                                            <constraint firstAttribute="width" constant="100" id="oaM-Ja-Obj"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="good"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="50"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="rateSelect:" destination="fiv-GL-TTR" eventType="touchUpInside" id="wLU-kp-3kd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ccl-HG-xh8">
+                                        <rect key="frame" x="210" y="0.0" width="100" height="100"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="2dg-Bw-oqo"/>
+                                            <constraint firstAttribute="width" constant="100" id="yus-nK-1ia"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="great"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="50"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="rateSelect:" destination="fiv-GL-TTR" eventType="touchUpInside" id="G4s-gH-mBC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-ZE-4JC">
+                                <rect key="frame" x="540" y="28" width="40" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6zK-e3-9lX"/>
+                                    <constraint firstAttribute="width" constant="40" id="E3h-FO-PrK"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="close"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Bnl-2M-Mej" kind="unwind" identifier="unwindToDetail" unwindAction="close:" id="lFj-d2-uel"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MrA-Qg-Fud" firstAttribute="centerY" secondItem="XAy-wx-Vat" secondAttribute="centerY" id="8AR-XO-Jif"/>
+                            <constraint firstItem="ets-jg-Tz3" firstAttribute="top" secondItem="8gQ-Gg-Z8z" secondAttribute="bottom" constant="97" id="9N4-5G-0nM"/>
+                            <constraint firstItem="ets-jg-Tz3" firstAttribute="centerX" secondItem="MrA-Qg-Fud" secondAttribute="centerX" id="GOE-wb-wAE"/>
+                            <constraint firstAttribute="trailing" secondItem="XAy-wx-Vat" secondAttribute="trailing" id="Gu5-AN-mrd"/>
+                            <constraint firstItem="Whw-ZE-4JC" firstAttribute="trailing" secondItem="sPf-Vv-Tlh" secondAttribute="trailingMargin" id="Kzg-uz-BIe"/>
+                            <constraint firstItem="Whw-ZE-4JC" firstAttribute="top" secondItem="8gQ-Gg-Z8z" secondAttribute="bottom" constant="8" id="PtK-aA-7ph"/>
+                            <constraint firstItem="XAy-wx-Vat" firstAttribute="leading" secondItem="sPf-Vv-Tlh" secondAttribute="leading" id="SiB-T6-m1d"/>
+                            <constraint firstItem="MrA-Qg-Fud" firstAttribute="centerX" secondItem="XAy-wx-Vat" secondAttribute="centerX" id="TZi-dO-ZQq"/>
+                            <constraint firstItem="XAy-wx-Vat" firstAttribute="bottom" secondItem="ezt-yf-F8E" secondAttribute="top" id="eyv-hB-ewE"/>
+                            <constraint firstItem="XAy-wx-Vat" firstAttribute="top" secondItem="sPf-Vv-Tlh" secondAttribute="top" id="nnS-Oc-IAg"/>
+                            <constraint firstItem="MrA-Qg-Fud" firstAttribute="top" secondItem="ets-jg-Tz3" secondAttribute="bottom" constant="43" id="t4k-5Q-vNR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgrounImage" destination="XAy-wx-Vat" id="xyi-RR-jEd"/>
+                        <outlet property="stack" destination="MrA-Qg-Fud" id="VUr-ex-aSg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vdK-xT-I8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Bnl-2M-Mej" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2725" y="433"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RAW-JI-hMR">
@@ -214,4 +362,12 @@
             <point key="canvasLocation" x="299" y="389"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close" width="84" height="84"/>
+        <image name="dislike" width="84" height="84"/>
+        <image name="good" width="256" height="256"/>
+        <image name="great" width="256" height="256"/>
+        <image name="nnm" width="304" height="304"/>
+        <image name="rating" width="256" height="256"/>
+    </resources>
 </document>

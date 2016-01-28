@@ -12,13 +12,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var rateButton: UIButton!
     
-    var data = DataSource(name: "", type: "", location: "", isVisited: false)
+    var data = DataSource(name: "", type: "", location: "", isVisited: false, rating: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = UIImage(named: "nnm")
-        
+        rateButton.setImage(UIImage(named: data.rating), forState: .Normal)
         // Do any additional setup after loading the view.
         tableView.backgroundColor = UIColor.grayColor()
         
@@ -100,6 +101,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    @IBAction func close(seque: UIStoryboardSegue) {
+        if let rateviewController = seque.sourceViewController as? ModalityViewController {
+            if let rating = rateviewController.rating {
+                data.rating = rating
+                rateButton.setImage(UIImage(named: rating), forState: UIControlState.Normal)
+            }
+        }
     }
 
 }

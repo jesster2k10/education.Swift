@@ -18,6 +18,7 @@
 		200D466A1C4E84E0009C9596 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D46691C4E84E0009C9596 /* DetailViewController.swift */; };
 		200D466C1C4FB2ED009C9596 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D466B1C4FB2ED009C9596 /* DataSource.swift */; };
 		200D466E1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D466D1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift */; };
+		2066441B1C5A6DFE001008F4 /* ModalityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066441A1C5A6DFE001008F4 /* ModalityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		200D46691C4E84E0009C9596 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		200D466B1C4FB2ED009C9596 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		200D466D1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewCustomTableViewCell.swift; sourceTree = "<group>"; };
+		2066441A1C5A6DFE001008F4 /* ModalityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,12 +107,11 @@
 		200D46361C47ED7D009C9596 /* NoName */ = {
 			isa = PBXGroup;
 			children = (
-				200D46671C47F541009C9596 /* CustomTableViewCell.swift */,
 				200D46371C47ED7D009C9596 /* AppDelegate.swift */,
-				200D46391C47ED7D009C9596 /* ViewController.swift */,
-				200D46691C4E84E0009C9596 /* DetailViewController.swift */,
-				200D466D1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift */,
 				200D466B1C4FB2ED009C9596 /* DataSource.swift */,
+				206644171C5A6AF5001008F4 /* MainTable */,
+				206644181C5A6B07001008F4 /* Detail View */,
+				206644191C5A6B24001008F4 /* Modality View */,
 				200D463B1C47ED7D009C9596 /* Main.storyboard */,
 				200D463E1C47ED7D009C9596 /* Assets.xcassets */,
 				200D46401C47ED7D009C9596 /* LaunchScreen.storyboard */,
@@ -135,6 +136,32 @@
 				200D46591C47ED7D009C9596 /* Info.plist */,
 			);
 			path = NoNameUITests;
+			sourceTree = "<group>";
+		};
+		206644171C5A6AF5001008F4 /* MainTable */ = {
+			isa = PBXGroup;
+			children = (
+				200D46391C47ED7D009C9596 /* ViewController.swift */,
+				200D46671C47F541009C9596 /* CustomTableViewCell.swift */,
+			);
+			name = MainTable;
+			sourceTree = "<group>";
+		};
+		206644181C5A6B07001008F4 /* Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				200D46691C4E84E0009C9596 /* DetailViewController.swift */,
+				200D466D1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift */,
+			);
+			name = "Detail View";
+			sourceTree = "<group>";
+		};
+		206644191C5A6B24001008F4 /* Modality View */ = {
+			isa = PBXGroup;
+			children = (
+				2066441A1C5A6DFE001008F4 /* ModalityViewController.swift */,
+			);
+			name = "Modality View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				200D46681C47F541009C9596 /* CustomTableViewCell.swift in Sources */,
+				2066441B1C5A6DFE001008F4 /* ModalityViewController.swift in Sources */,
 				200D463A1C47ED7D009C9596 /* ViewController.swift in Sources */,
 				200D466E1C4FD341009C9596 /* DetailViewCustomTableViewCell.swift in Sources */,
 				200D46381C47ED7D009C9596 /* AppDelegate.swift in Sources */,
