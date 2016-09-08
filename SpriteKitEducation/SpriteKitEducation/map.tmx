@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="12" tilewidth="48" tileheight="48" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="48" tileheight="48" tilecount="189" columns="21">
+  <image source="tiles.png" width="1008" height="432"/>
+ </tileset>
+ <layer name="1" width="200" height="12">
+  <data encoding="base64" compression="zlib">
+   eJztl1lOwzAQhg3cAbgDcIeUO0DE3mcK5ZH2ga3wSBES+w04JmMpI1nDeOx4Sdoov/SrTXBmxs58dlGK1wp4Fbxm+XuvXjm0B94HlwHfm9Q6eAO82XDe1Gqa87b3lbbzx2pZ+NgCb4N3EsVr6701zXnb+0rb+U1dgyfgqee11qLyQfu3AA/Au57jXcrx3nxqsHEey6vt+dh95RI8rjxsIX8q6X59Bs/BL9U917XWovLB9e+g5nhJOd6bTw2F4jmP5dX2vC0fJ2Thyrg3Az+CT8Bnys5Iivy5VKru8cH1r8RH3X4vVL33dgAeGR5G1MDNI5ZX6Xlp3UwhC0/GvS/wd+VTZWckRf4cKlU3+SjU//6V1pkb7xIXj5uXZuMQfKzkvdS3BjMv5vN91ib6vDkPbp7cWYEs/DD3XIzUzd+EStVdPrTourrWue57oOPNtUQhG0fKr098asAxNF9sH9WJK50VEh8+c089L1P4PzT11HPMsvMxivQFiXceGY9jg/bJmDGtI6QWjPFm+QyNpyWx4OLDNXebdX66p0vG+ZlnHPYwNfY0nhOvxDhm2fm4j/QDiXcXEUv/jrKxYfYJ/u4yTesIqQVj/Fo+Q+NpxfIhzd1mbk0kzaq6zTOO8nGj+LPiVnWTj49If5J475HxJDYk0zpCasEYNj5C42ml4CPFmkjSueekHuxh2vvSdc9HPj5CGen5yMcH1/vUXeXjD+4jucI=
+  </data>
+ </layer>
+ <layer name="2" width="200" height="12">
+  <data encoding="base64" compression="zlib">
+   eJzt00ENADAMA7GgDH8oI7Dv1FWyEdznEgAAAGCLTgfApxp/wE3jDwAAAHjtAI3NAgU=
+  </data>
+ </layer>
+</map>
