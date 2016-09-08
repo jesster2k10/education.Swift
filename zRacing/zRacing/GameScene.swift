@@ -97,7 +97,6 @@ class GameScene: SKScene {
         }
         tileMap.physicsBody?.friction = 1
         
-        
         self.addChild(tileMap)
         
     }
@@ -165,13 +164,13 @@ class GameScene: SKScene {
         let wheel1JointSliding = SKPhysicsJointSliding.jointWithBodyA(car.physicsBody!, bodyB: suspension1.physicsBody!, anchor: suspension1.position, axis: CGVectorMake(0,1))
         
         wheel1JointSliding.shouldEnableLimits = true
-        wheel1JointSliding.lowerDistanceLimit = 0
-        wheel1JointSliding.upperDistanceLimit = 0
+        wheel1JointSliding.lowerDistanceLimit = 5
+        wheel1JointSliding.upperDistanceLimit = 15
         
-        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(car.position.x + car.size.width / 2, car.position.y - car.size.height / 2), anchorB: suspension1.position)
+        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(car.position.x + car.size.width / 4, car.position.y - car.size.height / 2), anchorB: suspension1.position)
         
-        wheel1JointSpring.damping = 0
-        wheel1JointSpring.frequency = 0
+        wheel1JointSpring.damping = 10.0
+        wheel1JointSpring.frequency = 4.0
         
         let wheel1JointPin = SKPhysicsJointPin.jointWithBodyA(suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
         
@@ -179,13 +178,13 @@ class GameScene: SKScene {
         let wheel2JointSliding = SKPhysicsJointSliding.jointWithBodyA(car.physicsBody!, bodyB: suspension2.physicsBody!, anchor: suspension2.position, axis: CGVectorMake(0, 1))
         
         wheel2JointSliding.shouldEnableLimits = true
-        wheel2JointSliding.lowerDistanceLimit = 0
-        wheel2JointSliding.upperDistanceLimit = 0
+        wheel2JointSliding.lowerDistanceLimit = 5
+        wheel2JointSliding.upperDistanceLimit = 15
         
-        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(car.position.x - car.size.width / 2, car.position.y - car.size.height / 2), anchorB: suspension2.position)
+        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(car.position.x - car.size.width / 4, car.position.y - car.size.height / 2), anchorB: suspension2.position)
         
-        wheel2JointSpring.damping = 0
-        wheel2JointSpring.frequency = 0
+        wheel2JointSpring.damping = 10.0
+        wheel2JointSpring.frequency = 4.0
         
         let wheel2JointPin = SKPhysicsJointPin.jointWithBodyA(suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
         

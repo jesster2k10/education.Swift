@@ -59,14 +59,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         let ground = SKShapeNode(rectOfSize: CGSize(width: self.frame.size.width, height: 50))
-        ground.position = CGPointMake(CGRectGetMidX(self.frame), ground.frame.size.height-25)
+        ground.position = CGPointMake(CGRectGetMidX(self.frame), ground.frame.size.height + 100)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.frame.size)
         ground.physicsBody?.dynamic = false
         ground.fillColor = SKColor.brownColor()
         ground.zPosition = 0
         
         let quad = SKShapeNode(rect: CGRectMake(-25, -25, 50, 50))
-        quad.position = CGPointMake(CGRectGetMidX(self.frame) + 200, 300)
+        quad.position = CGPointMake(circle.position.x, circle.position.y - quad.frame.size.height - 70)
         quad.fillColor = SKColor.blackColor()
         quad.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 60, height: 60))
         quad.physicsBody?.dynamic = true
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = SKColor.orangeColor()
         
 //        self.addChild(ground)
-//        self.addChild(quad)
+        self.addChild(quad)
 //        self.addChild(triangle)
         self.addChild(circle)
         
@@ -98,6 +98,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        let myJointLimit = SKPhysicsJointLimit.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchorA: circle.position, anchorB: quad.position)
 //        let myJointSpring = SKPhysicsJointSpring.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchorA: circle.position, anchorB: quad.position)
 //        self.physicsWorld.addJoint(myJointLimit)
+        
+        let pin = SKPhysicsJointSliding.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchor: circle.position, axis: CGVector(dx: 0,dy: 1))
+        pin.shouldEnableLimits = true
+        pin.lowerDistanceLimit = 1
+        pin.upperDistanceLimit = 30
+        
+        self.physicsWorld.addJoint(pin)
     }
 
     override func didFinishUpdate() {
@@ -107,13 +114,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         circle.physicsBody?.velocity = CGVector.zero
         circle.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+        
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-        MyLocation = CGPointMake(x, 60)
-        tileMap.position = MyLocation
         
-        x = x - 3
+        
     }
 }
