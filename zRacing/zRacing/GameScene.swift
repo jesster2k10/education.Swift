@@ -13,6 +13,8 @@ class GameScene: SKScene {
     //Variables
     var gameViewControllerBridge: GameViewController!
     
+    var planet = SKShapeNode()
+    
     //Tile Map
     var tileMap = JSTileMap(named: "map2.tmx")
     var myLocation = CGPointMake(0, 0)
@@ -40,7 +42,7 @@ class GameScene: SKScene {
     let cam = SKCameraNode()
     
     override func didMoveToView(view: SKView) {
-        self.physicsWorld.gravity = CGVectorMake(0, -9.8) //Earth gravity
+        self.physicsWorld.gravity = CGVectorMake(0, 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.8
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: 0, y: 0)
@@ -97,14 +99,40 @@ class GameScene: SKScene {
         }
         tileMap.physicsBody?.friction = 1
         
-        self.addChild(tileMap)
+        //self.addChild(tileMap)
+        
+        var beizerPath4 = UIBezierPath()
+        beizerPath4.moveToPoint(CGPoint(x: 0,y: 0))
+        var theta : Float = 0.0
+        
+        for _ in 0...18 {
+            let x = 1000 * cos((theta * Float(M_PI)) / 180)
+            let y = 1000 * sin((theta * Float(M_PI)) / 180)
+            
+            beizerPath4.addQuadCurveToPoint(CGPoint(x: CGFloat(x),y: CGFloat(y)), controlPoint: CGPoint(x: CGFloat(x*1.1),y: CGFloat(y*1.1)))
+            theta += 20
+        }
+        
+        planet = SKShapeNode(path: beizerPath4.CGPath)
+        planet.position = CGPointMake(0, 0)
+        planet.physicsBody = SKPhysicsBody(edgeLoopFromPath: beizerPath4.CGPath)
+        planet.physicsBody?.dynamic = false
+        planet.fillColor = SKColor.greenColor()
+        
+        var fieldNode = SKFieldNode.radialGravityField()
+        fieldNode.falloff = 1
+        fieldNode.strength = 200
+        
+        planet.addChild(fieldNode)
+        self.addChild(planet)
         
     }
     
     func createCar() {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
-        car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
+        //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
+        car.position = CGPointMake(0, planet.position.y + 1200)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         car.physicsBody?.dynamic = true
         car.physicsBody?.mass = 3
@@ -204,6 +232,7 @@ class GameScene: SKScene {
     
     override func didFinishUpdate() {
         cam.position = car.position
+        cam.zRotation = car.zRotation
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
