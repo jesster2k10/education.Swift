@@ -24,4 +24,8 @@ extension GameViewController {
     @IBAction func brakeButtonUp(sender: UIButton) {
         brakeButtonState = false
     }
+    
+    @IBAction func reloadButton(sender: UIButton) {
+        scene?.reloadGame()
+    }
 }

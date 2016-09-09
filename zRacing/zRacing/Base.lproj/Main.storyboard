@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -42,6 +42,13 @@
                                     <action selector="brakeButtonUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="00R-Ez-fCk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ffd-ih-Ks2">
+                                <rect key="frame" x="504" y="28" width="76" height="76"/>
+                                <state key="normal" image="reloadButton.png"/>
+                                <connections>
+                                    <action selector="reloadButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="wnU-2y-kNQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -49,15 +56,19 @@
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="Cj0-H6-D7F" secondAttribute="bottom" constant="20" id="ATn-0d-QG4"/>
                             <constraint firstItem="Cj0-H6-D7F" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leadingMargin" id="HpD-y6-fdJ"/>
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="4Kc-th-nUn" secondAttribute="bottom" constant="20" id="pak-WK-M6L"/>
+                            <constraint firstItem="Ffd-ih-Ks2" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="8" id="uRl-xe-TMo"/>
+                            <constraint firstItem="Ffd-ih-Ks2" firstAttribute="trailing" secondItem="3se-qz-xqx" secondAttribute="trailingMargin" id="vIP-BS-4jJ"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="539" y="326"/>
         </scene>
     </scenes>
     <resources>
         <image name="Button_14.png" width="176" height="178"/>
         <image name="Button_22.png" width="176" height="178"/>
+        <image name="reloadButton.png" width="75" height="75"/>
     </resources>
 </document>

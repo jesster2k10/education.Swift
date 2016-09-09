@@ -35,6 +35,7 @@
 		202211181D7DB551003ADC7D /* Wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110B1D7DB551003ADC7D /* Wheel2.png */; };
 		2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211191D7DBA7F003ADC7D /* map_01.png */; };
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
+		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		2022110B1D7DB551003ADC7D /* Wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel2.png; sourceTree = "<group>"; };
 		202211191D7DBA7F003ADC7D /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_01.png; sourceTree = "<group>"; };
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
+		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				202211031D7DB551003ADC7D /* Button_23.png */,
 				202211041D7DB551003ADC7D /* Button_24.png */,
 				202211051D7DB551003ADC7D /* Button_25.png */,
+				20DB931A1D82C5CF00BA4DEA /* reloadButton.png */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				202211101D7DB551003ADC7D /* Button_22.png in Resources */,
 				202211171D7DB551003ADC7D /* Wheel1.png in Resources */,
 				202210E91D7DB473003ADC7D /* GameScene.sks in Resources */,
+				20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */,
 				2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */,
 				202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */,
 				2022110E1D7DB551003ADC7D /* Button_16.png in Resources */,

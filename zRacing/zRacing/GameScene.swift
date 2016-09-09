@@ -107,7 +107,7 @@ class GameScene: SKScene {
         car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         car.physicsBody?.dynamic = true
-        //car.physicsBody?.mass = 5
+        car.physicsBody?.mass = 3
         car.setScale(0.3)
         car.zPosition = 1
         
@@ -117,12 +117,14 @@ class GameScene: SKScene {
         suspension1.zPosition = 3
         suspension1.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension1.physicsBody?.dynamic = true
+        suspension1.physicsBody?.mass = 1
         
         suspension2 = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 5, height: 5))
         suspension2.position = CGPointMake(car.position.x - car.size.width / 2 + 25, car.position.y - 60)
         suspension2.zPosition = 3
         suspension2.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension2.physicsBody?.dynamic = true
+        suspension2.physicsBody?.mass = 1
         
         wheel1Texture = SKTexture(imageNamed: "Wheel1")
         wheel2Texture = SKTexture(imageNamed: "Wheel2")
@@ -142,8 +144,9 @@ class GameScene: SKScene {
         wheel2.physicsBody?.friction = 1
         //wheel1.physicsBody?.linearDamping = 1
         //wheel2.physicsBody?.linearDamping = 1
-        wheel1.physicsBody?.density = 1.5
-        wheel2.physicsBody?.density = 1
+        wheel1.physicsBody?.mass = 2
+        wheel2.physicsBody?.mass = 2
+        
         //wheel1.physicsBody?.restitution = 1
         //wheel2.physicsBody?.restitution = 1
         //wheel1.physicsBody?.density = 3
@@ -165,12 +168,12 @@ class GameScene: SKScene {
         
         wheel1JointSliding.shouldEnableLimits = true
         wheel1JointSliding.lowerDistanceLimit = 5
-        wheel1JointSliding.upperDistanceLimit = 15
+        wheel1JointSliding.upperDistanceLimit = 20
         
-        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(car.position.x + car.size.width / 4, car.position.y - car.size.height / 2), anchorB: suspension1.position)
+        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(wheel1.position.x + 20, wheel1.position.y + 20), anchorB: suspension1.position)
         
-        wheel1JointSpring.damping = 10.0
-        wheel1JointSpring.frequency = 4.0
+        wheel1JointSpring.damping = 1
+        wheel1JointSpring.frequency = 4
         
         let wheel1JointPin = SKPhysicsJointPin.jointWithBodyA(suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
         
@@ -179,12 +182,12 @@ class GameScene: SKScene {
         
         wheel2JointSliding.shouldEnableLimits = true
         wheel2JointSliding.lowerDistanceLimit = 5
-        wheel2JointSliding.upperDistanceLimit = 15
+        wheel2JointSliding.upperDistanceLimit = 20
         
-        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(car.position.x - car.size.width / 4, car.position.y - car.size.height / 2), anchorB: suspension2.position)
+        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(wheel2.position.x - 20, wheel2.position.y + 20), anchorB: suspension2.position)
         
-        wheel2JointSpring.damping = 10.0
-        wheel2JointSpring.frequency = 4.0
+        wheel2JointSpring.damping = 1
+        wheel2JointSpring.frequency = 4
         
         let wheel2JointPin = SKPhysicsJointPin.jointWithBodyA(suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
         
@@ -215,7 +218,14 @@ class GameScene: SKScene {
             wheel1.physicsBody?.angularVelocity = -35
         } else if gameViewControllerBridge.brakeButtonState {
             wheel2.physicsBody?.angularVelocity = 35
-            //wheel1.physicsBody?.angularVelocity = 35
+            wheel1.physicsBody?.angularVelocity = 35
         }
+    }
+    
+    func reloadGame() {
+        carNode.removeAllChildren()
+        
+        createCar()
+        addJoint()
     }
 }
