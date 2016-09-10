@@ -35,6 +35,7 @@
 		202211181D7DB551003ADC7D /* Wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110B1D7DB551003ADC7D /* Wheel2.png */; };
 		2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211191D7DBA7F003ADC7D /* map_01.png */; };
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
+		20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF3941D8441DE0064AD7E /* Utils.swift */; };
 		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		2022110B1D7DB551003ADC7D /* Wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel2.png; sourceTree = "<group>"; };
 		202211191D7DBA7F003ADC7D /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_01.png; sourceTree = "<group>"; };
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
+		20ABF3941D8441DE0064AD7E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				202210E61D7DB473003ADC7D /* AppDelegate.swift */,
 				202210E81D7DB473003ADC7D /* GameScene.sks */,
 				202210EA1D7DB473003ADC7D /* GameScene.swift */,
+				20ABF3941D8441DE0064AD7E /* Utils.swift */,
 				202210EC1D7DB473003ADC7D /* GameViewController.swift */,
 				2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */,
 				202210EE1D7DB473003ADC7D /* Main.storyboard */,
@@ -286,6 +289,7 @@
 				202210EB1D7DB473003ADC7D /* GameScene.swift in Sources */,
 				201FB59D1D8056B000430CC6 /* JSTileMap.m in Sources */,
 				202210ED1D7DB473003ADC7D /* GameViewController.swift in Sources */,
+				20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */,
 				202210E71D7DB473003ADC7D /* AppDelegate.swift in Sources */,
 				201FB59E1D8056B000430CC6 /* LFCGzipUtility.m in Sources */,
 				2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */,

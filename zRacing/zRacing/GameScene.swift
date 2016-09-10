@@ -106,8 +106,8 @@ class GameScene: SKScene {
         var theta : Float = 0.0
         
         for _ in 0...18 {
-            let x = 1000 * cos((theta * Float(M_PI)) / 180)
-            let y = 1000 * sin((theta * Float(M_PI)) / 180)
+            let x = 1000 * cos((theta * Float(M_PI)) / -180)
+            let y = 1000 * sin((theta * Float(M_PI)) / -180)
             
             beizerPath4.addQuadCurveToPoint(CGPoint(x: CGFloat(x),y: CGFloat(y)), controlPoint: CGPoint(x: CGFloat(x*1.1),y: CGFloat(y*1.1)))
             theta += 20
@@ -187,7 +187,6 @@ class GameScene: SKScene {
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
-        
     }
     
     func addJoint() {
@@ -231,8 +230,20 @@ class GameScene: SKScene {
     }
     
     override func didFinishUpdate() {
-        cam.position = car.position
-        cam.zRotation = car.zRotation
+        let a = sqrt(pow(planet.position.x - car.position.x, 2) + pow(planet.position.y - car.position.y, 2))
+        
+        let angle = atan2(car.position.y, car.position.x) - 0.2
+        
+        let cx = (Float(a) * cosf(Float(angle)))
+        let cy = (Float(a) * sinf(Float(angle)))
+        
+        let cx2 = (Float(a) * cosf(Float(angle)))
+        let cy2 = (Float(a) * sinf(Float(angle)))
+        
+        let angle2 = atan2(CGFloat(cy2), CGFloat(cx2))
+        
+        cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
+        cam.zRotation = angle2
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
