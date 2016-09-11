@@ -237,13 +237,11 @@ class GameScene: SKScene {
         let cx = (Float(a) * cosf(Float(angle)))
         let cy = (Float(a) * sinf(Float(angle)))
         
-        let cx2 = (Float(a) * cosf(Float(angle)))
-        let cy2 = (Float(a) * sinf(Float(angle)))
-        
-        let angle2 = atan2(CGFloat(cy2), CGFloat(cx2))
+        let camAngle = atan(atan2(car.position.y,car.position.x))
         
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
-        cam.zRotation = angle2
+        cam.zRotation = camAngle
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
