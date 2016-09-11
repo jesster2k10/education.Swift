@@ -13,8 +13,7 @@ class GameScene: SKScene {
     //Variables
     var gameViewControllerBridge: GameViewController!
     
-    var planet = SKShapeNode()
-    
+    //Beizer Path
     var beizerPath4 = UIBezierPath()
     
     //Tile Map
@@ -40,6 +39,9 @@ class GameScene: SKScene {
     var suspension1 = SKSpriteNode()
     var suspension2 = SKSpriteNode()
     
+    //Shapes
+    var planet = SKShapeNode()
+    
     //Camera
     let cam = SKCameraNode()
     
@@ -63,27 +65,7 @@ class GameScene: SKScene {
     }
     
     func loadMap() {
-//        mapTexture = SKTexture(imageNamed: "map_01")
-//        map = SKSpriteNode(texture: mapTexture)
-//        map.position = CGPointMake(0 + map.frame.size.width/4 , 0 + self.frame.size.height/4)
-//        map.physicsBody = SKPhysicsBody(texture: mapTexture, size: mapTexture.size())
-//        
-//        map.physicsBody?.dynamic = false
-//        
-//        map.zPosition = 0
-//        
-//        sceneNode.addChild(map)
-        
-//        let map = SKShapeNode(rectOfSize: CGSize(width: self.frame.size.width*3, height: 50))
-//        map.position = CGPointMake(-CGRectGetMidX(self.frame)/2, -self.frame.height/8)
-//        map.physicsBody = SKPhysicsBody(rectangleOfSize: map.frame.size)
-//        map.physicsBody?.dynamic = false
-//        map.fillColor = SKColor.brownColor()
-//        
-//        sceneNode.addChild(map)
-        
-       // let road = self.childNodeWithName("road") as? SKSpriteNode
-       // road?.physicsBody?.friction = 2
+        /* Tile Maps ------------------------------------------------
         tileMap.position = CGPoint(x: 0, y: 0)
         
         for var a=0; a < Int(tileMap.mapSize.width); a++ {
@@ -102,7 +84,8 @@ class GameScene: SKScene {
         tileMap.physicsBody?.friction = 1
         
         //self.addChild(tileMap)
-        
+        ------------------------------------------------------------- */ 
+ 
         beizerPath4.moveToPoint(CGPoint(x: 0,y: 0))
         var theta : Float = 0.0
         
@@ -120,7 +103,7 @@ class GameScene: SKScene {
         planet.physicsBody?.dynamic = false
         planet.fillColor = SKColor.greenColor()
         
-        var fieldNode = SKFieldNode.radialGravityField()
+        let fieldNode = SKFieldNode.radialGravityField()
         fieldNode.falloff = 1
         fieldNode.strength = 200
         
