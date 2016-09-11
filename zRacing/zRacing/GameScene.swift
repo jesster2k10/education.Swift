@@ -15,6 +15,8 @@ class GameScene: SKScene {
     
     var planet = SKShapeNode()
     
+    var beizerPath4 = UIBezierPath()
+    
     //Tile Map
     var tileMap = JSTileMap(named: "map2.tmx")
     var myLocation = CGPointMake(0, 0)
@@ -101,7 +103,6 @@ class GameScene: SKScene {
         
         //self.addChild(tileMap)
         
-        var beizerPath4 = UIBezierPath()
         beizerPath4.moveToPoint(CGPoint(x: 0,y: 0))
         var theta : Float = 0.0
         
@@ -232,15 +233,14 @@ class GameScene: SKScene {
     override func didFinishUpdate() {
         let a = sqrt(pow(planet.position.x - car.position.x, 2) + pow(planet.position.y - car.position.y, 2))
         
-        let angle = atan2(car.position.y, car.position.x) - 0.2
+        let angle = atan2(car.position.y, car.position.x)
+        let theta : CGFloat = 0.2
         
-        let cx = (Float(a) * cosf(Float(angle)))
-        let cy = (Float(a) * sinf(Float(angle)))
-        
-        let camAngle = atan(atan2(car.position.y,car.position.x))
+        let cx = (Float(a) * cosf(Float(angle - theta)))
+        let cy = (Float(a) * sinf(Float(angle - theta)))
         
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
-        cam.zRotation = camAngle
+        cam.zRotation = angle - CGFloat(M_PI_2)
         
     }
     
@@ -258,6 +258,7 @@ class GameScene: SKScene {
             wheel2.physicsBody?.angularVelocity = 35
             wheel1.physicsBody?.angularVelocity = 35
         }
+        
     }
     
     func reloadGame() {
