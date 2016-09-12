@@ -8,12 +8,49 @@
 
 import Foundation
 
+//Extensions
 extension Int {
     var degreesToRadians: Double { return Double(self) * M_PI / 180 }
     var radiansToDegrees: Double { return Double(self) * 180 / M_PI }
     
     public static func random (lower: Int , upper: Int) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
+    }
+}
+
+extension CGPath {
+    func points() -> [CGPoint]
+    {
+        var bezierPoints = [CGPoint]()
+        self.forEach({ (element: CGPathElement) in
+            let numberOfPoints: Int = {
+                switch element.type {
+                case .MoveToPoint, .AddLineToPoint: // contains 1 point
+                    return 1
+                case .AddQuadCurveToPoint: // contains 2 points
+                    return 2
+                case .AddCurveToPoint: // contains 3 points
+                    return 3
+                case .CloseSubpath:
+                    return 0
+                }
+            }()
+            for index in 0..<numberOfPoints {
+                let point = element.points[index]
+                bezierPoints.append(point)
+            }
+        })
+        return bezierPoints
+    }
+    
+    func forEach(@noescape body: @convention(block) (CGPathElement) -> Void) {
+        typealias Body = @convention(block) (CGPathElement) -> Void
+        func callback(info: UnsafeMutablePointer<Void>, element: UnsafePointer<CGPathElement>) {
+            let body = unsafeBitCast(info, Body.self)
+            body(element.memory)
+        }
+        let unsafeBody = unsafeBitCast(body, UnsafeMutablePointer<Void>.self)
+        CGPathApply(self, unsafeBody, callback)
     }
 }
 
@@ -24,23 +61,7 @@ public extension Float {
     }
 }
 
-protocol DoubleConvertible {
-    init(_ double: Double)
-    var double: Double { get }
-}
-extension Double : DoubleConvertible { var double: Double { return self         } }
-extension Float  : DoubleConvertible { var double: Double { return Double(self) } }
-extension CGFloat: DoubleConvertible { var double: Double { return Double(self) } }
-
-extension DoubleConvertible {
-    var degreesToRadians: DoubleConvertible {
-        return Self(double * M_PI / 180)
-    }
-    var radiansToDegrees: DoubleConvertible {
-        return Self(double * 180 / M_PI)
-    }
-}
-
+//Functions
 func getRandomColor() -> SKColor{
     
     let randomRed:CGFloat = CGFloat(drand48())

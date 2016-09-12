@@ -67,6 +67,7 @@ class GameScene: SKScene {
         cam.setScale(20)
         
         loadMap()
+        addCoins()
         createCar()
         addJoint()
     }
@@ -98,8 +99,8 @@ class GameScene: SKScene {
         var radius : Float = 1000
         var theta : Float = 20.0
         
-        var ox = radius * cos((Float(M_PI)) / 180)
-        var oy = radius * sin((Float(M_PI)) / 180)
+        let ox = radius * cos((Float(M_PI)) / 180)
+        let oy = radius * sin((Float(M_PI)) / 180)
         
         beizerPath.moveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
         
@@ -138,6 +139,19 @@ class GameScene: SKScene {
         planet.addChild(fieldNode)
         sceneNode.addChild(planet)
         
+    }
+    
+    func addCoins() {
+        let beizerPoints = beizerPath.CGPath.points()
+        
+        //To edit --------------
+        for i in beizerPoints {
+            if !beizerPath.containsPoint(i) {
+                let testShape = SKShapeNode(circleOfRadius: 5)
+                testShape.position = i
+                planet.addChild(testShape)
+            }
+        }
     }
     
     func createCar() {
@@ -298,6 +312,7 @@ class GameScene: SKScene {
         loadMap()
         createCar()
         addJoint()
+        addCoins()
         
         let camZoom = SKAction.scaleTo(30, duration: 0.1)
         cam.runAction(camZoom)

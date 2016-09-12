@@ -1,22 +1,5 @@
 import SpriteKit
 
-let rect = SKShapeNode(rectOfSize: CGSize(width: 100, height: 50))
-
-rect.fillColor = SKColor.blueColor()
-
-let beizerPath = UIBezierPath()
-beizerPath.moveToPoint(CGPoint(x: 0, y: 0))
-beizerPath.addLineToPoint(CGPointMake(10, 20))
-beizerPath.addCurveToPoint(CGPointMake(200, 20), controlPoint1: CGPointMake(50, 50), controlPoint2: CGPointMake(30, 150))
-
-beizerPath.addCurveToPoint(CGPointMake(200, -20), controlPoint1: CGPointMake(200, -30), controlPoint2: CGPointMake(200, 0))
-beizerPath.closePath()
-let rect2 = SKShapeNode(path: beizerPath.CGPath)
-rect2.fillColor = SKColor.redColor()
-let beizerPath2 = UIBezierPath()
-beizerPath2.addArcWithCenter(CGPointMake(0, 0), radius: 50, startAngle: CGFloat((M_PI * 0)/180), endAngle: CGFloat((M_PI * 360)/180), clockwise: false)
-
-
 func randomPointOnCircle(radius:Float, center:CGPoint) -> CGPoint {
     // Random angle in [0, 2*pi]
     let theta = Float(arc4random_uniform(UInt32.max))/Float(UInt32.max-1) * Float(M_PI) * 2.0
@@ -94,6 +77,58 @@ for y in 0...17 {
 }
 
 beizerPath4.closePath()
+
+extension CGPath {
+    func points() -> [CGPoint]
+    {
+        var bezierPoints = [CGPoint]()
+        self.forEach({ (element: CGPathElement) in
+            let numberOfPoints: Int = {
+                switch element.type {
+                case .MoveToPoint, .AddLineToPoint: // contains 1 point
+                    return 1
+                case .AddQuadCurveToPoint: // contains 2 points
+                    return 2
+                case .AddCurveToPoint: // contains 3 points
+                    return 3
+                case .CloseSubpath:
+                    return 0
+                }
+            }()
+            for index in 0..<numberOfPoints {
+                let point = element.points[index]
+                bezierPoints.append(point)
+            }
+        })
+        return bezierPoints
+    }
+    
+    func forEach(@noescape body: @convention(block) (CGPathElement) -> Void) {
+        typealias Body = @convention(block) (CGPathElement) -> Void
+        func callback(info: UnsafeMutablePointer<Void>, element: UnsafePointer<CGPathElement>) {
+            let body = unsafeBitCast(info, Body.self)
+            body(element.memory)
+        }
+        let unsafeBody = unsafeBitCast(body, UnsafeMutablePointer<Void>.self)
+        CGPathApply(self, unsafeBody, callback)
+    }
+}
+
+var bezierPoints = beizerPath4.CGPath.points()
+
+let testShape = SKShapeNode(circleOfRadius: 5)
+
+testShape.position = CGPoint(x: bezierPoints[5].x, y: bezierPoints[5].y)
+//testShape.position = CGPoint(x: bezierPoints[15].x, y: bezierPoints[15].y)
+
+beizerPath4.containsPoint(beizerPath4.CGPath.points()[5])
+
+let testShape2 = SKShapeNode(path: beizerPath4.CGPath)
+testShape2.position = CGPoint(x: 0, y: 0)
+
+testShape2.addChild(testShape)
+
+
 
 
 Float.random(1.1, upper: 1.5)
