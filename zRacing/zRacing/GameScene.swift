@@ -14,7 +14,7 @@ class GameScene: SKScene {
     var gameViewControllerBridge: GameViewController!
     
     //Beizer Path
-    var beizerPath4 = UIBezierPath()
+    var beizerPath = UIBezierPath()
     
     //Tile Map
     var tileMap = JSTileMap(named: "map2.tmx")
@@ -29,6 +29,7 @@ class GameScene: SKScene {
     
     //Nodes
     //var sceneNode = SKNode()
+    var sceneNode = SKNode()
     var carNode = SKNode()
     
     //Sprites
@@ -38,6 +39,9 @@ class GameScene: SKScene {
     var wheel2 = SKSpriteNode()
     var suspension1 = SKSpriteNode()
     var suspension2 = SKSpriteNode()
+    
+    //Emitters
+    var wheelDirtEmitter = SKEmitterNode()
     
     //Shapes
     var planet = SKShapeNode()
@@ -56,9 +60,12 @@ class GameScene: SKScene {
     }
     
     func createGame() {
+        self.addChild(cam)
         self.addChild(carNode)
-        //self.addChild(sceneNode)
-
+        self.addChild(sceneNode)
+        
+        cam.setScale(20)
+        
         loadMap()
         createCar()
         addJoint()
@@ -86,29 +93,50 @@ class GameScene: SKScene {
         //self.addChild(tileMap)
         ------------------------------------------------------------- */ 
  
-        beizerPath4.moveToPoint(CGPoint(x: 0,y: 0))
-        var theta : Float = 0.0
+        beizerPath.moveToPoint(CGPoint(x: 0,y: 0))
         
-        for _ in 0...18 {
-            let x = 1000 * cos((theta * Float(M_PI)) / -180)
-            let y = 1000 * sin((theta * Float(M_PI)) / -180)
+        var radius : Float = 1000
+        var theta : Float = 20.0
+        
+        var ox = radius * cos((Float(M_PI)) / 180)
+        var oy = radius * sin((Float(M_PI)) / 180)
+        
+        beizerPath.moveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
+        
+        for _ in 0...17 {
+            let x2 = Float.random(radius, upper: radius + 300) * cos((theta * Float(M_PI)) / 180)
+            let y2 = Float.random(radius, upper: radius + 300) * sin((theta * Float(M_PI)) / 180)
             
-            beizerPath4.addQuadCurveToPoint(CGPoint(x: CGFloat(x),y: CGFloat(y)), controlPoint: CGPoint(x: CGFloat(x*1.1),y: CGFloat(y*1.1)))
+            let x3 = Float.random(radius, upper: radius + 300) * cos(((theta - 10) * Float(M_PI)) / 180)
+            let y3 = Float.random(radius, upper: radius + 300) * sin(((theta - 10) * Float(M_PI)) / 180)
+            
+            if theta == 360 {
+                beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+            }
+            else {
+                beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3))) }
+            //beizerPath4.addCurveToPoint(CGPoint(x: CGFloat(x4),y: CGFloat(y4)), controlPoint1: CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint2: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+            
             theta += 20
         }
         
-        planet = SKShapeNode(path: beizerPath4.CGPath)
+        beizerPath.closePath()
+        
+        planet = SKShapeNode(path: beizerPath.CGPath)
         planet.position = CGPointMake(0, 0)
-        planet.physicsBody = SKPhysicsBody(edgeLoopFromPath: beizerPath4.CGPath)
+        planet.physicsBody = SKPhysicsBody(edgeLoopFromPath: beizerPath.CGPath)
         planet.physicsBody?.dynamic = false
-        planet.fillColor = SKColor.greenColor()
+        planet.fillColor = getRandomColor()
+        planet.strokeColor = getRandomColor()
+        planet.lineWidth = 7
+        planet.glowWidth = 0.5
         
         let fieldNode = SKFieldNode.radialGravityField()
         fieldNode.falloff = 1
         fieldNode.strength = 200
         
         planet.addChild(fieldNode)
-        self.addChild(planet)
+        sceneNode.addChild(planet)
         
     }
     
@@ -116,7 +144,7 @@ class GameScene: SKScene {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
         //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
-        car.position = CGPointMake(0, planet.position.y + 1200)
+        car.position = CGPointMake(0, planet.position.y + 1500)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         car.physicsBody?.dynamic = true
         car.physicsBody?.mass = 3
@@ -156,8 +184,8 @@ class GameScene: SKScene {
         wheel2.physicsBody?.friction = 1
         //wheel1.physicsBody?.linearDamping = 1
         //wheel2.physicsBody?.linearDamping = 1
-        wheel1.physicsBody?.mass = 2
-        wheel2.physicsBody?.mass = 2
+        wheel1.physicsBody?.mass = 1
+        wheel2.physicsBody?.mass = 1
         
         //wheel1.physicsBody?.restitution = 1
         //wheel2.physicsBody?.restitution = 1
@@ -171,6 +199,15 @@ class GameScene: SKScene {
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
+        
+        //addWheelDirtEmiter()
+    }
+    
+    func addWheelDirtEmiter() {
+        wheelDirtEmitter = SKEmitterNode(fileNamed: "WheelDirtEmitter.sks")!
+        carNode.addChild(wheelDirtEmitter)
+        
+        wheelDirtEmitter.hidden = true
     }
     
     func addJoint() {
@@ -197,7 +234,7 @@ class GameScene: SKScene {
         
         let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(wheel2.position.x - 20, wheel2.position.y + 20), anchorB: suspension2.position)
         
-        wheel2JointSpring.damping = 1
+        wheel2JointSpring.damping = 10
         wheel2JointSpring.frequency = 4
         
         let wheel2JointPin = SKPhysicsJointPin.jointWithBodyA(suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
@@ -217,14 +254,19 @@ class GameScene: SKScene {
         let a = sqrt(pow(planet.position.x - car.position.x, 2) + pow(planet.position.y - car.position.y, 2))
         
         let angle = atan2(car.position.y, car.position.x)
-        let theta : CGFloat = 0.2
+        let theta : CGFloat = 0.1
         
         let cx = (Float(a) * cosf(Float(angle - theta)))
         let cy = (Float(a) * sinf(Float(angle - theta)))
         
+        let camZoom = SKAction.scaleTo(1, duration: 0.5)
+
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
         cam.zRotation = angle - CGFloat(M_PI_2)
+        cam.runAction(camZoom)
         
+        wheelDirtEmitter.position = CGPointMake(wheel2.position.x, wheel2.position.y)
+        wheelDirtEmitter.zRotation = cam.zRotation
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -237,17 +279,28 @@ class GameScene: SKScene {
         if gameViewControllerBridge.gasButtonState {
             wheel2.physicsBody?.angularVelocity = -35
             wheel1.physicsBody?.angularVelocity = -35
+            
+            wheelDirtEmitter.hidden = false
         } else if gameViewControllerBridge.brakeButtonState {
             wheel2.physicsBody?.angularVelocity = 35
             wheel1.physicsBody?.angularVelocity = 35
+        } else {
+            wheelDirtEmitter.hidden = true
         }
         
     }
     
     func reloadGame() {
+        beizerPath.removeAllPoints()
         carNode.removeAllChildren()
-        
+        sceneNode.removeAllChildren()
+
+        loadMap()
         createCar()
         addJoint()
+        
+        let camZoom = SKAction.scaleTo(30, duration: 0.1)
+        cam.runAction(camZoom)
+
     }
 }

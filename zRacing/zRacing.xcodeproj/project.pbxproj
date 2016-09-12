@@ -37,6 +37,8 @@
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
 		20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF3941D8441DE0064AD7E /* Utils.swift */; };
 		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
+		20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */; };
+		20DB93251D87042300BA4DEA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93231D87042300BA4DEA /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,8 @@
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
 		20ABF3941D8441DE0064AD7E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
+		20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WheelDirtEmitter.sks; sourceTree = "<group>"; };
+		20DB93231D87042300BA4DEA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 				202210F11D7DB473003ADC7D /* Assets.xcassets */,
 				202210F31D7DB473003ADC7D /* LaunchScreen.storyboard */,
 				202210F61D7DB473003ADC7D /* Info.plist */,
+				20DB93211D8702F200BA4DEA /* Emitters */,
 				201FB5971D80569C00430CC6 /* Tile Map */,
 				202210FC1D7DB551003ADC7D /* Texture Atlas */,
 			);
@@ -193,6 +198,15 @@
 				2022110B1D7DB551003ADC7D /* Wheel2.png */,
 			);
 			path = truck;
+			sourceTree = "<group>";
+		};
+		20DB93211D8702F200BA4DEA /* Emitters */ = {
+			isa = PBXGroup;
+			children = (
+				20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */,
+				20DB93231D87042300BA4DEA /* spark.png */,
+			);
+			name = Emitters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +271,7 @@
 				202211121D7DB551003ADC7D /* Button_24.png in Resources */,
 				202211101D7DB551003ADC7D /* Button_22.png in Resources */,
 				202211171D7DB551003ADC7D /* Wheel1.png in Resources */,
+				20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */,
 				202210E91D7DB473003ADC7D /* GameScene.sks in Resources */,
 				20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */,
 				2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */,
@@ -266,6 +281,7 @@
 				202211151D7DB551003ADC7D /* Body.png in Resources */,
 				201FB5B61D8176BB00430CC6 /* tiles_spritesheet.png in Resources */,
 				202211131D7DB551003ADC7D /* Button_25.png in Resources */,
+				20DB93251D87042300BA4DEA /* spark.png in Resources */,
 				201FB5BC1D8178A100430CC6 /* tiles.png in Resources */,
 				2022110F1D7DB551003ADC7D /* Button_17.png in Resources */,
 				201FB5C01D817C7800430CC6 /* map2.tmx in Resources */,
