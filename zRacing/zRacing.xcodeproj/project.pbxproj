@@ -39,6 +39,11 @@
 		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
 		20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */; };
 		20DB93251D87042300BA4DEA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93231D87042300BA4DEA /* spark.png */; };
+		20DB932C1D8835AA00BA4DEA /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93271D8835AA00BA4DEA /* coin.jpg */; };
+		20DB932D1D8835AA00BA4DEA /* Coin0.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93281D8835AA00BA4DEA /* Coin0.png */; };
+		20DB932E1D8835AA00BA4DEA /* Coin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93291D8835AA00BA4DEA /* Coin1.png */; };
+		20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932A1D8835AA00BA4DEA /* Coin2.png */; };
+		20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932B1D8835AA00BA4DEA /* Coin3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +84,11 @@
 		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
 		20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WheelDirtEmitter.sks; sourceTree = "<group>"; };
 		20DB93231D87042300BA4DEA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		20DB93271D8835AA00BA4DEA /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
+		20DB93281D8835AA00BA4DEA /* Coin0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin0.png; sourceTree = "<group>"; };
+		20DB93291D8835AA00BA4DEA /* Coin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin1.png; sourceTree = "<group>"; };
+		20DB932A1D8835AA00BA4DEA /* Coin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin2.png; sourceTree = "<group>"; };
+		20DB932B1D8835AA00BA4DEA /* Coin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +175,7 @@
 		202210FC1D7DB551003ADC7D /* Texture Atlas */ = {
 			isa = PBXGroup;
 			children = (
+				20DB93261D88359600BA4DEA /* Coins */,
 				202211191D7DBA7F003ADC7D /* map_01.png */,
 				202210FD1D7DB551003ADC7D /* Buttons */,
 				202211071D7DB551003ADC7D /* truck */,
@@ -207,6 +218,18 @@
 				20DB93231D87042300BA4DEA /* spark.png */,
 			);
 			name = Emitters;
+			sourceTree = "<group>";
+		};
+		20DB93261D88359600BA4DEA /* Coins */ = {
+			isa = PBXGroup;
+			children = (
+				20DB93271D8835AA00BA4DEA /* coin.jpg */,
+				20DB93281D8835AA00BA4DEA /* Coin0.png */,
+				20DB93291D8835AA00BA4DEA /* Coin1.png */,
+				20DB932A1D8835AA00BA4DEA /* Coin2.png */,
+				20DB932B1D8835AA00BA4DEA /* Coin3.png */,
+			);
+			name = Coins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,17 +302,22 @@
 				2022110E1D7DB551003ADC7D /* Button_16.png in Resources */,
 				202211111D7DB551003ADC7D /* Button_23.png in Resources */,
 				202211151D7DB551003ADC7D /* Body.png in Resources */,
+				20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */,
 				201FB5B61D8176BB00430CC6 /* tiles_spritesheet.png in Resources */,
 				202211131D7DB551003ADC7D /* Button_25.png in Resources */,
 				20DB93251D87042300BA4DEA /* spark.png in Resources */,
 				201FB5BC1D8178A100430CC6 /* tiles.png in Resources */,
 				2022110F1D7DB551003ADC7D /* Button_17.png in Resources */,
+				20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */,
+				20DB932E1D8835AA00BA4DEA /* Coin1.png in Resources */,
+				20DB932C1D8835AA00BA4DEA /* coin.jpg in Resources */,
 				201FB5C01D817C7800430CC6 /* map2.tmx in Resources */,
 				2022110C1D7DB551003ADC7D /* Button_14.png in Resources */,
 				2022110D1D7DB551003ADC7D /* Button_15.png in Resources */,
 				202211181D7DB551003ADC7D /* Wheel2.png in Resources */,
 				201FB5B21D805C1000430CC6 /* map1.tmx in Resources */,
 				202211161D7DB551003ADC7D /* Head.png in Resources */,
+				20DB932D1D8835AA00BA4DEA /* Coin0.png in Resources */,
 				202210F21D7DB473003ADC7D /* Assets.xcassets in Resources */,
 				202210F01D7DB473003ADC7D /* Main.storyboard in Resources */,
 			);

@@ -18,6 +18,17 @@ extension Int {
     }
 }
 
+extension Float {
+    public static func random(lower: Float, upper: Float) -> Float {
+        let r = Float(arc4random()) / Float(UInt32.max)
+        return (r * (upper - lower)) + lower
+    }
+}
+
+func randomBool() -> Bool {
+    return arc4random_uniform(2) == 0 ? true: false
+}
+
 extension CGPath {
     func points() -> [CGPoint]
     {
@@ -51,13 +62,6 @@ extension CGPath {
         }
         let unsafeBody = unsafeBitCast(body, UnsafeMutablePointer<Void>.self)
         CGPathApply(self, unsafeBody, callback)
-    }
-}
-
-public extension Float {
-    public static func random(lower: Float, upper: Float) -> Float {
-        let r = Float(arc4random()) / Float(UInt32.max)
-        return (r * (upper - lower)) + lower
     }
 }
 
