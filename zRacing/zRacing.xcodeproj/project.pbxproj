@@ -29,7 +29,6 @@
 		202211111D7DB551003ADC7D /* Button_23.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211031D7DB551003ADC7D /* Button_23.png */; };
 		202211121D7DB551003ADC7D /* Button_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211041D7DB551003ADC7D /* Button_24.png */; };
 		202211131D7DB551003ADC7D /* Button_25.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211051D7DB551003ADC7D /* Button_25.png */; };
-		202211151D7DB551003ADC7D /* Body.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211081D7DB551003ADC7D /* Body.png */; };
 		202211161D7DB551003ADC7D /* Head.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211091D7DB551003ADC7D /* Head.png */; };
 		202211171D7DB551003ADC7D /* Wheel1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110A1D7DB551003ADC7D /* Wheel1.png */; };
 		202211181D7DB551003ADC7D /* Wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110B1D7DB551003ADC7D /* Wheel2.png */; };
@@ -44,6 +43,7 @@
 		20DB932E1D8835AA00BA4DEA /* Coin1.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93291D8835AA00BA4DEA /* Coin1.png */; };
 		20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932A1D8835AA00BA4DEA /* Coin2.png */; };
 		20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932B1D8835AA00BA4DEA /* Coin3.png */; };
+		20DB93341D89C42E00BA4DEA /* Body.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93331D89C42E00BA4DEA /* Body.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +74,6 @@
 		202211031D7DB551003ADC7D /* Button_23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_23.png; sourceTree = "<group>"; };
 		202211041D7DB551003ADC7D /* Button_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_24.png; sourceTree = "<group>"; };
 		202211051D7DB551003ADC7D /* Button_25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_25.png; sourceTree = "<group>"; };
-		202211081D7DB551003ADC7D /* Body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Body.png; sourceTree = "<group>"; };
 		202211091D7DB551003ADC7D /* Head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Head.png; sourceTree = "<group>"; };
 		2022110A1D7DB551003ADC7D /* Wheel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel1.png; sourceTree = "<group>"; };
 		2022110B1D7DB551003ADC7D /* Wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel2.png; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		20DB93291D8835AA00BA4DEA /* Coin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin1.png; sourceTree = "<group>"; };
 		20DB932A1D8835AA00BA4DEA /* Coin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin2.png; sourceTree = "<group>"; };
 		20DB932B1D8835AA00BA4DEA /* Coin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin3.png; sourceTree = "<group>"; };
+		20DB93331D89C42E00BA4DEA /* Body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Body.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +203,7 @@
 		202211071D7DB551003ADC7D /* truck */ = {
 			isa = PBXGroup;
 			children = (
-				202211081D7DB551003ADC7D /* Body.png */,
+				20DB93331D89C42E00BA4DEA /* Body.png */,
 				202211091D7DB551003ADC7D /* Head.png */,
 				2022110A1D7DB551003ADC7D /* Wheel1.png */,
 				2022110B1D7DB551003ADC7D /* Wheel2.png */,
@@ -292,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				202211121D7DB551003ADC7D /* Button_24.png in Resources */,
+				20DB93341D89C42E00BA4DEA /* Body.png in Resources */,
 				202211101D7DB551003ADC7D /* Button_22.png in Resources */,
 				202211171D7DB551003ADC7D /* Wheel1.png in Resources */,
 				20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */,
@@ -301,7 +302,6 @@
 				202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */,
 				2022110E1D7DB551003ADC7D /* Button_16.png in Resources */,
 				202211111D7DB551003ADC7D /* Button_23.png in Resources */,
-				202211151D7DB551003ADC7D /* Body.png in Resources */,
 				20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */,
 				201FB5B61D8176BB00430CC6 /* tiles_spritesheet.png in Resources */,
 				202211131D7DB551003ADC7D /* Button_25.png in Resources */,

@@ -86,13 +86,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         triangle.physicsBody?.dynamic = true
         triangle.zPosition = 1
         
+        quad.physicsBody?.restitution = 1
+        circle.physicsBody?.restitution = 1
         
         self.backgroundColor = SKColor.orangeColor()
         
-//        self.addChild(ground)
-        self.addChild(quad)
-//        self.addChild(triangle)
-        self.addChild(circle)
+        let node = SKNode()
+        node.addChild(circle)
+        node.addChild(quad)
+        
+        self.addChild(node)
         
 //        let myJointPin = SKPhysicsJointPin.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchor: circle.position)
 //        let myJointLimit = SKPhysicsJointLimit.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchorA: circle.position, anchorB: quad.position)

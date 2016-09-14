@@ -55,7 +55,7 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.gravity = CGVectorMake(0, 0) //Earth gravity (0, -9.8)
-        self.physicsWorld.speed = 0.9
+        self.physicsWorld.speed = 0.8
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: 0, y: 0)
         self.camera = cam
@@ -77,8 +77,8 @@ class GameScene: SKScene {
     }
     
     func loadMap() {
-        /* Tile Maps ------------------------------------------------
-        tileMap.position = CGPoint(x: 0, y: 0)
+        // Tile Maps ------------------------------------------------
+        /*tileMap.position = CGPoint(x: 0, y: 0)
         
         for var a=0; a < Int(tileMap.mapSize.width); a++ {
             for var b = 0; b < Int(tileMap.mapSize.height); b++ {
@@ -94,10 +94,10 @@ class GameScene: SKScene {
             }
         }
         tileMap.physicsBody?.friction = 1
-        
-        //self.addChild(tileMap)
-        ------------------------------------------------------------- */ 
- 
+        tileMap.physicsBody?.restitution = 0
+        sceneNode.addChild(tileMap)
+        //-------------------------------------------------------------
+        */
         beizerPath.moveToPoint(CGPoint(x: 0,y: 0))
         coinsArray.removeAll()
         
@@ -170,7 +170,7 @@ class GameScene: SKScene {
         
         planet.addChild(fieldNode)
         sceneNode.addChild(planet)
-        
+ 
     }
     
     func addCoins() {
@@ -191,27 +191,33 @@ class GameScene: SKScene {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
         //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
-        car.position = CGPointMake(0, planet.frame.maxY + 100)
+        car.position = CGPointMake(600, planet.frame.maxY + car.frame.height + 100)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
-        car.physicsBody?.dynamic = true
-        car.physicsBody?.mass = 0.5
+        //car.physicsBody?.dynamic = true
+        car.physicsBody?.mass = 0.1
+        //car.physicsBody?.density = 0.1
         car.setScale(0.3)
         car.zPosition = 1
+        //car.physicsBody?.restitution = 0
         
         //Roch Shok
         suspension1 = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 5, height: 5))
-        suspension1.position = CGPointMake(car.position.x + car.size.width / 2 - 35, car.position.y - 60)
+        suspension1.position = CGPointMake(car.position.x + car.size.width / 2 - 35, car.position.y - 50)
         suspension1.zPosition = 3
         suspension1.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension1.physicsBody?.dynamic = true
-        suspension1.physicsBody?.mass = 0.3
+        suspension1.physicsBody?.mass = 0.1
+        //suspension1.physicsBody?.restitution = 0
+        //suspension1.physicsBody?.density = 0.1
         
         suspension2 = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 5, height: 5))
-        suspension2.position = CGPointMake(car.position.x - car.size.width / 2 + 25, car.position.y - 60)
+        suspension2.position = CGPointMake(car.position.x - car.size.width / 2 + 25, car.position.y - 50)
         suspension2.zPosition = 3
         suspension2.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension2.physicsBody?.dynamic = true
-        suspension2.physicsBody?.mass = 0.4
+        suspension2.physicsBody?.mass = 0.1
+        //suspension2.physicsBody?.restitution = 0
+        //suspension2.physicsBody?.density = 0.1
         
         wheel1Texture = SKTexture(imageNamed: "Wheel1")
         wheel2Texture = SKTexture(imageNamed: "Wheel2")
@@ -229,15 +235,21 @@ class GameScene: SKScene {
         wheel2.physicsBody?.dynamic = true
         wheel1.physicsBody?.friction = 1
         wheel2.physicsBody?.friction = 1
-        //wheel1.physicsBody?.linearDamping = 1
-        //wheel2.physicsBody?.linearDamping = 1
-        wheel1.physicsBody?.mass = 0.3
-        wheel2.physicsBody?.mass = 0.3
+
+        wheel1.physicsBody?.mass = 0.2
+        wheel2.physicsBody?.mass = 0.1
+        
+//        car.physicsBody?.restitution = 1
+//        suspension1.physicsBody?.restitution = 1
+//        suspension2.physicsBody?.restitution = 1
+//        wheel1.physicsBody?.restitution = 1s
+//        wheel2.physicsBody?.restitution = 1
         
         //wheel1.physicsBody?.restitution = 1
         //wheel2.physicsBody?.restitution = 1
-        //wheel1.physicsBody?.density = 3
-        //wheel2.physicsBody?.density = 3
+        //wheel1.physicsBody?.density = 0.1
+        //wheel2.physicsBody?.density = 0.1
+        
         wheel1.zPosition = 2
         wheel2.zPosition = 2
         
@@ -246,6 +258,9 @@ class GameScene: SKScene {
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
+        
+        carNode.physicsBody = SKPhysicsBody(bodies: [car.physicsBody!, wheel1.physicsBody!, wheel2.physicsBody!, suspension1.physicsBody!, suspension2.physicsBody!])
+        carNode.physicsBody?.restitution = 1
         
         //addWheelDirtEmiter()
     }
@@ -265,10 +280,11 @@ class GameScene: SKScene {
         wheel1JointSliding.lowerDistanceLimit = 5
         wheel1JointSliding.upperDistanceLimit = 20
         
-        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(wheel1.position.x + 20, wheel1.position.y + 20), anchorB: suspension1.position)
+        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(car.position.x - car.frame.size.width / 2, car.position.y), anchorB: suspension1.position)
         
-        wheel1JointSpring.damping = 0
-        wheel1JointSpring.frequency = 4
+        wheel1JointSpring.damping = 1
+        wheel1JointSpring.frequency = 10
+
         
         let wheel1JointPin = SKPhysicsJointPin.jointWithBodyA(suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
         
@@ -279,10 +295,10 @@ class GameScene: SKScene {
         wheel2JointSliding.lowerDistanceLimit = 5
         wheel2JointSliding.upperDistanceLimit = 20
         
-        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(wheel2.position.x - 20, wheel2.position.y + 20), anchorB: suspension2.position)
+        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(car.position.x + car.frame.size.width / 2, car.position.y), anchorB: suspension2.position)
         
-        wheel2JointSpring.damping = 0
-        wheel2JointSpring.frequency = 4
+        wheel2JointSpring.damping = 1
+        wheel2JointSpring.frequency = 10
         
         let wheel2JointPin = SKPhysicsJointPin.jointWithBodyA(suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
         
@@ -326,6 +342,7 @@ class GameScene: SKScene {
         if gameViewControllerBridge.gasButtonState {
             wheel2.physicsBody?.angularVelocity = -35
             wheel1.physicsBody?.angularVelocity = -35
+
             
             wheelDirtEmitter.hidden = false
         } else if gameViewControllerBridge.brakeButtonState {
