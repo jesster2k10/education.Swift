@@ -8,7 +8,10 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    //Animations
+    var animations = AnimationClass()
     
     //Variables
     var gameViewControllerBridge: GameViewController!
@@ -17,11 +20,6 @@ class GameScene: SKScene {
     
     //Beizer Path
     var beizerPath = UIBezierPath()
-    
-    //Tile Map
-    var tileMap = JSTileMap(named: "map2.tmx")
-    var myLocation = CGPointMake(0, 0)
-    var x = CGFloat(0)
     
     //Textures
     var mapTexture = SKTexture()
@@ -50,12 +48,18 @@ class GameScene: SKScene {
     //Shapes
     var planet = SKShapeNode()
     
+    //Bit Masks
+    var planetGroup : UInt32 = 0x1 << 1
+    var carGroup : UInt32 = 0x1 << 2
+    var coinGroup : UInt32 = 0x1 << 3
+    
     //Camera
     let cam = SKCameraNode()
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.gravity = CGVectorMake(0, 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.8
+        self.physicsWorld.contactDelegate = self
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: 0, y: 0)
         self.camera = cam
@@ -68,7 +72,7 @@ class GameScene: SKScene {
         self.addChild(carNode)
         self.addChild(sceneNode)
         
-        cam.setScale(50)
+        cam.setScale(30)
         
         loadMap()
         addCoins()
@@ -77,49 +81,28 @@ class GameScene: SKScene {
     }
     
     func loadMap() {
-        // Tile Maps ------------------------------------------------
-        /*tileMap.position = CGPoint(x: 0, y: 0)
-        
-        for var a=0; a < Int(tileMap.mapSize.width); a++ {
-            for var b = 0; b < Int(tileMap.mapSize.height); b++ {
-                let layerInfo: TMXLayerInfo = tileMap.layers.firstObject as! TMXLayerInfo
-                let point = CGPoint(x: a, y: b)
-                let gid = layerInfo.layer.tileGidAt(layerInfo.layer.pointForCoord(point))
-                
-                if gid == 9 || gid == 152 || gid == 104 || gid == 153 || gid == 21 || gid == 33 || gid == 129 {
-                    let node = layerInfo.layer.tileAtCoord(point)
-                    node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
-                    node.physicsBody?.dynamic = false
-                }
-            }
-        }
-        tileMap.physicsBody?.friction = 1
-        tileMap.physicsBody?.restitution = 0
-        sceneNode.addChild(tileMap)
-        //-------------------------------------------------------------
-        */
         beizerPath.moveToPoint(CGPoint(x: 0,y: 0))
         coinsArray.removeAll()
         
         planetRadius = Float.random(2000, upper: 5000)
         var theta : Float = 9.0
         
-        var ox = planetRadius * cos((Float(M_PI)) / 180)
-        var oy = planetRadius * sin((Float(M_PI)) / 180)
+        let ox = planetRadius * cos((Float(M_PI)) / 180)
+        let oy = planetRadius * sin((Float(M_PI)) / 180)
         
         beizerPath.moveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
         
         for _ in 0...38 {
             var newRadius = Float.random(planetRadius, upper: planetRadius + planetRadius / 4)
 
-            var x2 = newRadius * cos((theta * Float(M_PI)) / 180)
-            var y2 = newRadius * sin((theta * Float(M_PI)) / 180)
+            let x2 = newRadius * cos((theta * Float(M_PI)) / 180)
+            let y2 = newRadius * sin((theta * Float(M_PI)) / 180)
             
             var x3 = newRadius * cos(((theta - 3.5) * Float(M_PI)) / 180)
             var y3 = newRadius * sin(((theta - 3.5) * Float(M_PI)) / 180)
             
-            var x4 = newRadius * cos(((theta ) * Float(M_PI)) / 180)
-            var y4 = newRadius * sin(((theta ) * Float(M_PI)) / 180)
+            let x4 = newRadius * cos(((theta ) * Float(M_PI)) / 180)
+            let y4 = newRadius * sin(((theta ) * Float(M_PI)) / 180)
             
             if theta == 360 {
                 beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
@@ -133,7 +116,7 @@ class GameScene: SKScene {
                 }
             }
             
-            let coinCount = Int.random(0, upper: 3)
+            let coinCount = Int.random(0, upper: 4)
             var newTheta : Float = 3.0
             for _ in 0...coinCount {
                 newRadius += Float.random(50, upper: 70)
@@ -142,7 +125,7 @@ class GameScene: SKScene {
                 y3 = newRadius * sin(((theta - newTheta) * Float(M_PI)) / 180)
                 
                 if randomBool() {
-                coinsArray.append(CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+                    coinsArray.append(CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
                 }
                 newTheta += 3
             }
@@ -159,6 +142,8 @@ class GameScene: SKScene {
         planet.strokeColor = getRandomColor()
         planet.lineWidth = 7
         planet.glowWidth = 0.5
+        
+        planet.physicsBody?.categoryBitMask = planetGroup
         
         let fieldNode = SKFieldNode.radialGravityField()
         fieldNode.position = planet.position
@@ -178,13 +163,30 @@ class GameScene: SKScene {
         coinTexture = SKTexture(imageNamed: "coin.jpg")
         //To edit --------------
         for i in coinsArray {
-            if !beizerPath.containsPoint(i) {
-                coin = SKSpriteNode(texture: coinTexture)
-                coin.setScale(0.15)
-                coin.position = i
-                planet.addChild(coin)
-            }
+            coin = SKSpriteNode(texture: coinTexture)
+        
+            coin.position = i
+            coin.physicsBody = SKPhysicsBody(texture: coinTexture, size: coin.frame.size)
+            coin.physicsBody?.dynamic = false
+            coin.physicsBody?.categoryBitMask = coinGroup
+            coin.physicsBody?.collisionBitMask = 0
+            coin.zPosition = 1
+        
+            coin.setScale(0.2)
+        
+            let angle = atan2(i.y, i.x)
+            coin.zRotation = angle - CGFloat(M_PI_2)
+            
+            
+             if !beizerPath.containsPoint(CGPoint(x: CGRectGetMaxX(coin.frame), y: CGRectGetMaxY(coin.frame))) &&
+                !beizerPath.containsPoint(CGPoint(x: CGRectGetMinX(coin.frame), y: CGRectGetMinY(coin.frame))) &&
+                !beizerPath.containsPoint(CGPoint(x: CGRectGetMinX(coin.frame), y: CGRectGetMaxY(coin.frame))) &&
+                !beizerPath.containsPoint(CGPoint(x: CGRectGetMaxX(coin.frame), y: CGRectGetMinY(coin.frame)))
+             {
+                 planet.addChild(coin)
+             }
         }
+    
     }
     
     func createCar() {
@@ -253,23 +255,40 @@ class GameScene: SKScene {
         wheel1.zPosition = 2
         wheel2.zPosition = 2
         
+        car.physicsBody?.categoryBitMask = carGroup
+        car.physicsBody?.contactTestBitMask = planetGroup | coinGroup
+        car.physicsBody?.collisionBitMask = planetGroup
+        
+        suspension1.physicsBody?.collisionBitMask = 0
+        suspension2.physicsBody?.collisionBitMask = 0
+        
+        wheel1.physicsBody?.categoryBitMask = carGroup
+        wheel1.physicsBody?.contactTestBitMask = planetGroup | coinGroup
+        wheel1.physicsBody?.collisionBitMask =   planetGroup
+
+        wheel2.physicsBody?.categoryBitMask = carGroup
+        wheel2.physicsBody?.contactTestBitMask =  planetGroup | coinGroup
+        wheel2.physicsBody?.collisionBitMask = planetGroup
+        
         carNode.addChild(car)
         carNode.addChild(suspension1)
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
         
-        carNode.physicsBody = SKPhysicsBody(bodies: [car.physicsBody!, wheel1.physicsBody!, wheel2.physicsBody!, suspension1.physicsBody!, suspension2.physicsBody!])
-        carNode.physicsBody?.restitution = 1
+        //carNode.position = car.position
+        //carNode.physicsBody = SKPhysicsBody(bodies: [car.physicsBody!, wheel1.physicsBody!, wheel2.physicsBody!, suspension1.physicsBody!, suspension2.physicsBody!])
         
-        //addWheelDirtEmiter()
+        //carNode.physicsBody?.restitution = 1
+        
+        addWheelDirtEmiter()
     }
     
     func addWheelDirtEmiter() {
         wheelDirtEmitter = SKEmitterNode(fileNamed: "WheelDirtEmitter.sks")!
-        carNode.addChild(wheelDirtEmitter)
+        //carNode.addChild(wheelDirtEmitter)
         
-        wheelDirtEmitter.hidden = true
+        //wheelDirtEmitter.hidden = true
     }
     
     func addJoint() {
@@ -328,8 +347,8 @@ class GameScene: SKScene {
         cam.zRotation = angle - CGFloat(M_PI_2)
         cam.runAction(camZoom)
         
-        wheelDirtEmitter.position = CGPointMake(wheel2.position.x, wheel2.position.y)
-        wheelDirtEmitter.zRotation = cam.zRotation
+        wheelDirtEmitter.position = CGPointMake(wheel2.position.x,wheel2.position.y - wheel2.frame.height / 2)
+        wheelDirtEmitter.zRotation = angle - CGFloat(M_PI_2)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -355,6 +374,8 @@ class GameScene: SKScene {
     }
     
     func reloadGame() {
+        animations.shakeAndFlashAnimation(self.view!)
+        
         beizerPath.removeAllPoints()
         carNode.removeAllChildren()
         sceneNode.removeAllChildren()

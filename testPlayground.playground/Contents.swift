@@ -2,113 +2,112 @@ import Foundation
 import SpriteKit
 import XCPlayground
 
-let view:SKView = SKView(frame: CGRectMake(0, 0, 1024, 768))
-XCPlaygroundPage.currentPage.liveView = view
+extension Int {
+    var degreesToRadians: Double { return Double(self) * M_PI / 180 }
+    var radiansToDegrees: Double { return Double(self) * 180 / M_PI }
+    
+    public static func random (lower: Int , upper: Int) -> Int {
+        return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
+    }
+}
 
-let scene = SKScene(size: CGSizeMake(1024, 768))
-scene.name = "PlaygroundScene"
-scene.physicsWorld.gravity =  CGVectorMake(0.0, -0.0)
-scene.scaleMode = SKSceneScaleMode.AspectFit
+extension Float {
+    public static func random(lower: Float, upper: Float) -> Float {
+        let r = Float(arc4random()) / Float(UInt32.max)
+        return (r * (upper - lower)) + lower
+    }
+}
 
-let vehicle = SKNode()
+func randomBool() -> Bool {
+    return arc4random_uniform(2) == 0 ? true: false
+}
 
-var joints = [SKPhysicsJoint]()
-let wheelOffsetY:CGFloat    =   60;
-let damping:CGFloat     =   1;
-let frequency :CGFloat    =   4;
+var beizerPath = UIBezierPath()
+var coinsArray = [CGPoint]()
 
-let chassis = SKSpriteNode.init(color: UIColor.whiteColor(), size: CGSizeMake(120, 8))
-chassis.position = CGPoint(x: scene.size.width/2, y: scene.size.height/2)
-chassis.physicsBody =  SKPhysicsBody.init(rectangleOfSize: chassis.size)
-vehicle.addChild(chassis)
+beizerPath.moveToPoint(CGPoint(x: 0,y: 0))
+coinsArray.removeAll()
 
+var planetRadius : Float = 100
+var theta : Float = 9.0
 
-let ctop = SKSpriteNode.init(color: UIColor.greenColor(), size: CGSizeMake(70, 16))
-ctop.position = CGPointMake(chassis.position.x+20, chassis.position.y+12);
-ctop.physicsBody = SKPhysicsBody.init(rectangleOfSize: ctop.size)
-vehicle.addChild(ctop)
+var ox = planetRadius * cos((Float(M_PI)) / 180)
+var oy = planetRadius * sin((Float(M_PI)) / 180)
 
+beizerPath.moveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
 
+for _ in 0...38 {
+    var newRadius = Float.random(planetRadius, upper: planetRadius + planetRadius / 4)
+    
+    var x2 = newRadius * cos((theta * Float(M_PI)) / 180)
+    var y2 = newRadius * sin((theta * Float(M_PI)) / 180)
+    
+    var x3 = newRadius * cos(((theta - 3.5) * Float(M_PI)) / 180)
+    var y3 = newRadius * sin(((theta - 3.5) * Float(M_PI)) / 180)
+    
+    var x4 = newRadius * cos(((theta ) * Float(M_PI)) / 180)
+    var y4 = newRadius * sin(((theta ) * Float(M_PI)) / 180)
+    
+    if theta == 360 {
+        beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+    }
+    else {
+        if randomBool() {
+            beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+        }
+        else {
+            beizerPath.addCurveToPoint(CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint1: CGPoint(x: CGFloat(x3),y: CGFloat(y3)), controlPoint2: CGPoint(x: CGFloat(x4),y: CGFloat(y4)))
+        }
+    }
+    
+    let coinCount = 0
+    var newTheta : Float = 3.0
+    for _ in 0...coinCount {
+        newRadius += 10
+        
+        x3 = newRadius * cos(((theta - newTheta) * Float(M_PI)) / 180)
+        y3 = newRadius * sin(((theta - newTheta) * Float(M_PI)) / 180)
+        
+        if randomBool() {
+            coinsArray.append((CGPoint(x: CGFloat(x3),y: CGFloat(y3))))
+        }
+        newTheta += 3
+    }
+    theta += 9
+}
 
-let cJoint = SKPhysicsJointFixed.jointWithBodyA(chassis.physicsBody!, bodyB: ctop.physicsBody!, anchor: CGPointMake(ctop.position.x, ctop.position.y))
+beizerPath.closePath()
 
+var planet = SKShapeNode(path: beizerPath.CGPath)
+planet.position = CGPointMake(0, 0)
+planet.fillColor = SKColor.greenColor()
 
-
-let leftWheel = SKSpriteNode(imageNamed: "wheel.png")
-leftWheel.position = CGPointMake(chassis.position.x - chassis.size.width / 2, chassis.position.y - wheelOffsetY)  //Always set position before physicsBody
-leftWheel.physicsBody = SKPhysicsBody(circleOfRadius: leftWheel.size.width/2)
-leftWheel.physicsBody!.allowsRotation = true;
-vehicle.addChild(leftWheel)
-
-
-let rightWheel = SKSpriteNode(imageNamed: "wheel.png")
-rightWheel.position = CGPointMake(chassis.position.x + chassis.size.width / 2, chassis.position.y - wheelOffsetY)  //Always set position before physicsBody
-rightWheel.physicsBody = SKPhysicsBody(circleOfRadius: leftWheel.size.width/2)
-rightWheel.physicsBody!.allowsRotation = true;
-vehicle.addChild(rightWheel)
-
-
-//--------------------- LEFT SUSPENSION ---------------------- //
-
-let leftShockPost = SKSpriteNode(color: UIColor.blueColor(), size:CGSizeMake(7, wheelOffsetY) )
-
-leftShockPost.position = CGPointMake(chassis.position.x - chassis.size.width / 2, chassis.position.y - leftShockPost.size.height/2)
-
-leftShockPost.physicsBody = SKPhysicsBody(rectangleOfSize: leftShockPost.size)
-vehicle.addChild(leftShockPost)
-
-let leftSlide = SKPhysicsJointSliding.jointWithBodyA(chassis.physicsBody!, bodyB: leftShockPost.physicsBody!, anchor:CGPointMake(leftShockPost.position.x, leftShockPost.position.y), axis:CGVectorMake(0, 1))
-
-
-leftSlide.shouldEnableLimits = true;
-leftSlide.lowerDistanceLimit = 5;
-leftSlide.upperDistanceLimit = wheelOffsetY;
-
-
-let leftSpring = SKPhysicsJointSpring.jointWithBodyA(chassis.physicsBody!, bodyB: leftWheel.physicsBody!, anchorA: CGPointMake(chassis.position.x - chassis.size.width / 2, chassis.position.y), anchorB: leftWheel.position)
-
-
-leftSpring.damping = damping;
-leftSpring.frequency = frequency;
-
-let lPin = SKPhysicsJointPin.jointWithBodyA(leftShockPost.physicsBody!, bodyB:leftWheel.physicsBody!, anchor:leftWheel.position)
-
-
-//--------------------- Right SUSPENSION ---------------------- //
-
-let rightShockPost = SKSpriteNode(color: UIColor.blueColor(), size:CGSizeMake(7, wheelOffsetY) )
-
-rightShockPost.position = CGPointMake(chassis.position.x + chassis.size.width / 2, chassis.position.y - rightShockPost.size.height/2)
-
-rightShockPost.physicsBody = SKPhysicsBody(rectangleOfSize: rightShockPost.size)
-vehicle.addChild(rightShockPost)
-
-let rightSlide = SKPhysicsJointSliding.jointWithBodyA(chassis.physicsBody!, bodyB: rightShockPost.physicsBody!, anchor:CGPointMake(rightShockPost.position.x, rightShockPost.position.y), axis:CGVectorMake(0, 1))
-
-
-rightSlide.shouldEnableLimits = true;
-rightSlide.lowerDistanceLimit = 5;
-rightSlide.upperDistanceLimit = wheelOffsetY;
-
-
-let rightSpring = SKPhysicsJointSpring.jointWithBodyA(chassis.physicsBody!, bodyB: rightWheel.physicsBody!, anchorA: CGPointMake(chassis.position.x - chassis.size.width / 2, chassis.position.y), anchorB: rightWheel.position)
-
-
-rightSpring.damping = damping;
-rightSpring.frequency = frequency;
-
-let rPin = SKPhysicsJointPin.jointWithBodyA(leftShockPost.physicsBody!, bodyB:rightWheel.physicsBody!, anchor:rightWheel.position)
+for i in coinsArray {
+    var coin = SKShapeNode(circleOfRadius: 7)
+    coin.position = i
+    
+    coin.fillColor = SKColor.blueColor()
+    
+    if !beizerPath.containsPoint(i) {
+    }
+    if !coin.intersectsNode(planet) {
+        let error = SKShapeNode(circleOfRadius: 5)
+        error.fillColor = SKColor.redColor()
+        error.position = i
+        error.zPosition = 2
+        planet.addChild(error)
+    }
+    
+    planet.addChild(coin)
+}
 
 
-// Add all joints to the array.
+planet
 
-joints.append(cJoint)
-joints.append(leftSlide)
-joints.append(leftSpring)
-joints.append(rightSlide)
-joints.append(rightSpring)
-joints.append(rPin)
 
- 
-scene.addChild(vehicle)
-view.presentScene(scene)
+
+
+
+
+
+

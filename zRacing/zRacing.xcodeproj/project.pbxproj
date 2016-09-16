@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		201FB59D1D8056B000430CC6 /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FB59A1D8056B000430CC6 /* JSTileMap.m */; };
-		201FB59E1D8056B000430CC6 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FB59C1D8056B000430CC6 /* LFCGzipUtility.m */; };
-		201FB5A01D8056DB00430CC6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201FB59F1D8056DB00430CC6 /* libz.tbd */; };
-		201FB5B21D805C1000430CC6 /* map1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 201FB5B11D805C1000430CC6 /* map1.tmx */; };
-		201FB5B61D8176BB00430CC6 /* tiles_spritesheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 201FB5B51D8176BB00430CC6 /* tiles_spritesheet.png */; };
-		201FB5BC1D8178A100430CC6 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 201FB5BB1D8178A100430CC6 /* tiles.png */; };
-		201FB5C01D817C7800430CC6 /* map2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 201FB5BF1D817C7800430CC6 /* map2.tmx */; };
 		202210E71D7DB473003ADC7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202210E61D7DB473003ADC7D /* AppDelegate.swift */; };
 		202210E91D7DB473003ADC7D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 202210E81D7DB473003ADC7D /* GameScene.sks */; };
 		202210EB1D7DB473003ADC7D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202210EA1D7DB473003ADC7D /* GameScene.swift */; };
@@ -44,19 +37,11 @@
 		20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932A1D8835AA00BA4DEA /* Coin2.png */; };
 		20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB932B1D8835AA00BA4DEA /* Coin3.png */; };
 		20DB93341D89C42E00BA4DEA /* Body.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93331D89C42E00BA4DEA /* Body.png */; };
+		20DB93361D8B110B00BA4DEA /* GameScene_Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DB93351D8B110B00BA4DEA /* GameScene_Physics.swift */; };
+		20DB93381D8C365100BA4DEA /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DB93371D8C365100BA4DEA /* Animations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		201FB5981D8056AF00430CC6 /* zRacing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zRacing-Bridging-Header.h"; sourceTree = "<group>"; };
-		201FB5991D8056B000430CC6 /* JSTileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTileMap.h; sourceTree = "<group>"; };
-		201FB59A1D8056B000430CC6 /* JSTileMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTileMap.m; sourceTree = "<group>"; };
-		201FB59B1D8056B000430CC6 /* LFCGzipUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCGzipUtility.h; sourceTree = "<group>"; };
-		201FB59C1D8056B000430CC6 /* LFCGzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
-		201FB59F1D8056DB00430CC6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		201FB5B11D805C1000430CC6 /* map1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map1.tmx; sourceTree = "<group>"; };
-		201FB5B51D8176BB00430CC6 /* tiles_spritesheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles_spritesheet.png; sourceTree = "<group>"; };
-		201FB5BB1D8178A100430CC6 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
-		201FB5BF1D817C7800430CC6 /* map2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map2.tmx; sourceTree = "<group>"; };
 		202210E31D7DB473003ADC7D /* zRacing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zRacing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		202210E61D7DB473003ADC7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		202210E81D7DB473003ADC7D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -89,6 +74,9 @@
 		20DB932A1D8835AA00BA4DEA /* Coin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin2.png; sourceTree = "<group>"; };
 		20DB932B1D8835AA00BA4DEA /* Coin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coin3.png; sourceTree = "<group>"; };
 		20DB93331D89C42E00BA4DEA /* Body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Body.png; sourceTree = "<group>"; };
+		20DB93351D8B110B00BA4DEA /* GameScene_Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene_Physics.swift; sourceTree = "<group>"; };
+		20DB93371D8C365100BA4DEA /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zRacing-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,46 +84,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				201FB5A01D8056DB00430CC6 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		201FB5971D80569C00430CC6 /* Tile Map */ = {
-			isa = PBXGroup;
-			children = (
-				201FB5A11D80572600430CC6 /* Maps */,
-				201FB5A21D80573100430CC6 /* Source */,
-			);
-			name = "Tile Map";
-			sourceTree = "<group>";
-		};
-		201FB5A11D80572600430CC6 /* Maps */ = {
-			isa = PBXGroup;
-			children = (
-				201FB5BB1D8178A100430CC6 /* tiles.png */,
-				201FB5B11D805C1000430CC6 /* map1.tmx */,
-				201FB5B51D8176BB00430CC6 /* tiles_spritesheet.png */,
-				201FB5BF1D817C7800430CC6 /* map2.tmx */,
-			);
-			name = Maps;
-			sourceTree = "<group>";
-		};
-		201FB5A21D80573100430CC6 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				201FB59F1D8056DB00430CC6 /* libz.tbd */,
-				201FB5991D8056B000430CC6 /* JSTileMap.h */,
-				201FB59A1D8056B000430CC6 /* JSTileMap.m */,
-				201FB59B1D8056B000430CC6 /* LFCGzipUtility.h */,
-				201FB59C1D8056B000430CC6 /* LFCGzipUtility.m */,
-				201FB5981D8056AF00430CC6 /* zRacing-Bridging-Header.h */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
 		202210DA1D7DB473003ADC7D = {
 			isa = PBXGroup;
 			children = (
@@ -158,15 +112,15 @@
 				202210E61D7DB473003ADC7D /* AppDelegate.swift */,
 				202210E81D7DB473003ADC7D /* GameScene.sks */,
 				202210EA1D7DB473003ADC7D /* GameScene.swift */,
-				20ABF3941D8441DE0064AD7E /* Utils.swift */,
+				20DB93351D8B110B00BA4DEA /* GameScene_Physics.swift */,
 				202210EC1D7DB473003ADC7D /* GameViewController.swift */,
 				2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */,
 				202210EE1D7DB473003ADC7D /* Main.storyboard */,
 				202210F11D7DB473003ADC7D /* Assets.xcassets */,
 				202210F31D7DB473003ADC7D /* LaunchScreen.storyboard */,
 				202210F61D7DB473003ADC7D /* Info.plist */,
+				20DB93391D8C367300BA4DEA /* Helpers */,
 				20DB93211D8702F200BA4DEA /* Emitters */,
-				201FB5971D80569C00430CC6 /* Tile Map */,
 				202210FC1D7DB551003ADC7D /* Texture Atlas */,
 			);
 			path = zRacing;
@@ -230,6 +184,16 @@
 				20DB932B1D8835AA00BA4DEA /* Coin3.png */,
 			);
 			name = Coins;
+			sourceTree = "<group>";
+		};
+		20DB93391D8C367300BA4DEA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */,
+				20ABF3941D8441DE0064AD7E /* Utils.swift */,
+				20DB93371D8C365100BA4DEA /* Animations.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,19 +267,15 @@
 				2022110E1D7DB551003ADC7D /* Button_16.png in Resources */,
 				202211111D7DB551003ADC7D /* Button_23.png in Resources */,
 				20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */,
-				201FB5B61D8176BB00430CC6 /* tiles_spritesheet.png in Resources */,
 				202211131D7DB551003ADC7D /* Button_25.png in Resources */,
 				20DB93251D87042300BA4DEA /* spark.png in Resources */,
-				201FB5BC1D8178A100430CC6 /* tiles.png in Resources */,
 				2022110F1D7DB551003ADC7D /* Button_17.png in Resources */,
 				20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */,
 				20DB932E1D8835AA00BA4DEA /* Coin1.png in Resources */,
 				20DB932C1D8835AA00BA4DEA /* coin.jpg in Resources */,
-				201FB5C01D817C7800430CC6 /* map2.tmx in Resources */,
 				2022110C1D7DB551003ADC7D /* Button_14.png in Resources */,
 				2022110D1D7DB551003ADC7D /* Button_15.png in Resources */,
 				202211181D7DB551003ADC7D /* Wheel2.png in Resources */,
-				201FB5B21D805C1000430CC6 /* map1.tmx in Resources */,
 				202211161D7DB551003ADC7D /* Head.png in Resources */,
 				20DB932D1D8835AA00BA4DEA /* Coin0.png in Resources */,
 				202210F21D7DB473003ADC7D /* Assets.xcassets in Resources */,
@@ -331,11 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				202210EB1D7DB473003ADC7D /* GameScene.swift in Sources */,
-				201FB59D1D8056B000430CC6 /* JSTileMap.m in Sources */,
 				202210ED1D7DB473003ADC7D /* GameViewController.swift in Sources */,
 				20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */,
+				20DB93361D8B110B00BA4DEA /* GameScene_Physics.swift in Sources */,
+				20DB93381D8C365100BA4DEA /* Animations.swift in Sources */,
 				202210E71D7DB473003ADC7D /* AppDelegate.swift in Sources */,
-				201FB59E1D8056B000430CC6 /* LFCGzipUtility.m in Sources */,
 				2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
