@@ -163,9 +163,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         atmosphere.position = planet.position
         atmosphere.zPosition = 5
         
+        let view = gameViewControllerBridge.view as! SKView
+        let texture = view.textureFromNode(atmosphere)
+        coinTexture = SKTexture(imageNamed: "coin.jpg")
+
+        
+        let gradient = BDGradientNode(radialGradientWithTexture: coinTexture, colors: [UIColor.redColor(), UIColor.blueColor(), UIColor.cyanColor()], locations: nil, firstCenter: CGPoint(x: 0.5,y: 0.5), firstRadius: 0.3, secondCenter: CGPoint(x: 0.5,y: 0.5), secondRadius: 0.8, blending: 1, discardOutsideGradient: true, keepTextureShape: true, size: CGSize(width: atmosphere.frame.size.width, height: atmosphere.frame.size.height))
+        gradient.position = CGPoint(x: 0, y: 0)
+        
         planet.addChild(fieldNode)
         sceneNode.addChild(planet)
-        sceneNode.addChild(atmosphere)
+        //sceneNode.addChild(atmosphere)
+        sceneNode.addChild(gradient)
     }
     
     func addCoins() {

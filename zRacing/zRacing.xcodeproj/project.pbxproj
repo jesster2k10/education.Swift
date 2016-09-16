@@ -27,6 +27,7 @@
 		202211181D7DB551003ADC7D /* Wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110B1D7DB551003ADC7D /* Wheel2.png */; };
 		2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211191D7DBA7F003ADC7D /* map_01.png */; };
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
+		20811DC41D8C9D060059B522 /* BDGradientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20811DC31D8C9D060059B522 /* BDGradientNode.swift */; };
 		20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF3941D8441DE0064AD7E /* Utils.swift */; };
 		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
 		20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */; };
@@ -64,6 +65,7 @@
 		2022110B1D7DB551003ADC7D /* Wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel2.png; sourceTree = "<group>"; };
 		202211191D7DBA7F003ADC7D /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_01.png; sourceTree = "<group>"; };
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
+		20811DC31D8C9D060059B522 /* BDGradientNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDGradientNode.swift; sourceTree = "<group>"; };
 		20ABF3941D8441DE0064AD7E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
 		20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WheelDirtEmitter.sks; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */,
 				20ABF3941D8441DE0064AD7E /* Utils.swift */,
 				20DB93371D8C365100BA4DEA /* Animations.swift */,
+				20811DC31D8C9D060059B522 /* BDGradientNode.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				202210EB1D7DB473003ADC7D /* GameScene.swift in Sources */,
+				20811DC41D8C9D060059B522 /* BDGradientNode.swift in Sources */,
 				202210ED1D7DB473003ADC7D /* GameViewController.swift in Sources */,
 				20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */,
 				20DB93361D8B110B00BA4DEA /* GameScene_Physics.swift in Sources */,
