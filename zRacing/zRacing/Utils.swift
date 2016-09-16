@@ -76,3 +76,4 @@ func getRandomColor() -> SKColor{
     return SKColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     
 }
+

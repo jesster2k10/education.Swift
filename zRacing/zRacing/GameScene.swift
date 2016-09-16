@@ -64,6 +64,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.position = CGPoint(x: 0, y: 0)
         self.camera = cam
         
+        //scene?.backgroundColor = SKColor.clearColor()
+        
         createGame()
     }
     
@@ -72,7 +74,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(carNode)
         self.addChild(sceneNode)
         
-        cam.setScale(30)
+        //cam.setScale(30)
+        cam.setScale(1)
         
         loadMap()
         addCoins()
@@ -136,26 +139,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         planet = SKShapeNode(path: beizerPath.CGPath)
         planet.position = CGPointMake(0, 0)
+        planet.zPosition = 10
         planet.physicsBody = SKPhysicsBody(edgeLoopFromPath: beizerPath.CGPath)
         planet.physicsBody?.dynamic = false
+        planet.physicsBody?.categoryBitMask = planetGroup
         planet.fillColor = getRandomColor()
         planet.strokeColor = getRandomColor()
         planet.lineWidth = 7
         planet.glowWidth = 0.5
         
-        planet.physicsBody?.categoryBitMask = planetGroup
+        //Gravity & Friction
+        planet.physicsBody?.friction = 1.0
         
         let fieldNode = SKFieldNode.radialGravityField()
         fieldNode.position = planet.position
-        
-        //Gravity & Friction
-        planet.physicsBody?.friction = 1.0
         fieldNode.falloff = 0.9
         fieldNode.strength = 200
         
+        //Planet atmosphere
+        let atmosphere = SKShapeNode(circleOfRadius: CGFloat(planetRadius) + 1500)
+        atmosphere.fillColor = getRandomColor()
+        atmosphere.alpha = 0.5
+        atmosphere.position = planet.position
+        atmosphere.zPosition = 5
+        
         planet.addChild(fieldNode)
         sceneNode.addChild(planet)
- 
+        sceneNode.addChild(atmosphere)
     }
     
     func addCoins() {
@@ -170,7 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             coin.physicsBody?.dynamic = false
             coin.physicsBody?.categoryBitMask = coinGroup
             coin.physicsBody?.collisionBitMask = 0
-            coin.zPosition = 1
+            coin.zPosition = 9
         
             coin.setScale(0.2)
         
@@ -199,13 +209,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         car.physicsBody?.mass = 0.1
         //car.physicsBody?.density = 0.1
         car.setScale(0.3)
-        car.zPosition = 1
+        car.zPosition = 101
         //car.physicsBody?.restitution = 0
         
         //Roch Shok
         suspension1 = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 5, height: 5))
         suspension1.position = CGPointMake(car.position.x + car.size.width / 2 - 35, car.position.y - 50)
-        suspension1.zPosition = 3
+        suspension1.zPosition = 103
         suspension1.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension1.physicsBody?.dynamic = true
         suspension1.physicsBody?.mass = 0.1
@@ -214,7 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         suspension2 = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 5, height: 5))
         suspension2.position = CGPointMake(car.position.x - car.size.width / 2 + 25, car.position.y - 50)
-        suspension2.zPosition = 3
+        suspension2.zPosition = 103
         suspension2.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension2.physicsBody?.dynamic = true
         suspension2.physicsBody?.mass = 0.1
@@ -241,19 +251,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wheel1.physicsBody?.mass = 0.2
         wheel2.physicsBody?.mass = 0.1
         
-//        car.physicsBody?.restitution = 1
-//        suspension1.physicsBody?.restitution = 1
-//        suspension2.physicsBody?.restitution = 1
-//        wheel1.physicsBody?.restitution = 1s
-//        wheel2.physicsBody?.restitution = 1
+//      car.physicsBody?.restitution = 1
+//      suspension1.physicsBody?.restitution = 1
+//      suspension2.physicsBody?.restitution = 1
+//      wheel1.physicsBody?.restitution = 1s
+//      wheel2.physicsBody?.restitution = 1
         
         //wheel1.physicsBody?.restitution = 1
         //wheel2.physicsBody?.restitution = 1
         //wheel1.physicsBody?.density = 0.1
         //wheel2.physicsBody?.density = 0.1
         
-        wheel1.zPosition = 2
-        wheel2.zPosition = 2
+        wheel1.zPosition = 102
+        wheel2.zPosition = 102
         
         car.physicsBody?.categoryBitMask = carGroup
         car.physicsBody?.contactTestBitMask = planetGroup | coinGroup
@@ -341,11 +351,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let cx = (Float(a) * cosf(Float(angle - theta)))
         let cy = (Float(a) * sinf(Float(angle - theta)))
         
-        let camZoom = SKAction.scaleTo(1, duration: 0.5)
-        
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
         cam.zRotation = angle - CGFloat(M_PI_2)
-        cam.runAction(camZoom)
+        
+        let camZoom = SKAction.scaleTo(1, duration: 0.5)
+        //cam.runAction(camZoom)
         
         wheelDirtEmitter.position = CGPointMake(wheel2.position.x,wheel2.position.y - wheel2.frame.height / 2)
         wheelDirtEmitter.zRotation = angle - CGFloat(M_PI_2)
@@ -386,7 +396,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addCoins()
         
         let camZoom = SKAction.scaleTo(50, duration: 0.1)
-        cam.runAction(camZoom)
+        //cam.runAction(camZoom)
+        cam.setScale(1)
 
     }
 }

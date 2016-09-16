@@ -28,4 +28,10 @@ extension GameViewController {
     @IBAction func reloadButton(sender: UIButton) {
         scene?.reloadGame()
     }
+    
+    @IBAction func camScale(sender: UIButton) {
+        scene?.cam.xScale += 5
+        scene?.cam.yScale += 5
+        print("cam scale + 5")
+    }
 }
