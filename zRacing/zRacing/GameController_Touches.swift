@@ -10,26 +10,26 @@ import Foundation
 import SpriteKit
 
 extension GameViewController {    
-    @IBAction func gasButton(sender: UIButton){
+    @IBAction func gasButton(_ sender: UIButton){
         gasButtonState = true
     }
     
-    @IBAction func brakeButton(sender: UIButton){
+    @IBAction func brakeButton(_ sender: UIButton){
         brakeButtonState = true
     }
     
-    @IBAction func gasButtonUp(sender: UIButton) {
+    @IBAction func gasButtonUp(_ sender: UIButton) {
         gasButtonState = false
     }
-    @IBAction func brakeButtonUp(sender: UIButton) {
+    @IBAction func brakeButtonUp(_ sender: UIButton) {
         brakeButtonState = false
     }
     
-    @IBAction func reloadButton(sender: UIButton) {
+    @IBAction func reloadButton(_ sender: UIButton) {
         scene?.reloadGame()
     }
     
-    @IBAction func camScale(sender: UIButton) {
+    @IBAction func camScale(_ sender: UIButton) {
         scene?.cam.xScale += 5
         scene?.cam.yScale += 5
         print("cam scale + 5")

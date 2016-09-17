@@ -11,32 +11,32 @@ import SpriteKit
 
 class AnimationClass {
     
-    func scaleZdirection(sprite: SKSpriteNode) {
-        sprite.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.scaleBy(2.0, duration: 0.5), SKAction.scaleTo(1.0, duration: 1.0)])))
+    func scaleZdirection(_ sprite: SKSpriteNode) {
+        sprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.scale(by: 2.0, duration: 0.5), SKAction.scale(to: 1.0, duration: 1.0)])))
     }
     
-    func redColorAnimation(sprite: SKSpriteNode, animDuration: NSTimeInterval) {
-        sprite.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.colorizeWithColor(SKColor.redColor(), colorBlendFactor: 1.0, duration: animDuration), SKAction.colorizeWithColorBlendFactor(0.0, duration: animDuration)])))
+    func redColorAnimation(_ sprite: SKSpriteNode, animDuration: TimeInterval) {
+        sprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.colorize(with: SKColor.red, colorBlendFactor: 1.0, duration: animDuration), SKAction.colorize(withColorBlendFactor: 0.0, duration: animDuration)])))
     }
     
-    func shakeAndFlashAnimation(view: SKView) {
+    func shakeAndFlashAnimation(_ view: SKView) {
         //While flash
         let aView = UIView(frame: view.frame)
-        aView.backgroundColor = UIColor.whiteColor()
+        aView.backgroundColor = UIColor.white
         view.addSubview(aView)
         
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {aView.alpha = 0.0 }, completion: {(done) in aView.removeFromSuperview()})
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {aView.alpha = 0.0 }, completion: {(done) in aView.removeFromSuperview()})
         
         //Shake animation
         let shake = CAKeyframeAnimation(keyPath: "transform")
         shake.values = [
-            NSValue(CATransform3D: CATransform3DMakeTranslation(-15, 5, 5)),
-            NSValue(CATransform3D: CATransform3DMakeTranslation(15, 5, 5))
+            NSValue(caTransform3D: CATransform3DMakeTranslation(-15, 5, 5)),
+            NSValue(caTransform3D: CATransform3DMakeTranslation(15, 5, 5))
         ]
         shake.autoreverses = true
         shake.repeatCount = 2
         shake.duration = 7/100
-        view.layer.addAnimation(shake, forKey: nil)
+        view.layer.add(shake, forKey: nil)
     }
     
 }

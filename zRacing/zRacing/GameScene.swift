@@ -56,8 +56,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Camera
     let cam = SKCameraNode()
     
-    override func didMoveToView(view: SKView) {
-        self.physicsWorld.gravity = CGVectorMake(0, 0) //Earth gravity (0, -9.8)
+    override func didMove(to view: SKView) {
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.8
         self.physicsWorld.contactDelegate = self
         self.anchorPoint = CGPoint(x: 0, y: 0)
@@ -84,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func loadMap() {
-        beizerPath.moveToPoint(CGPoint(x: 0,y: 0))
+        beizerPath.move(to: CGPoint(x: 0,y: 0))
         coinsArray.removeAll()
         
         planetRadius = Float.random(2000, upper: 5000)
@@ -93,7 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let ox = planetRadius * cos((Float(M_PI)) / 180)
         let oy = planetRadius * sin((Float(M_PI)) / 180)
         
-        beizerPath.moveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
+        beizerPath.move(to: CGPoint(x: CGFloat(ox),y: CGFloat(oy)))
         
         for _ in 0...38 {
             var newRadius = Float.random(planetRadius, upper: planetRadius + planetRadius / 4)
@@ -108,14 +108,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let y4 = newRadius * sin(((theta ) * Float(M_PI)) / 180)
             
             if theta == 360 {
-                beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(ox),y: CGFloat(oy)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+                beizerPath.addQuadCurve(to: CGPoint(x: CGFloat(ox),y: CGFloat(oy)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
             }
             else {
                 if randomBool() {
-                beizerPath.addQuadCurveToPoint(CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
+                beizerPath.addQuadCurve(to: CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint: CGPoint(x: CGFloat(x3),y: CGFloat(y3)))
                 }
                 else {
-                beizerPath.addCurveToPoint(CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint1: CGPoint(x: CGFloat(x3),y: CGFloat(y3)), controlPoint2: CGPoint(x: CGFloat(x4),y: CGFloat(y4)))
+                beizerPath.addCurve(to: CGPoint(x: CGFloat(x2),y: CGFloat(y2)), controlPoint1: CGPoint(x: CGFloat(x3),y: CGFloat(y3)), controlPoint2: CGPoint(x: CGFloat(x4),y: CGFloat(y4)))
                 }
             }
             
@@ -135,13 +135,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theta += 9
         }
         
-        beizerPath.closePath()
+        beizerPath.close()
         
-        planet = SKShapeNode(path: beizerPath.CGPath)
-        planet.position = CGPointMake(0, 0)
+        planet = SKShapeNode(path: beizerPath.cgPath)
+        planet.position = CGPoint(x: 0, y: 0)
         planet.zPosition = 10
-        planet.physicsBody = SKPhysicsBody(edgeLoopFromPath: beizerPath.CGPath)
-        planet.physicsBody?.dynamic = false
+        planet.physicsBody = SKPhysicsBody(edgeLoopFrom: beizerPath.cgPath)
+        planet.physicsBody?.isDynamic = false
         planet.physicsBody?.categoryBitMask = planetGroup
         planet.fillColor = getRandomColor()
         planet.strokeColor = getRandomColor()
@@ -157,24 +157,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fieldNode.strength = 200
         
         //Planet atmosphere
-        let atmosphere = SKShapeNode(circleOfRadius: CGFloat(planetRadius) + 1500)
-        atmosphere.fillColor = getRandomColor()
-        atmosphere.alpha = 0.5
-        atmosphere.position = planet.position
-        atmosphere.zPosition = 5
+        let atmoTexture = SKTexture(imageNamed: "atmosphere.png")
+        let atmoSize = CGSize(width: CGFloat(planetRadius * 4), height: CGFloat(planetRadius * 4))
         
-        let view = gameViewControllerBridge.view as! SKView
-        let texture = view.textureFromNode(atmosphere)
-        coinTexture = SKTexture(imageNamed: "coin.jpg")
-
-        
-        let gradient = BDGradientNode(radialGradientWithTexture: coinTexture, colors: [UIColor.redColor(), UIColor.blueColor(), UIColor.cyanColor()], locations: nil, firstCenter: CGPoint(x: 0.5,y: 0.5), firstRadius: 0.3, secondCenter: CGPoint(x: 0.5,y: 0.5), secondRadius: 0.8, blending: 1, discardOutsideGradient: true, keepTextureShape: true, size: CGSize(width: atmosphere.frame.size.width, height: atmosphere.frame.size.height))
-        gradient.position = CGPoint(x: 0, y: 0)
+        let atmoGradient = BDGradientNode(radialGradientWithTexture: atmoTexture, colors: [getRandomColor(), getRandomColor(), UIColor.cyan], locations: nil, firstCenter: CGPoint(x: 0.5,y: 0.5), firstRadius: 0.2, secondCenter: CGPoint(x: 0.5,y: 0.5), secondRadius: 0.36, blending: 0.3, discardOutsideGradient: true, keepTextureShape: true, size: atmoSize)
+        atmoGradient.position = CGPoint(x: 0, y: 0)
+        atmoGradient.zPosition = 1
         
         planet.addChild(fieldNode)
+        sceneNode.addChild(atmoGradient)
         sceneNode.addChild(planet)
-        //sceneNode.addChild(atmosphere)
-        sceneNode.addChild(gradient)
     }
     
     func addCoins() {
@@ -186,7 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             coin.position = i
             coin.physicsBody = SKPhysicsBody(texture: coinTexture, size: coin.frame.size)
-            coin.physicsBody?.dynamic = false
+            coin.physicsBody?.isDynamic = false
             coin.physicsBody?.categoryBitMask = coinGroup
             coin.physicsBody?.collisionBitMask = 0
             coin.zPosition = 9
@@ -197,10 +189,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             coin.zRotation = angle - CGFloat(M_PI_2)
             
             
-             if !beizerPath.containsPoint(CGPoint(x: CGRectGetMaxX(coin.frame), y: CGRectGetMaxY(coin.frame))) &&
-                !beizerPath.containsPoint(CGPoint(x: CGRectGetMinX(coin.frame), y: CGRectGetMinY(coin.frame))) &&
-                !beizerPath.containsPoint(CGPoint(x: CGRectGetMinX(coin.frame), y: CGRectGetMaxY(coin.frame))) &&
-                !beizerPath.containsPoint(CGPoint(x: CGRectGetMaxX(coin.frame), y: CGRectGetMinY(coin.frame)))
+             if !beizerPath.contains(CGPoint(x: coin.frame.maxX, y: coin.frame.maxY)) &&
+                !beizerPath.contains(CGPoint(x: coin.frame.minX, y: coin.frame.minY)) &&
+                !beizerPath.contains(CGPoint(x: coin.frame.minX, y: coin.frame.maxY)) &&
+                !beizerPath.contains(CGPoint(x: coin.frame.maxX, y: coin.frame.minY))
              {
                  planet.addChild(coin)
              }
@@ -212,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
         //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
-        car.position = CGPointMake(600, planet.frame.maxY + car.frame.height + 100)
+        car.position = CGPoint(x: 600, y: planet.frame.maxY + car.frame.height + 100)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         //car.physicsBody?.dynamic = true
         car.physicsBody?.mass = 0.1
@@ -222,20 +214,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //car.physicsBody?.restitution = 0
         
         //Roch Shok
-        suspension1 = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 5, height: 5))
-        suspension1.position = CGPointMake(car.position.x + car.size.width / 2 - 35, car.position.y - 50)
+        suspension1 = SKSpriteNode(color: SKColor.red, size: CGSize(width: 5, height: 5))
+        suspension1.position = CGPoint(x: car.position.x + car.size.width / 2 - 35, y: car.position.y - 50)
         suspension1.zPosition = 103
         suspension1.physicsBody = SKPhysicsBody(circleOfRadius: 5)
-        suspension1.physicsBody?.dynamic = true
+        suspension1.physicsBody?.isDynamic = true
         suspension1.physicsBody?.mass = 0.1
         //suspension1.physicsBody?.restitution = 0
         //suspension1.physicsBody?.density = 0.1
         
-        suspension2 = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 5, height: 5))
-        suspension2.position = CGPointMake(car.position.x - car.size.width / 2 + 25, car.position.y - 50)
+        suspension2 = SKSpriteNode(color: SKColor.green, size: CGSize(width: 5, height: 5))
+        suspension2.position = CGPoint(x: car.position.x - car.size.width / 2 + 25, y: car.position.y - 50)
         suspension2.zPosition = 103
         suspension2.physicsBody = SKPhysicsBody(circleOfRadius: 5)
-        suspension2.physicsBody?.dynamic = true
+        suspension2.physicsBody?.isDynamic = true
         suspension2.physicsBody?.mass = 0.1
         //suspension2.physicsBody?.restitution = 0
         //suspension2.physicsBody?.density = 0.1
@@ -252,8 +244,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wheel2.position = suspension2.position
         wheel1.physicsBody?.allowsRotation = true
         wheel2.physicsBody?.allowsRotation = true
-        wheel1.physicsBody?.dynamic = true
-        wheel2.physicsBody?.dynamic = true
+        wheel1.physicsBody?.isDynamic = true
+        wheel2.physicsBody?.isDynamic = true
         wheel1.physicsBody?.friction = 1
         wheel2.physicsBody?.friction = 1
 
@@ -311,43 +303,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addJoint() {
+        //Suspensions
         //Wheel1
-        let wheel1JointSliding = SKPhysicsJointSliding.jointWithBodyA(car.physicsBody!, bodyB: suspension1.physicsBody!, anchor: suspension1.position, axis: CGVectorMake(0,1))
+        let wheel1JointSliding = SKPhysicsJointSliding.joint(withBodyA: car.physicsBody!, bodyB: suspension1.physicsBody!, anchor: suspension1.position, axis: CGVector(dx: 0,dy: 1))
         
         wheel1JointSliding.shouldEnableLimits = true
         wheel1JointSliding.lowerDistanceLimit = 5
         wheel1JointSliding.upperDistanceLimit = 20
         
-        let wheel1JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPointMake(car.position.x - car.frame.size.width / 2, car.position.y), anchorB: suspension1.position)
+        let wheel1JointSpring = SKPhysicsJointSpring.joint(withBodyA: car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPoint(x: car.position.x - car.frame.size.width / 2, y: car.position.y), anchorB: suspension1.position)
         
         wheel1JointSpring.damping = 1
         wheel1JointSpring.frequency = 10
 
         
-        let wheel1JointPin = SKPhysicsJointPin.jointWithBodyA(suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
+        let wheel1JointPin = SKPhysicsJointPin.joint(withBodyA: suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
         
         //Wheel2
-        let wheel2JointSliding = SKPhysicsJointSliding.jointWithBodyA(car.physicsBody!, bodyB: suspension2.physicsBody!, anchor: suspension2.position, axis: CGVectorMake(0, 1))
+        let wheel2JointSliding = SKPhysicsJointSliding.joint(withBodyA: car.physicsBody!, bodyB: suspension2.physicsBody!, anchor: suspension2.position, axis: CGVector(dx: 0, dy: 1))
         
         wheel2JointSliding.shouldEnableLimits = true
         wheel2JointSliding.lowerDistanceLimit = 5
         wheel2JointSliding.upperDistanceLimit = 20
         
-        let wheel2JointSpring = SKPhysicsJointSpring.jointWithBodyA(car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPointMake(car.position.x + car.frame.size.width / 2, car.position.y), anchorB: suspension2.position)
+        let wheel2JointSpring = SKPhysicsJointSpring.joint(withBodyA: car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPoint(x: car.position.x + car.frame.size.width / 2, y: car.position.y), anchorB: suspension2.position)
         
         wheel2JointSpring.damping = 1
         wheel2JointSpring.frequency = 10
         
-        let wheel2JointPin = SKPhysicsJointPin.jointWithBodyA(suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
+        let wheel2JointPin = SKPhysicsJointPin.joint(withBodyA: suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
         
         //Addjoints
-        self.physicsWorld.addJoint(wheel1JointSliding)
-        self.physicsWorld.addJoint(wheel1JointSpring)
-        self.physicsWorld.addJoint(wheel1JointPin)
+        self.physicsWorld.add(wheel1JointSliding)
+        self.physicsWorld.add(wheel1JointSpring)
+        self.physicsWorld.add(wheel1JointPin)
         
-        self.physicsWorld.addJoint(wheel2JointSliding)
-        self.physicsWorld.addJoint(wheel2JointSpring)
-        self.physicsWorld.addJoint(wheel2JointPin)
+        self.physicsWorld.add(wheel2JointSliding)
+        self.physicsWorld.add(wheel2JointSpring)
+        self.physicsWorld.add(wheel2JointPin)
         
     }
     
@@ -363,18 +356,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
         cam.zRotation = angle - CGFloat(M_PI_2)
         
-        let camZoom = SKAction.scaleTo(1, duration: 0.5)
+        let camZoom = SKAction.scale(to: 1, duration: 0.5)
         //cam.runAction(camZoom)
         
-        wheelDirtEmitter.position = CGPointMake(wheel2.position.x,wheel2.position.y - wheel2.frame.height / 2)
+        wheelDirtEmitter.position = CGPoint(x: wheel2.position.x,y: wheel2.position.y - wheel2.frame.height / 2)
         wheelDirtEmitter.zRotation = angle - CGFloat(M_PI_2)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
         if gameViewControllerBridge.gasButtonState {
@@ -382,12 +375,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             wheel1.physicsBody?.angularVelocity = -35
 
             
-            wheelDirtEmitter.hidden = false
+            wheelDirtEmitter.isHidden = false
         } else if gameViewControllerBridge.brakeButtonState {
             wheel2.physicsBody?.angularVelocity = 35
             wheel1.physicsBody?.angularVelocity = 35
         } else {
-            wheelDirtEmitter.hidden = true
+            wheelDirtEmitter.isHidden = true
         }
         
     }
@@ -404,7 +397,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addJoint()
         addCoins()
         
-        let camZoom = SKAction.scaleTo(50, duration: 0.1)
+        let camZoom = SKAction.scale(to: 50, duration: 0.1)
         //cam.runAction(camZoom)
         cam.setScale(1)
 

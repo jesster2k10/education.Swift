@@ -10,14 +10,11 @@ import Foundation
 import SpriteKit
 
 extension GameScene {
-    func didBeginContact(contact: SKPhysicsContact) {
+    @objc(didBeginContact:) func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == coinGroup || contact.bodyB.categoryBitMask == coinGroup {
             let coinNode = contact.bodyA.categoryBitMask == coinGroup ? contact.bodyA.node : contact.bodyB.node
             
             coinNode?.removeFromParent()
         }
-
-        
     }
-    
 }
