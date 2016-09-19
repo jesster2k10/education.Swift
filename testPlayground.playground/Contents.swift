@@ -2,58 +2,6 @@ import Foundation
 import SpriteKit
 import XCPlayground
 
-class RadialGradientLayer: CALayer {
-    
-    override init(){
-        
-        super.init()
-        
-        needsDisplayOnBoundsChange = true
-    }
-    
-    init(center:CGPoint,radius:CGFloat,colors:[CGColor]){
-        
-        self.center = center
-        self.radius = radius
-        self.colors = colors
-        
-        super.init()
-        
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        
-        super.init()
-        
-    }
-    
-    var center : CGPoint = CGPointMake(50,50)
-    var radius : CGFloat = 20
-    var colors:[CGColor] = [UIColor(red: 251/255, green: 237/255, blue: 33/255, alpha: 1.0).CGColor , UIColor(red: 251/255, green: 179/255, blue: 108/255, alpha: 1.0).CGColor]
-    
-    override func drawInContext(ctx: CGContext!) {
-        
-        CGContextSaveGState(ctx)
-        
-        var colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        var locations:[CGFloat] = [0.0, 1.0]
-        
-        var gradient = CGGradientCreateWithColors(colorSpace, colors, [0.0,1.0])
-        
-        var startPoint = CGPointMake(0, self.bounds.height)
-        var endPoint = CGPointMake(self.bounds.width, self.bounds.height)
-        
-        CGContextDrawRadialGradient(ctx, gradient, center, 0.0, center, radius, CGGradientDrawingOptions.DrawsAfterEndLocation)
-    }
-    
-}
-
-var gradient = RadialGradientLayer(center: CGPoint(x: 0,y: 0), radius: 100, colors: [UIColor.blueColor().CGColor, UIColor.redColor().CGColor])
-gradient.setNeedsDisplay()
-gradient.drawInContext(UIGraphicsGetCurrentContext())
-
-
 SKView()
 
 //Create the SpriteKit View
@@ -67,4 +15,31 @@ let scene:SKScene = SKScene(size: CGSizeMake(1024, 768))
 scene.scaleMode = SKSceneScaleMode.AspectFit
 view.presentScene(scene)
 
-//Add something to it!
+//---------------------------------------------------------------------------------------
+let ground = SKShapeNode(rectOfSize: CGSize(width: scene.size.width, height: 50))
+ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.frame.size)
+ground.physicsBody?.dynamic = false
+ground.position = CGPointMake(scene.frame.width / 2, scene.frame.height / 10)
+
+let node = SKNode()
+
+let shape = SKShapeNode(circleOfRadius: 50)
+shape.physicsBody = SKPhysicsBody(circleOfRadius: 50)
+shape.position = CGPoint(x: 0 ,y: 0)
+
+let quad = SKShapeNode(rectOfSize: CGSize(width: 50, height: 50), cornerRadius: 2)
+quad.physicsBody = SKPhysicsBody(rectangleOfSize: quad.frame.size)
+quad.position = CGPoint(x: 100 ,y: 0)
+
+node.position = CGPointMake(scene.frame.width / 4, scene.frame.height)
+
+node.addChild(shape)
+shape.addChild(quad)
+
+scene.addChild(ground)
+scene.addChild(node)
+
+
+
+
+

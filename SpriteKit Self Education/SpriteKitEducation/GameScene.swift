@@ -48,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.camera = cam
         
-        circle.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        circle.position = CGPointMake(0, 0)
         circle.physicsBody = SKPhysicsBody(circleOfRadius: 60)
         circle.lineWidth = 5
         circle.fillColor = SKColor.purpleColor()
@@ -93,7 +93,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let node = SKNode()
         node.addChild(circle)
-        node.addChild(quad)
+        
+        node.physicsBody = SKPhysicsBody(bodies: [circle.physicsBody!])
+        node.physicsBody?.dynamic = true
+        node.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        
+        //node.addChild(quad)
         
         self.addChild(node)
         
@@ -102,12 +107,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        let myJointSpring = SKPhysicsJointSpring.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchorA: circle.position, anchorB: quad.position)
 //        self.physicsWorld.addJoint(myJointLimit)
         
-        let pin = SKPhysicsJointSliding.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchor: circle.position, axis: CGVector(dx: 0,dy: 1))
-        pin.shouldEnableLimits = true
-        pin.lowerDistanceLimit = 1
-        pin.upperDistanceLimit = 30
+        //let pin = SKPhysicsJointSliding.jointWithBodyA(circle.physicsBody!, bodyB: quad.physicsBody!, anchor: circle.position, axis: CGVector(dx: 0,dy: 1))
+        //pin.shouldEnableLimits = true
+        //pin.lowerDistanceLimit = 1
+        //pin.upperDistanceLimit = 30
         
-        self.physicsWorld.addJoint(pin)
+        //self.physicsWorld.addJoint(pin)
     }
 
     override func didFinishUpdate() {
