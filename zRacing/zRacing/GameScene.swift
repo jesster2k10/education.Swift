@@ -27,11 +27,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wheel1Texture = SKTexture()
     var wheel2Texture = SKTexture()
     var coinTexture = SKTexture()
+    var planetTexture = SKTexture()
     
     //Nodes
     //var sceneNode = SKNode()
     var sceneNode = SKNode()
     var carNode = SKNode()
+    var coinsNode = SKNode()
+    //var cameraNode = SKNode()
     
     //Sprites
     var map = SKSpriteNode()
@@ -45,8 +48,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Emitters
     var wheelDirtEmitter = SKEmitterNode()
     
-    //Shapes
-    var planet = SKShapeNode()
+    //Planet Shapes
+    let planet = SKCropNode()
+    var planetPath = SKShapeNode()
     
     //Bit Masks
     var planetGroup : UInt32 = 0x1 << 1
@@ -54,27 +58,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var coinGroup : UInt32 = 0x1 << 3
     
     //Camera
-    let cam = SKCameraNode()
+    var cam = SKCameraNode()
     
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.8
         self.physicsWorld.contactDelegate = self
-        self.anchorPoint = CGPoint(x: 0, y: 0)
-        self.position = CGPoint(x: 0, y: 0)
+
         self.camera = cam
         
-        //scene?.backgroundColor = SKColor.clearColor()
+        self.addChild(carNode)
+        self.addChild(sceneNode)
+        self.addChild(coinsNode)
         
         createGame()
     }
     
     func createGame() {
-        self.addChild(cam)
-        self.addChild(carNode)
-        self.addChild(sceneNode)
-        
-        //cam.setScale(30)
         cam.setScale(1)
         
         loadMap()
@@ -84,6 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func loadMap() {
+        //Generate random beizer path
         beizerPath.move(to: CGPoint(x: 0,y: 0))
         coinsArray.removeAll()
         
@@ -137,19 +138,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         beizerPath.close()
         
-        planet = SKShapeNode(path: beizerPath.cgPath)
+        //Create planet from beizer path
+        planetTexture = SKTexture(imageNamed: "asanoha")
+        
+        let planetSprite = SKSpriteNode(texture: planetTexture)
+        
+        planetPath = SKShapeNode(path: beizerPath.cgPath)
+        planetPath.fillColor = SKColor.white
+        planetPath.strokeColor = getRandomColor()
+        planetPath.lineWidth = 7
+        planetPath.glowWidth = 0.5
+        
+        planet.maskNode = planetPath
+        planet.addChild(planetSprite)
+        
         planet.position = CGPoint(x: 0, y: 0)
-        planet.zPosition = 10
         planet.physicsBody = SKPhysicsBody(edgeLoopFrom: beizerPath.cgPath)
         planet.physicsBody?.isDynamic = false
         planet.physicsBody?.categoryBitMask = planetGroup
-        planet.fillColor = getRandomColor()
-        planet.strokeColor = getRandomColor()
-        planet.lineWidth = 7
-        planet.glowWidth = 0.5
         
         //Gravity & Friction
-        planet.physicsBody?.friction = 1.0
+        planet.physicsBody?.friction = 1
         
         let fieldNode = SKFieldNode.radialGravityField()
         fieldNode.position = planet.position
@@ -164,9 +173,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         atmoGradient.position = CGPoint(x: 0, y: 0)
         atmoGradient.zPosition = 1
         
-        planet.addChild(fieldNode)
-        sceneNode.addChild(atmoGradient)
         sceneNode.addChild(planet)
+        //sceneNode.addChild(atmoGradient)
+        sceneNode.addChild(fieldNode)
+        
     }
     
     func addCoins() {
@@ -175,15 +185,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //To edit --------------
         for i in coinsArray {
             coin = SKSpriteNode(texture: coinTexture)
-        
+            coin.setScale(0.2)
+
             coin.position = i
             coin.physicsBody = SKPhysicsBody(texture: coinTexture, size: coin.frame.size)
             coin.physicsBody?.isDynamic = false
             coin.physicsBody?.categoryBitMask = coinGroup
             coin.physicsBody?.collisionBitMask = 0
             coin.zPosition = 9
-        
-            coin.setScale(0.2)
         
             let angle = atan2(i.y, i.x)
             coin.zRotation = angle - CGFloat(M_PI_2)
@@ -194,7 +203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 !beizerPath.contains(CGPoint(x: coin.frame.minX, y: coin.frame.maxY)) &&
                 !beizerPath.contains(CGPoint(x: coin.frame.maxX, y: coin.frame.minY))
              {
-                 planet.addChild(coin)
+                 coinsNode.addChild(coin)
              }
         }
     
@@ -204,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
         //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
-        car.position = CGPoint(x: 600, y: planet.frame.maxY + car.frame.height + 100)
+        car.position = CGPoint(x: 600, y: planetPath.frame.maxY + car.frame.height + 100)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         //car.physicsBody?.dynamic = true
         car.physicsBody?.mass = 0.1
@@ -345,7 +354,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didFinishUpdate() {
-        let a = sqrt(pow(planet.position.x - car.position.x, 2) + pow(planet.position.y - car.position.y, 2))
+        let a = sqrt(pow(planetPath.position.x - car.position.x, 2) + pow(planetPath.position.y - car.position.y, 2))
         
         let angle = atan2(car.position.y, car.position.x)
         let theta : CGFloat = 0.0
@@ -356,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cam.position = CGPoint(x: CGFloat(cx), y: CGFloat(cy))
         cam.zRotation = angle - CGFloat(M_PI_2)
         
-        let camZoom = SKAction.scale(to: 1, duration: 0.5)
+        //let camZoom = SKAction.scale(to: 1, duration: 0.5)
         //cam.runAction(camZoom)
         
         wheelDirtEmitter.position = CGPoint(x: wheel2.position.x,y: wheel2.position.y - wheel2.frame.height / 2)
@@ -391,15 +400,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         beizerPath.removeAllPoints()
         carNode.removeAllChildren()
         sceneNode.removeAllChildren()
+        coinsNode.removeAllChildren()
 
-        loadMap()
-        createCar()
-        addJoint()
-        addCoins()
+        createGame()
         
         let camZoom = SKAction.scale(to: 50, duration: 0.1)
         //cam.runAction(camZoom)
-        cam.setScale(1)
-
     }
 }
