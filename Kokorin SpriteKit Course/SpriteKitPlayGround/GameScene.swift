@@ -59,9 +59,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var heroDeathTexturesArray = [SKTexture]()
     
     //Timers
-    var timerAddCoin = NSTimer()
-    var timerAddRedCoin = NSTimer()
-    var timerAddElectricGate = NSTimer()
+    var timerAddCoin = Timer()
+    var timerAddRedCoin = Timer()
+    var timerAddElectricGate = Timer()
 
     //Sounds
     var pickCoinPreload = SKAction()
@@ -76,7 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var objectGroup: UInt32 = 0x1 << 5
     
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //Backgroung Texture
         bgTexture = SKTexture(imageNamed: "bg01.png")
         
@@ -131,21 +131,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timerFunc()
         addElectricGate()
         
-        gameViewControllerBridge.reloadGameBtn?.hidden = true
+        gameViewControllerBridge.reloadGameBtn?.isHidden = true
     }
     
     func createBg() {
        //bgTexture = SKTexture(imageNamed: "bg01.png")
         
-        let moveBg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 3)
-        let replaceBg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
-        let moveBgForever = SKAction.repeatActionForever(SKAction.sequence([moveBg, replaceBg]))
+        let moveBg = SKAction.moveBy(x: -bgTexture.size().width, y: 0, duration: 3)
+        let replaceBg = SKAction.moveBy(x: bgTexture.size().width, y: 0, duration: 0)
+        let moveBgForever = SKAction.repeatForever(SKAction.sequence([moveBg, replaceBg]))
         
         for i in 0..<3 {
             bg = SKSpriteNode(texture: bgTexture)
             bg.position = CGPoint(x: size.width/4 + bgTexture.size().width * CGFloat(i), y: size.height/2.0)
             bg.size.height = self.frame.height
-            bg.runAction(moveBgForever)
+            bg.run(moveBgForever)
             bg.zPosition = -1
             
             bgObject.addChild(bg)
@@ -155,8 +155,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createGround() {
         ground = SKSpriteNode()
         ground.position = CGPoint.zero
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: self.frame.height/4 + self.frame.height/8))
-        ground.physicsBody?.dynamic = false
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.width, height: self.frame.height/4 + self.frame.height/8))
+        ground.physicsBody?.isDynamic = false
         ground.physicsBody?.categoryBitMask = groundGroup
         ground.zPosition = 1
         
@@ -166,33 +166,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createSky() {
         sky = SKSpriteNode()
         sky.position = CGPoint(x: 0, y: self.frame.maxX)
-        sky.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.size.width + 100, height: self.frame.size.height - 50))
-        sky.physicsBody?.dynamic = false
+        sky.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width + 100, height: self.frame.size.height - 50))
+        sky.physicsBody?.isDynamic = false
         sky.zPosition = 1
         
         movingObject.addChild(sky)
     }
     
-    func addHero(heroNode: SKSpriteNode, atPosition position: CGPoint) {
+    func addHero(_ heroNode: SKSpriteNode, atPosition position: CGPoint) {
         hero = SKSpriteNode(texture: flyHeroTex)
         
         //Animation hero
         heroFlyTexturesArray = [SKTexture(imageNamed: "Fly0.png"), SKTexture(imageNamed: "Fly1.png"), SKTexture(imageNamed: "Fly2.png"), SKTexture(imageNamed: "Fly3.png"), SKTexture(imageNamed: "Fly4.png")]
-        let heroFlyAnimation = SKAction.animateWithTextures(heroFlyTexturesArray, timePerFrame: 0.1)
-        let flyHero = SKAction.repeatActionForever(heroFlyAnimation)
-        hero.runAction(flyHero)
+        let heroFlyAnimation = SKAction.animate(with: heroFlyTexturesArray, timePerFrame: 0.1)
+        let flyHero = SKAction.repeatForever(heroFlyAnimation)
+        hero.run(flyHero)
         
         hero.position = position
         hero.size.height = 84
         hero.size.width = 120
         
-        hero.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: hero.size.width - 40, height: hero.size.height - 30))
+        hero.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: hero.size.width - 40, height: hero.size.height - 30))
         
         hero.physicsBody?.categoryBitMask = heroGroup
         hero.physicsBody?.contactTestBitMask = groundGroup | coinGroup | redCoinGroup | objectGroup
         hero.physicsBody?.collisionBitMask = groundGroup
         
-        hero.physicsBody?.dynamic = true
+        hero.physicsBody?.isDynamic = true
         hero.physicsBody?.allowsRotation = false
         hero.zPosition = 1
         
@@ -213,27 +213,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         coin = SKSpriteNode(texture: coinTexture)
         
         coinTexturesArray = [SKTexture(imageNamed: "Coin0.png"), SKTexture(imageNamed: "Coin1.png"), SKTexture(imageNamed: "Coin2.png"), SKTexture(imageNamed: "Coin3.png")]
-        let coinAnimation = SKAction.animateWithTextures(coinTexturesArray, timePerFrame: 0.1)
-        let coinHero = SKAction.repeatActionForever(coinAnimation)
+        let coinAnimation = SKAction.animate(with: coinTexturesArray, timePerFrame: 0.1)
+        let coinHero = SKAction.repeatForever(coinAnimation)
         
-        coin.runAction(coinHero)
+        coin.run(coinHero)
         
         let movementAmount = arc4random() % UInt32(self.frame.size.height / 2)
         let pipeOffSet = CGFloat(movementAmount) - self.frame.size.height / 4
         
         coin.size.width = 40
         coin.size.height = 40
-        coin.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: coin.size.width - 20 , height: coin.size.height - 20))
+        coin.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: coin.size.width - 20 , height: coin.size.height - 20))
         coin.physicsBody?.restitution = 0 //сопротивление
         coin.position = CGPoint(x: self.size.width + 50, y: 0 + coinTexture.size().height + 90 + pipeOffSet)
         
-        let moveCoin = SKAction.moveToX(-self.frame.size.width * 2, duration: 5)
+        let moveCoin = SKAction.moveTo(x: -self.frame.size.width * 2, duration: 5)
         let removeAction = SKAction.removeFromParent()
-        let coinMoveBgForever = SKAction.repeatActionForever(SKAction.sequence([moveCoin, removeAction]))
+        let coinMoveBgForever = SKAction.repeatForever(SKAction.sequence([moveCoin, removeAction]))
         
-        coin.runAction(coinMoveBgForever)
+        coin.run(coinMoveBgForever)
         
-        coin.physicsBody?.dynamic = false
+        coin.physicsBody?.isDynamic = false
         coin.physicsBody?.categoryBitMask = coinGroup
         coin.zPosition = 1
         coinObject.addChild(coin)
@@ -243,30 +243,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         redCoin = SKSpriteNode(texture: redCoinTexture)
         
         coinTexturesArray = [SKTexture(imageNamed: "Coin0.png"), SKTexture(imageNamed: "Coin1.png"), SKTexture(imageNamed: "Coin2.png"), SKTexture(imageNamed: "Coin3.png")]
-        let redCoinAnimation = SKAction.animateWithTextures(coinTexturesArray, timePerFrame: 0.1)
-        let redCoinHero = SKAction.repeatActionForever(redCoinAnimation)
-        redCoin.runAction(redCoinHero)
+        let redCoinAnimation = SKAction.animate(with: coinTexturesArray, timePerFrame: 0.1)
+        let redCoinHero = SKAction.repeatForever(redCoinAnimation)
+        redCoin.run(redCoinHero)
         
         let movementAmount = arc4random() % UInt32(self.frame.size.height / 2)
         let pipeOffSet = CGFloat(movementAmount) - self.frame.size.height / 4
         
         redCoin.size.width = 40
         redCoin.size.height = 40
-        redCoin.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: redCoin.size.width - 10 , height: redCoin.size.height - 10))
+        redCoin.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: redCoin.size.width - 10 , height: redCoin.size.height - 10))
         redCoin.physicsBody?.restitution = 0 //сопротивление
         redCoin.position = CGPoint(x: self.size.width + 50, y: 0 + coinTexture.size().height + 90 + pipeOffSet)
         
-        let moveCoin = SKAction.moveToX(-self.frame.size.width * 2, duration: 5)
+        let moveCoin = SKAction.moveTo(x: -self.frame.size.width * 2, duration: 5)
         let removeAction = SKAction.removeFromParent()
-        let coinMoveBgForever = SKAction.repeatActionForever(SKAction.sequence([moveCoin, removeAction]))
+        let coinMoveBgForever = SKAction.repeatForever(SKAction.sequence([moveCoin, removeAction]))
         
-        redCoin.runAction(coinMoveBgForever)
+        redCoin.run(coinMoveBgForever)
         
         animations.scaleZdirection(redCoin)
         animations.redColorAnimation(redCoin, animDuration: 0.5)
         
         redCoin.setScale(1.3)
-        redCoin.physicsBody?.dynamic = false
+        redCoin.physicsBody?.isDynamic = false
         redCoin.physicsBody?.categoryBitMask = redCoinGroup 
         redCoin.zPosition = 1
         redCoinObject.addChild(redCoin)
@@ -275,15 +275,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addElectricGate() {
         if sound == true {
-            runAction(electricGateCreatePreload)
+            run(electricGateCreatePreload)
         }
         
         electricGate = SKSpriteNode(texture: electricGateTex)
         
         electricGateTexturesArray = [SKTexture(imageNamed: "ElectricGate01.png"), SKTexture(imageNamed: "ElectricGate02.png"), SKTexture(imageNamed: "ElectricGate03.png"), SKTexture(imageNamed: "ElectricGate04.png")]
-        let electricGateAnimation = SKAction.animateWithTextures(electricGateTexturesArray, timePerFrame: 0.1)
-        let electricGateAnimationForever = SKAction.repeatActionForever(electricGateAnimation)
-        electricGate.runAction(electricGateAnimationForever)
+        let electricGateAnimation = SKAction.animate(with: electricGateTexturesArray, timePerFrame: 0.1)
+        let electricGateAnimationForever = SKAction.repeatForever(electricGateAnimation)
+        electricGate.run(electricGateAnimationForever)
         
         let randomPosition = arc4random() % 2
         
@@ -292,20 +292,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if randomPosition == 0 {
            electricGate.position = CGPoint(x: self.size.width + 50, y: 0 + electricGateTex.size().height/2 + 90 + pipeOffset)
-            electricGate.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: electricGate.size.width - 40, height: electricGate.size.height - 20))
+            electricGate.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: electricGate.size.width - 40, height: electricGate.size.height - 20))
         } else {
             electricGate.position = CGPoint(x: self.size.width + 50, y: self.frame.size.height - electricGateTex.size().height/2 - 90 - pipeOffset)
-            electricGate.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: electricGate.size.width - 40, height: electricGate.size.height - 20))
+            electricGate.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: electricGate.size.width - 40, height: electricGate.size.height - 20))
         }
         
         //Rotate
-        electricGate.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock({
-            self.electricGate.runAction(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 0.5))
-        }), SKAction.waitForDuration(20)])))
+        electricGate.run(SKAction.repeatForever(SKAction.sequence([SKAction.run({
+            self.electricGate.run(SKAction.rotate(byAngle: CGFloat(M_PI * 2), duration: 0.5))
+        }), SKAction.wait(forDuration: 20)])))
         
         //Move
-        let moveAction = SKAction.moveByX(-self.frame.width - 300, y: 0, duration: 6)
-        electricGate.runAction(moveAction)
+        let moveAction = SKAction.moveBy(x: -self.frame.width - 300, y: 0, duration: 6)
+        electricGate.run(moveAction)
         
         //Scale
         var scaleValue: CGFloat = 0.3
@@ -322,25 +322,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let movementRandom = arc4random() % 9
         if movementRandom == 0 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 + 220, duration: 4)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 + 220, duration: 4)
         } else if movementRandom == 1 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 - 220, duration: 5)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 - 220, duration: 5)
         } else if movementRandom == 2 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 - 150, duration: 4)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 - 150, duration: 4)
         } else if movementRandom == 3 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 + 120, duration: 5)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 + 120, duration: 5)
         } else if movementRandom == 4 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 + 50, duration: 4)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 + 50, duration: 4)
         } else if movementRandom == 5 {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2 - 20, duration: 5)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2 - 20, duration: 5)
         } else {
-            moveElectricGateY = SKAction.moveToY(self.frame.height / 2, duration: 4)
+            moveElectricGateY = SKAction.moveTo(y: self.frame.height / 2, duration: 4)
         }
         
-        electricGate.runAction(moveElectricGateY)
+        electricGate.run(moveElectricGateY)
         
         electricGate.physicsBody?.restitution = 0
-        electricGate.physicsBody?.dynamic = false
+        electricGate.physicsBody?.isDynamic = false
         electricGate.physicsBody?.categoryBitMask = objectGroup
         electricGate.zPosition = 1
         movingObject.addChild(electricGate)
@@ -352,15 +352,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timerAddRedCoin.invalidate()
         timerAddElectricGate.invalidate()
         
-        timerAddCoin = NSTimer.scheduledTimerWithTimeInterval(2.64, target: self, selector: #selector(GameScene.addCoin), userInfo: nil, repeats: true)
-        timerAddRedCoin = NSTimer.scheduledTimerWithTimeInterval(8.64, target: self, selector: #selector(GameScene.redCoinAdd), userInfo: nil, repeats: true)
-        timerAddElectricGate = NSTimer.scheduledTimerWithTimeInterval(5.234, target: self, selector: #selector(GameScene.addElectricGate), userInfo: nil, repeats: true)
+        timerAddCoin = Timer.scheduledTimer(timeInterval: 2.64, target: self, selector: #selector(GameScene.addCoin), userInfo: nil, repeats: true)
+        timerAddRedCoin = Timer.scheduledTimer(timeInterval: 8.64, target: self, selector: #selector(GameScene.redCoinAdd), userInfo: nil, repeats: true)
+        timerAddElectricGate = Timer.scheduledTimer(timeInterval: 5.234, target: self, selector: #selector(GameScene.addElectricGate), userInfo: nil, repeats: true)
     }
     
     func reloadGame() {
         coinObject.removeAllChildren()
         redCoinObject.removeAllChildren()
-        scene?.paused = false
+        scene?.isPaused = false
         
         movingObject.removeAllChildren()
         heroObject.removeAllChildren()

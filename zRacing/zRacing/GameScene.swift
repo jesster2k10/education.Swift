@@ -44,12 +44,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var suspension1 = SKSpriteNode()
     var suspension2 = SKSpriteNode()
     var coin = SKSpriteNode()
+    var planetSprite = SKSpriteNode()
     
     //Emitters
     var wheelDirtEmitter = SKEmitterNode()
     
     //Planet Shapes
-    let planet = SKCropNode()
+    var planet = SKCropNode()
     var planetPath = SKShapeNode()
     
     //Bit Masks
@@ -70,6 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(carNode)
         self.addChild(sceneNode)
         self.addChild(coinsNode)
+        
+        gameViewControllerBridge.scene?.backgroundColor = SKColor.black
         
         createGame()
     }
@@ -139,17 +142,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         beizerPath.close()
         
         //Create planet from beizer path
-        planetTexture = SKTexture(imageNamed: "asanoha")
-        
-        let planetSprite = SKSpriteNode(texture: planetTexture)
         
         planetPath = SKShapeNode(path: beizerPath.cgPath)
-        planetPath.fillColor = SKColor.white
+        planetPath.fillColor = getRandomColor()
         planetPath.strokeColor = getRandomColor()
-        planetPath.lineWidth = 7
-        planetPath.glowWidth = 0.5
+        planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
+        //planetPath.glowWidth = 0.5
         
         planet.maskNode = planetPath
+        
+        planetTexture = SKTexture(imageNamed: "asanoha2")
+        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.width + planetPath.frame.width / 4, height: planetPath.frame.height + planetPath.frame.height / 4))
+        planetSprite.alpha = 0.4
+        
         planet.addChild(planetSprite)
         
         planet.position = CGPoint(x: 0, y: 0)
@@ -166,15 +171,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fieldNode.strength = 200
         
         //Planet atmosphere
-        let atmoTexture = SKTexture(imageNamed: "atmosphere.png")
-        let atmoSize = CGSize(width: CGFloat(planetRadius * 4), height: CGFloat(planetRadius * 4))
+        let atmo1 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 2))
+        atmo1.position = CGPoint(x: 0,y: 0)
+        atmo1.fillColor = SKColor.cyan
+        atmo1.alpha = 0.9
         
-        let atmoGradient = BDGradientNode(radialGradientWithTexture: atmoTexture, colors: [getRandomColor(), getRandomColor(), UIColor.cyan], locations: nil, firstCenter: CGPoint(x: 0.5,y: 0.5), firstRadius: 0.2, secondCenter: CGPoint(x: 0.5,y: 0.5), secondRadius: 0.36, blending: 0.3, discardOutsideGradient: true, keepTextureShape: true, size: atmoSize)
-        atmoGradient.position = CGPoint(x: 0, y: 0)
-        atmoGradient.zPosition = 1
+        let atmo2 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 2))
+        atmo2.fillColor = getRandomColor()
+        atmo2.alpha = 0.2
         
+        let atmo3 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 3))
+        atmo3.fillColor = getRandomColor()
+        atmo3.alpha = 0.1
+        
+        atmo1.addChild(atmo2)
+        atmo2.addChild(atmo3)
+        
+        sceneNode.addChild(atmo1)
         sceneNode.addChild(planet)
-        //sceneNode.addChild(atmoGradient)
+        //planet.addChild(atmoGradient)
         sceneNode.addChild(fieldNode)
         
     }
@@ -397,6 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func reloadGame() {
         animations.shakeAndFlashAnimation(self.view!)
         
+        planet.removeAllChildren()
         beizerPath.removeAllPoints()
         carNode.removeAllChildren()
         sceneNode.removeAllChildren()

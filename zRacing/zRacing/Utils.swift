@@ -77,3 +77,18 @@ func getRandomColor() -> SKColor{
     
 }
 
+func generateImage(shape: CGRect) -> SKTexture {
+    let contex = CIContext(options: nil)
+    let filter = CIFilter(name: "CIAffineTile")
+    let pic = CIImage(image: UIImage(named: "asanoha")!)
+    
+    filter?.setDefaults()
+    filter?.setValue(pic, forKey: "inputImage")
+    filter?.setValue(NSValue(cgAffineTransform: CGAffineTransform.identity), forKey: "inputTransform")
+    
+    let cgimg = contex.createCGImage((filter?.outputImage)!, from: shape)
+    let newImage = UIImage(cgImage: cgimg!)
+    
+    return SKTexture(image: newImage)
+}
+
