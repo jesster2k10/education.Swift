@@ -27,15 +27,17 @@
 		202211181D7DB551003ADC7D /* Wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022110B1D7DB551003ADC7D /* Wheel2.png */; };
 		2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 202211191D7DBA7F003ADC7D /* map_01.png */; };
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
-		208E3A391D91550600F3EE6F /* asanoha2.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A381D91550600F3EE6F /* asanoha2.png */; };
+		208E3A3F1D928F3000F3EE6F /* test(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A3A1D928F3000F3EE6F /* test(1).png */; };
+		208E3A401D928F3000F3EE6F /* test(2).png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A3B1D928F3000F3EE6F /* test(2).png */; };
+		208E3A411D928F3000F3EE6F /* test(3).png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A3C1D928F3000F3EE6F /* test(3).png */; };
+		208E3A421D928F3000F3EE6F /* test(4).png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A3D1D928F3000F3EE6F /* test(4).png */; };
+		208E3A431D928F3000F3EE6F /* test(5).png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A3E1D928F3000F3EE6F /* test(5).png */; };
+		208E3A6D1D929B5200F3EE6F /* shader_opengl.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */; };
 		20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF3941D8441DE0064AD7E /* Utils.swift */; };
 		20AF3A9A1D8DF7BD00CCB91A /* atmosphere.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AF3A991D8DF7BC00CCB91A /* atmosphere.png */; };
 		20C420321D9022DC00A54C09 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C4202F1D9022DC00A54C09 /* back.png */; };
 		20C420331D9022DC00A54C09 /* starfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C420301D9022DC00A54C09 /* starfield.png */; };
 		20C420341D9022DC00A54C09 /* starfield2.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C420311D9022DC00A54C09 /* starfield2.png */; };
-		20C420381D9022E300A54C09 /* asanoha.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C420351D9022E300A54C09 /* asanoha.png */; };
-		20C420391D9022E300A54C09 /* sayagata.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C420361D9022E300A54C09 /* sayagata.png */; };
-		20C4203A1D9022E300A54C09 /* seigaiha.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C420371D9022E300A54C09 /* seigaiha.png */; };
 		20C4203E1D90371900A54C09 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C4203D1D90371900A54C09 /* test.png */; };
 		20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB931A1D82C5CF00BA4DEA /* reloadButton.png */; };
 		20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */; };
@@ -73,15 +75,17 @@
 		2022110B1D7DB551003ADC7D /* Wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wheel2.png; sourceTree = "<group>"; };
 		202211191D7DBA7F003ADC7D /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_01.png; sourceTree = "<group>"; };
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
-		208E3A381D91550600F3EE6F /* asanoha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asanoha2.png; sourceTree = "<group>"; };
+		208E3A3A1D928F3000F3EE6F /* test(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(1).png"; sourceTree = "<group>"; };
+		208E3A3B1D928F3000F3EE6F /* test(2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(2).png"; sourceTree = "<group>"; };
+		208E3A3C1D928F3000F3EE6F /* test(3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(3).png"; sourceTree = "<group>"; };
+		208E3A3D1D928F3000F3EE6F /* test(4).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(4).png"; sourceTree = "<group>"; };
+		208E3A3E1D928F3000F3EE6F /* test(5).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(5).png"; sourceTree = "<group>"; };
+		208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_opengl.fsh; sourceTree = "<group>"; };
 		20ABF3941D8441DE0064AD7E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20AF3A991D8DF7BC00CCB91A /* atmosphere.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atmosphere.png; sourceTree = "<group>"; };
 		20C4202F1D9022DC00A54C09 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		20C420301D9022DC00A54C09 /* starfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starfield.png; sourceTree = "<group>"; };
 		20C420311D9022DC00A54C09 /* starfield2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starfield2.png; sourceTree = "<group>"; };
-		20C420351D9022E300A54C09 /* asanoha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asanoha.png; sourceTree = "<group>"; };
-		20C420361D9022E300A54C09 /* sayagata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sayagata.png; sourceTree = "<group>"; };
-		20C420371D9022E300A54C09 /* seigaiha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seigaiha.png; sourceTree = "<group>"; };
 		20C4203D1D90371900A54C09 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		20DB931A1D82C5CF00BA4DEA /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = "<group>"; };
 		20DB93221D87042300BA4DEA /* WheelDirtEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WheelDirtEmitter.sks; sourceTree = "<group>"; };
@@ -188,10 +192,11 @@
 		20C4202D1D9022BE00A54C09 /* Planets */ = {
 			isa = PBXGroup;
 			children = (
-				20C420351D9022E300A54C09 /* asanoha.png */,
-				208E3A381D91550600F3EE6F /* asanoha2.png */,
-				20C420361D9022E300A54C09 /* sayagata.png */,
-				20C420371D9022E300A54C09 /* seigaiha.png */,
+				208E3A3A1D928F3000F3EE6F /* test(1).png */,
+				208E3A3B1D928F3000F3EE6F /* test(2).png */,
+				208E3A3C1D928F3000F3EE6F /* test(3).png */,
+				208E3A3D1D928F3000F3EE6F /* test(4).png */,
+				208E3A3E1D928F3000F3EE6F /* test(5).png */,
 			);
 			name = Planets;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 		20DB93391D8C367300BA4DEA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */,
 				20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */,
 				20ABF3941D8441DE0064AD7E /* Utils.swift */,
 				20DB93371D8C365100BA4DEA /* Animations.swift */,
@@ -300,36 +306,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				202211121D7DB551003ADC7D /* Button_24.png in Resources */,
+				208E3A401D928F3000F3EE6F /* test(2).png in Resources */,
 				20DB93341D89C42E00BA4DEA /* Body.png in Resources */,
-				208E3A391D91550600F3EE6F /* asanoha2.png in Resources */,
 				20C420321D9022DC00A54C09 /* back.png in Resources */,
 				202211101D7DB551003ADC7D /* Button_22.png in Resources */,
 				202211171D7DB551003ADC7D /* Wheel1.png in Resources */,
 				20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */,
 				202210E91D7DB473003ADC7D /* GameScene.sks in Resources */,
+				208E3A3F1D928F3000F3EE6F /* test(1).png in Resources */,
 				20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */,
 				2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */,
-				20C420381D9022E300A54C09 /* asanoha.png in Resources */,
 				202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */,
 				2022110E1D7DB551003ADC7D /* Button_16.png in Resources */,
 				202211111D7DB551003ADC7D /* Button_23.png in Resources */,
 				20C420341D9022DC00A54C09 /* starfield2.png in Resources */,
 				20DB932F1D8835AA00BA4DEA /* Coin2.png in Resources */,
-				20C420391D9022E300A54C09 /* sayagata.png in Resources */,
 				202211131D7DB551003ADC7D /* Button_25.png in Resources */,
 				20C420331D9022DC00A54C09 /* starfield.png in Resources */,
 				20DB93251D87042300BA4DEA /* spark.png in Resources */,
+				208E3A6D1D929B5200F3EE6F /* shader_opengl.fsh in Resources */,
 				2022110F1D7DB551003ADC7D /* Button_17.png in Resources */,
 				20DB93301D8835AA00BA4DEA /* Coin3.png in Resources */,
 				20DB932E1D8835AA00BA4DEA /* Coin1.png in Resources */,
 				20DB932C1D8835AA00BA4DEA /* coin.jpg in Resources */,
+				208E3A421D928F3000F3EE6F /* test(4).png in Resources */,
 				2022110C1D7DB551003ADC7D /* Button_14.png in Resources */,
 				2022110D1D7DB551003ADC7D /* Button_15.png in Resources */,
+				208E3A411D928F3000F3EE6F /* test(3).png in Resources */,
 				202211181D7DB551003ADC7D /* Wheel2.png in Resources */,
-				20C4203A1D9022E300A54C09 /* seigaiha.png in Resources */,
 				20AF3A9A1D8DF7BD00CCB91A /* atmosphere.png in Resources */,
 				202211161D7DB551003ADC7D /* Head.png in Resources */,
 				20DB932D1D8835AA00BA4DEA /* Coin0.png in Resources */,
+				208E3A431D928F3000F3EE6F /* test(5).png in Resources */,
 				202210F21D7DB473003ADC7D /* Assets.xcassets in Resources */,
 				202210F01D7DB473003ADC7D /* Main.storyboard in Resources */,
 				20C4203E1D90371900A54C09 /* test.png in Resources */,

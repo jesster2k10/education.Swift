@@ -147,13 +147,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planetPath.fillColor = getRandomColor()
         planetPath.strokeColor = getRandomColor()
         planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
-        //planetPath.glowWidth = 0.5
         
         planet.maskNode = planetPath
         
-        planetTexture = SKTexture(imageNamed: "asanoha2")
-        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.width + planetPath.frame.width / 4, height: planetPath.frame.height + planetPath.frame.height / 4))
-        planetSprite.alpha = 0.4
+        planetTexture = tiledFillTexture(imageName: "test(5)", frameSize: CGSize(width: 4000, height: 4000), tileSize: CGSize(width: 1920, height: 1080))
+        planetSprite = SKSpriteNode(texture: planetTexture, size: planetPath.frame.size)
+        planetSprite.alpha = 0.3
         
         planet.addChild(planetSprite)
         
@@ -178,18 +177,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let atmo2 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 2))
         atmo2.fillColor = getRandomColor()
+        atmo2.glowWidth = 30
         atmo2.alpha = 0.2
         
         let atmo3 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 3))
         atmo3.fillColor = getRandomColor()
-        atmo3.alpha = 0.1
+        atmo3.glowWidth = 60
+        atmo3.alpha = 0.3
         
         atmo1.addChild(atmo2)
         atmo2.addChild(atmo3)
         
         sceneNode.addChild(atmo1)
         sceneNode.addChild(planet)
-        //planet.addChild(atmoGradient)
         sceneNode.addChild(fieldNode)
         
     }
