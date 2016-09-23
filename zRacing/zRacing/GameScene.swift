@@ -152,9 +152,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planet.maskNode = planetPath
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         planetTexture = tiledFillTexture(imageName: "test(1).png", frameSize: CGSize(width: 2000, height: 2000), tileSize: CGSize(width: 1920, height: 1080))
         planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.size.width + CGFloat(planetRadius) / 4, height: planetPath.frame.size.height + CGFloat(planetRadius) / 4))
         planetSprite.alpha = 0.3
+=======
+        planetTexture = SKTexture(imageNamed: "asanoha2")
+        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.width + planetPath.frame.width / 4, height: planetPath.frame.height + planetPath.frame.height / 4))
+        planetSprite.alpha = 0.4
+>>>>>>> parent of e7005af... Update
 =======
         planetTexture = SKTexture(imageNamed: "asanoha2")
         planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.width + planetPath.frame.width / 4, height: planetPath.frame.height + planetPath.frame.height / 4))

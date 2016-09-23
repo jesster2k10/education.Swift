@@ -16,7 +16,11 @@
 		202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 202210F31D7DB473003ADC7D /* LaunchScreen.storyboard */; };
 		2022111C1D7DC84B003ADC7D /* GameController_Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 		208E3A6D1D929B5200F3EE6F /* shader_opengl.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */; };
+=======
+		208E3A391D91550600F3EE6F /* asanoha2.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A381D91550600F3EE6F /* asanoha2.png */; };
+>>>>>>> parent of e7005af... Update
 		20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABF3941D8441DE0064AD7E /* Utils.swift */; };
 =======
 		208E3A391D91550600F3EE6F /* asanoha2.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E3A381D91550600F3EE6F /* asanoha2.png */; };
@@ -51,7 +55,11 @@
 		202210F61D7DB473003ADC7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2022111B1D7DC84B003ADC7D /* GameController_Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController_Touches.swift; sourceTree = "<group>"; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 		208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_opengl.fsh; sourceTree = "<group>"; };
+=======
+		208E3A381D91550600F3EE6F /* asanoha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asanoha2.png; sourceTree = "<group>"; };
+>>>>>>> parent of e7005af... Update
 		20ABF3941D8441DE0064AD7E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 =======
 		208E3A381D91550600F3EE6F /* asanoha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asanoha2.png; sourceTree = "<group>"; };
@@ -291,10 +299,13 @@
 				20F280711D952BA50058B4E0 /* back.png in Resources */,
 				202210E91D7DB473003ADC7D /* GameScene.sks in Resources */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */,
 				20DB93251D87042300BA4DEA /* spark.png in Resources */,
 				208E3A6D1D929B5200F3EE6F /* shader_opengl.fsh in Resources */,
 =======
+=======
+>>>>>>> parent of e7005af... Update
 				20DB931B1D82C5CF00BA4DEA /* reloadButton.png in Resources */,
 				2022111A1D7DBA7F003ADC7D /* map_01.png in Resources */,
 				20C420381D9022E300A54C09 /* asanoha.png in Resources */,
@@ -318,6 +329,9 @@
 				20AF3A9A1D8DF7BD00CCB91A /* atmosphere.png in Resources */,
 				202211161D7DB551003ADC7D /* Head.png in Resources */,
 				20DB932D1D8835AA00BA4DEA /* Coin0.png in Resources */,
+<<<<<<< HEAD
+>>>>>>> parent of e7005af... Update
+=======
 >>>>>>> parent of e7005af... Update
 				202210F21D7DB473003ADC7D /* Assets.xcassets in Resources */,
 				202210F01D7DB473003ADC7D /* Main.storyboard in Resources */,
