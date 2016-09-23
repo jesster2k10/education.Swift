@@ -17,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewControllerBridge: GameViewController!
     var coinsArray = [CGPoint]()
     var planetRadius = Float()
+    var score = 0
+    var highScore = 0
     
     //Beizer Path
     var beizerPath = UIBezierPath()
@@ -30,11 +32,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var planetTexture = SKTexture()
     
     //Nodes
-    //var sceneNode = SKNode()
     var sceneNode = SKNode()
     var carNode = SKNode()
     var coinsNode = SKNode()
-    //var cameraNode = SKNode()
     
     //Sprites
     var map = SKSpriteNode()
@@ -50,7 +50,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wheelDirtEmitter = SKEmitterNode()
     
     //Planet Shapes
-    var planet = SKCropNode()
     var planetPath = SKShapeNode()
     
     //Bit Masks
@@ -65,12 +64,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.7
         self.physicsWorld.contactDelegate = self
-
         self.camera = cam
         
         self.addChild(carNode)
         self.addChild(sceneNode)
         self.addChild(coinsNode)
+        
+        if UserDefaults.standard.object(forKey: "highScore") != nil {
+            highScore = UserDefaults.standard.object(forKey: "highScore") as! Int
+        }
         
         gameViewControllerBridge.scene?.backgroundColor = SKColor.black
         
@@ -81,9 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cam.setScale(1)
         
         loadMap()
-        addCoins()
         createCar()
+        addCoins()
         addJoint()
+        
+        updateScoreLabels()
     }
     
     func loadMap() {
@@ -148,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planetPath.strokeColor = getRandomColor()
         planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
         
+        let planet = SKCropNode()
         planet.maskNode = planetPath
         
         let textureImage = SKTexture(imageNamed: "test(5)")
@@ -161,6 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planet.physicsBody = SKPhysicsBody(edgeLoopFrom: beizerPath.cgPath)
         planet.physicsBody?.isDynamic = false
         planet.physicsBody?.categoryBitMask = planetGroup
+        planet.zPosition = 10
         
         //Gravity & Friction
         planet.physicsBody?.friction = 1
@@ -175,6 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         atmo1.position = CGPoint(x: 0,y: 0)
         atmo1.fillColor = SKColor.cyan
         atmo1.alpha = 0.9
+        atmo1.zPosition = 1
         
         let atmo2 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 2))
         atmo2.fillColor = getRandomColor()
@@ -304,11 +311,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
-
-        //carNode.position = car.position
-        //carNode.physicsBody = SKPhysicsBody(bodies: [car.physicsBody!, wheel1.physicsBody!, wheel2.physicsBody!, suspension1.physicsBody!, suspension2.physicsBody!])
-        
-        //carNode.physicsBody?.restitution = 1
         
         addWheelDirtEmiter()
     }
@@ -362,6 +364,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func updateScoreLabels() {
+        if highScore < score {
+            highScore = score
+        }
+        
+        gameViewControllerBridge.scoreLabel.text = "Score: \(score)"
+        gameViewControllerBridge.hightScoreLabel.text = "Highscore: \(highScore)"
+    }
+    
     override func didFinishUpdate() {
         let a = sqrt(pow(planetPath.position.x - car.position.x, 2) + pow(planetPath.position.y - car.position.y, 2))
         
@@ -391,7 +402,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameViewControllerBridge.gasButtonState {
             wheel2.physicsBody?.angularVelocity = -35
             wheel1.physicsBody?.angularVelocity = -35
-
             
             wheelDirtEmitter.isHidden = false
         } else if gameViewControllerBridge.brakeButtonState {
@@ -400,18 +410,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             wheelDirtEmitter.isHidden = true
         }
-        
     }
     
     func reloadGame() {
         animations.shakeAndFlashAnimation(self.view!)
         
-        planet.removeAllChildren()
         beizerPath.removeAllPoints()
+        
         carNode.removeAllChildren()
         sceneNode.removeAllChildren()
         coinsNode.removeAllChildren()
-
+        
+        score = 0
+        
         createGame()
         
         //let camZoom = SKAction.scale(to: 50, duration: 0.1)

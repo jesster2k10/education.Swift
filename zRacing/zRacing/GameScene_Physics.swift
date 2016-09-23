@@ -10,11 +10,31 @@ import Foundation
 import SpriteKit
 
 extension GameScene {
+    
     @objc(didBeginContact:) func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == coinGroup || contact.bodyB.categoryBitMask == coinGroup {
-            let coinNode = contact.bodyA.categoryBitMask == coinGroup ? contact.bodyA.node : contact.bodyB.node
-            
-            coinNode?.removeFromParent()
+        
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        
+        UserDefaults.standard.set(highScore, forKey: "highScore")
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
         }
+        
+        if firstBody.categoryBitMask == carGroup && secondBody.categoryBitMask == coinGroup {
+            if secondBody.node?.parent != nil {
+                secondBody.node?.removeFromParent()
+                score += 1
+                updateScoreLabels()
+            }
+        }
+        //else if firstBody.categoryBitMask == coinGroup && secondBody.categoryBitMask == carGroup {
+        //    print("nope")
+        //}
     }
 }

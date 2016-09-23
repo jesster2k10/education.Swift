@@ -10,18 +10,22 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var hightScoreLabel: UILabel!
 
     var scene = GameScene(fileNamed:"GameScene")
     var gasButtonState = false
     var brakeButtonState = false
     let textureAtlas = SKTextureAtlas(named: "texture.atlas")
-    
-    @IBOutlet weak var loadingView: UIView!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SwiftSpinner.show("Loading...", animated: true)
         loadingView.isHidden = false
+    
         scene?.gameViewControllerBridge = self
         
         // Configure the view.
@@ -40,6 +44,7 @@ class GameViewController: UIViewController {
         textureAtlas.preload(completionHandler: {
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 self.loadingView.isHidden = true
+                SwiftSpinner.hide()
                 skView.presentScene(self.scene)
             })
         })

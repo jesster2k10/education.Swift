@@ -9,7 +9,8 @@
 import Foundation
 import SpriteKit
 
-extension GameViewController {    
+extension GameViewController {
+    
     @IBAction func gasButton(_ sender: UIButton){
         gasButtonState = true
     }
