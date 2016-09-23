@@ -14,10 +14,14 @@ class GameViewController: UIViewController {
     var scene = GameScene(fileNamed:"GameScene")
     var gasButtonState = false
     var brakeButtonState = false
+    let textureAtlas = SKTextureAtlas(named: "texture.atlas")
+    
+    @IBOutlet weak var loadingView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadingView.isHidden = false
         scene?.gameViewControllerBridge = self
         
         // Configure the view.
@@ -32,7 +36,13 @@ class GameViewController: UIViewController {
         
         /* Set the scale mode to scale to fit the window */
         scene!.scaleMode = .aspectFill
-        skView.presentScene(scene)
+        
+        textureAtlas.preload(completionHandler: {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                self.loadingView.isHidden = true
+                skView.presentScene(self.scene)
+            })
+        })
     }
     
     override func viewDidDisappear(_ animated: Bool) {

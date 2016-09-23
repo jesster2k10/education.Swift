@@ -150,7 +150,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         planet.maskNode = planetPath
         
-        planetTexture = tiledFillTexture(imageName: "test(1).png", frameSize: CGSize(width: 4000, height: 4000), tileSize: CGSize(width: 1920, height: 1080))
+        let textureImage = SKTexture(imageNamed: "test(5)")
+        planetTexture = tiledFillTexture(imageTexture: textureImage, frameSize: CGSize(width: 4000, height: 4000), tileSize: CGSize(width: 1920, height: 1080))
         planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.size.width + CGFloat(planetRadius) / 4, height: planetPath.frame.size.height + CGFloat(planetRadius) / 4))
         planetSprite.alpha = 0.3
         
@@ -413,7 +414,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         createGame()
         
-        let camZoom = SKAction.scale(to: 50, duration: 0.1)
+        //let camZoom = SKAction.scale(to: 50, duration: 0.1)
         //cam.runAction(camZoom)
     }
 }

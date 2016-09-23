@@ -79,13 +79,12 @@ func getRandomColor() -> SKColor{
     
 }
 
-func tiledFillTexture(imageName: String, frameSize: CGSize ,tileSize: CGSize) -> SKTexture {
+func tiledFillTexture(imageTexture: SKTexture, frameSize: CGSize ,tileSize: CGSize) -> SKTexture {
     let targetSize = CGSize(width: frameSize.width, height: frameSize.height)
-    let targetRef = UIImage(named: imageName)?.cgImage
     
     UIGraphicsBeginImageContext(targetSize)
     
-    UIGraphicsGetCurrentContext()?.draw(targetRef!, in: CGRect(origin: CGPoint.zero, size: tileSize), byTiling: true)
+    UIGraphicsGetCurrentContext()?.draw(imageTexture.cgImage(), in: CGRect(origin: CGPoint.zero, size: tileSize), byTiling: true)
     
     let tiledTexture = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
