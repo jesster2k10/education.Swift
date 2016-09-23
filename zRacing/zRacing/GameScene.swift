@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0) //Earth gravity (0, -9.8)
-        self.physicsWorld.speed = 0.8
+        self.physicsWorld.speed = 0.7
         self.physicsWorld.contactDelegate = self
 
         self.camera = cam
@@ -147,12 +147,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planetPath.fillColor = getRandomColor()
         planetPath.strokeColor = getRandomColor()
         planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
+        //planetPath.glowWidth = 0.5
         
         planet.maskNode = planetPath
         
-        planetTexture = tiledFillTexture(imageName: "test(5)", frameSize: CGSize(width: 4000, height: 4000), tileSize: CGSize(width: 1920, height: 1080))
-        planetSprite = SKSpriteNode(texture: planetTexture, size: planetPath.frame.size)
+<<<<<<< HEAD
+        planetTexture = tiledFillTexture(imageName: "test(1).png", frameSize: CGSize(width: 2000, height: 2000), tileSize: CGSize(width: 1920, height: 1080))
+        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.size.width + CGFloat(planetRadius) / 4, height: planetPath.frame.size.height + CGFloat(planetRadius) / 4))
         planetSprite.alpha = 0.3
+=======
+        planetTexture = SKTexture(imageNamed: "asanoha2")
+        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.width + planetPath.frame.width / 4, height: planetPath.frame.height + planetPath.frame.height / 4))
+        planetSprite.alpha = 0.4
+>>>>>>> parent of e7005af... Update
         
         planet.addChild(planetSprite)
         
@@ -177,19 +184,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let atmo2 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 2))
         atmo2.fillColor = getRandomColor()
-        atmo2.glowWidth = 30
         atmo2.alpha = 0.2
         
         let atmo3 = SKShapeNode(circleOfRadius: CGFloat(planetRadius + planetRadius / 3))
         atmo3.fillColor = getRandomColor()
-        atmo3.glowWidth = 60
-        atmo3.alpha = 0.3
+        atmo3.alpha = 0.1
         
         atmo1.addChild(atmo2)
         atmo2.addChild(atmo3)
         
-        sceneNode.addChild(atmo1)
+        //sceneNode.addChild(atmo1)
         sceneNode.addChild(planet)
+        //planet.addChild(atmoGradient)
         sceneNode.addChild(fieldNode)
         
     }
@@ -227,15 +233,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createCar() {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
-        //car.position = CGPointMake(tileMap.position.x + 600, tileMap.position.y + 600)
         car.position = CGPoint(x: 600, y: planetPath.frame.maxY + car.frame.height + 100)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         //car.physicsBody?.dynamic = true
-        car.physicsBody?.mass = 0.1
-        //car.physicsBody?.density = 0.1
+        car.physicsBody?.mass = 0.5
         car.setScale(0.3)
         car.zPosition = 101
-        //car.physicsBody?.restitution = 0
+        
+        car.physicsBody?.restitution = 0.5
         
         //Roch Shok
         suspension1 = SKSpriteNode(color: SKColor.red, size: CGSize(width: 5, height: 5))
@@ -244,7 +249,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         suspension1.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension1.physicsBody?.isDynamic = true
         suspension1.physicsBody?.mass = 0.1
-        //suspension1.physicsBody?.restitution = 0
+        
+        //suspension1.physicsBody?.restitution = 0.4
         //suspension1.physicsBody?.density = 0.1
         
         suspension2 = SKSpriteNode(color: SKColor.green, size: CGSize(width: 5, height: 5))
@@ -253,7 +259,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         suspension2.physicsBody = SKPhysicsBody(circleOfRadius: 5)
         suspension2.physicsBody?.isDynamic = true
         suspension2.physicsBody?.mass = 0.1
-        //suspension2.physicsBody?.restitution = 0
+        
+        //suspension2.physicsBody?.restitution = 0.4
         //suspension2.physicsBody?.density = 0.1
         
         wheel1Texture = SKTexture(imageNamed: "Wheel1")
@@ -273,19 +280,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wheel1.physicsBody?.friction = 1
         wheel2.physicsBody?.friction = 1
 
-        wheel1.physicsBody?.mass = 0.2
-        wheel2.physicsBody?.mass = 0.1
+        wheel1.physicsBody?.mass = 1
+        wheel2.physicsBody?.mass = 1
         
-//      car.physicsBody?.restitution = 1
-//      suspension1.physicsBody?.restitution = 1
-//      suspension2.physicsBody?.restitution = 1
-//      wheel1.physicsBody?.restitution = 1s
-//      wheel2.physicsBody?.restitution = 1
-        
-        //wheel1.physicsBody?.restitution = 1
-        //wheel2.physicsBody?.restitution = 1
-        //wheel1.physicsBody?.density = 0.1
-        //wheel2.physicsBody?.density = 0.1
+        wheel1.physicsBody?.restitution = 0.5
+        wheel2.physicsBody?.restitution = 0.5
         
         wheel1.zPosition = 102
         wheel2.zPosition = 102
@@ -310,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         carNode.addChild(suspension2)
         carNode.addChild(wheel1)
         carNode.addChild(wheel2)
-        
+
         //carNode.position = car.position
         //carNode.physicsBody = SKPhysicsBody(bodies: [car.physicsBody!, wheel1.physicsBody!, wheel2.physicsBody!, suspension1.physicsBody!, suspension2.physicsBody!])
         
@@ -338,7 +337,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wheel1JointSpring = SKPhysicsJointSpring.joint(withBodyA: car.physicsBody!, bodyB: wheel1.physicsBody!, anchorA: CGPoint(x: car.position.x - car.frame.size.width / 2, y: car.position.y), anchorB: suspension1.position)
         
         wheel1JointSpring.damping = 1
-        wheel1JointSpring.frequency = 10
+        wheel1JointSpring.frequency = 11
 
         
         let wheel1JointPin = SKPhysicsJointPin.joint(withBodyA: suspension1.physicsBody!, bodyB: wheel1.physicsBody!, anchor: wheel1.position)
@@ -353,7 +352,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wheel2JointSpring = SKPhysicsJointSpring.joint(withBodyA: car.physicsBody!, bodyB: wheel2.physicsBody!, anchorA: CGPoint(x: car.position.x + car.frame.size.width / 2, y: car.position.y), anchorB: suspension2.position)
         
         wheel2JointSpring.damping = 1
-        wheel2JointSpring.frequency = 10
+        wheel2JointSpring.frequency = 11
         
         let wheel2JointPin = SKPhysicsJointPin.joint(withBodyA: suspension2.physicsBody!, bodyB: wheel2.physicsBody!, anchor: wheel2.position)
         

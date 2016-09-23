@@ -8,8 +8,6 @@
 
 import Foundation
 import SpriteKit
-import QuartzCore
-import UIKit
 
 //Extensions
 extension Int {
@@ -79,18 +77,18 @@ func getRandomColor() -> SKColor{
     
 }
 
-func tiledFillTexture(imageName: String, frameSize: CGSize ,tileSize: CGSize) -> SKTexture {
-    let targetSize = CGSize(width: frameSize.width, height: frameSize.height)
-    let targetRef = UIImage(named: imageName)?.cgImage
+func generateImage(shape: CGRect) -> SKTexture {
+    let contex = CIContext(options: nil)
+    let filter = CIFilter(name: "CIAffineTile")
+    let pic = CIImage(image: UIImage(named: "asanoha")!)
     
-    UIGraphicsBeginImageContext(targetSize)
+    filter?.setDefaults()
+    filter?.setValue(pic, forKey: "inputImage")
+    filter?.setValue(NSValue(cgAffineTransform: CGAffineTransform.identity), forKey: "inputTransform")
     
-    UIGraphicsGetCurrentContext()?.draw(targetRef!, in: CGRect(origin: CGPoint.zero, size: tileSize), byTiling: true)
+    let cgimg = contex.createCGImage((filter?.outputImage)!, from: shape)
+    let newImage = UIImage(cgImage: cgimg!)
     
-    let tiledTexture = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    
-    return SKTexture(image: tiledTexture!)
+    return SKTexture(image: newImage)
 }
-
 
