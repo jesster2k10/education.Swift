@@ -256,7 +256,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //suspension2.physicsBody?.restitution = 0.4
         //suspension2.physicsBody?.density = 0.1
-        
+         
         wheel1Texture = SKTexture(imageNamed: "Wheel1")
         wheel2Texture = SKTexture(imageNamed: "Wheel2")
         wheel1 = SKSpriteNode(texture: wheel1Texture)
