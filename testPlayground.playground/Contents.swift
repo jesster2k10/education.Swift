@@ -1,47 +1,45 @@
-import Foundation
+//: Playground - noun: a place where people can play
+
+import UIKit
 import SpriteKit
 import XCPlayground
 
--(SKTexture *)tiledTextureImage:(UIImage *)image ForSize:(CGSize)size tileSize:(CGSize)tileSize{
-    
-    // First we create a new size based on the longest side of your rect
-    int targetDimension = (int)fmax(size.width,size.height);
-    CGSize targetSize = CGSizeMake(targetDimension, targetDimension);
-    
-    // Create a CGImage from the input image and start a new image context.
-    struct CGImage *targetRef = image.CGImage;
-    UIGraphicsBeginImageContext(targetSize);
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();
-    
-    // Now we simply draw a tiled image
-    CGContextDrawTiledImage(contextRef, CGRectMake(0,0, tileSize.width,tileSize.height), targetRef);
-    UIImage *tiledTexture = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    // Finally create a texture and return it.
-    return  [SKTexture textureWithImage:tiledTexture];
+let frame = CGRect(x: 0, y: 0, width: 600, height: 600)
+let midPoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
+
+//Create a scene, add something to it
+var scene = SKScene(size: frame.size)
+
+//Set up the view and show the scene
+let view = SKView(frame: frame)
+view.presentScene(scene)
+XCPlaygroundPage.currentPage.liveView = view
+
+//Code:
+
+let tileSize = CGSize(width: 100, height: 50)
+
+func getTilePosition(row r:Int, column c:Int) -> CGPoint
+{
+    let x = 100 + (c * (Int(tileSize.width + 1)))
+    let y = 100 + (r * (Int(tileSize.height + 1)))
+    return CGPoint(x: x, y: y)
 }
 
+let temp = SKSpriteNode()
+let temp2 = SKSpriteNode()
+let node = SKNode()
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//------------------------------------------------------------------------------------
+for r in 0...2 {
+    for c in 0...2 {
+        let tile = SKSpriteNode(color: SKColor.white, size: CGSize(width: 30, height: 30))
+        tile.size = CGSize(width: tileSize.width, height: tileSize.height)
+        tile.position = getTilePosition(row: r, column: c)
+        temp.addChild(tile)
+    }
+}
 
-let shape = SKShapeNode(circleOfRadius: 300)
-shape.position = midPoint
-shape.fillColor = SKColor.white
-shape.strokeColor = SKColor.green
-shape.lineWidth = 100
-
-
-scene.addChild(shape)
-=======
->>>>>>> parent of e7005af... Update
-=======
->>>>>>> parent of e7005af... Update
-=======
->>>>>>> parent of e7005af... Update
+scene.addChild(temp)
 
 
