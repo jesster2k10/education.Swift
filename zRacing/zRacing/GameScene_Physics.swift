@@ -16,7 +16,8 @@ extension GameScene {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
         
-        UserDefaults.standard.set(highScore, forKey: "highScore")
+        //UserDefaults.standard.set(highScore, forKey: "highScore")
+        Model.sharedInstance.setHighScore()
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
@@ -29,7 +30,7 @@ extension GameScene {
         if firstBody.categoryBitMask == carGroup && secondBody.categoryBitMask == coinGroup {
             if secondBody.node?.parent != nil {
                 secondBody.node?.removeFromParent()
-                score += 1
+                Model.sharedInstance.score += 1
                 updateScoreLabels()
             }
         }

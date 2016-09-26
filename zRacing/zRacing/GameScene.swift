@@ -17,19 +17,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewControllerBridge: GameViewController!
     var coinsArray = [CGPoint]()
     var planetRadius = Float()
-    var score = 0
-    var highScore = 0
     
     //Beizer Path
     var beizerPath = UIBezierPath()
     
     //Textures
-    var mapTexture = SKTexture()
-    var carTexture = SKTexture()
-    var wheel1Texture = SKTexture()
-    var wheel2Texture = SKTexture()
-    var coinTexture = SKTexture()
-    var planetTexture = SKTexture()
+    var carTexture: SKTexture!
+    var wheel1Texture: SKTexture!
+    var wheel2Texture: SKTexture!
+    var coinTexture: SKTexture!
+    var planetTexture: SKTexture!
+    var textureImage: SKTexture!
     
     //Nodes
     var sceneNode = SKNode()
@@ -61,6 +59,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var cam = SKCameraNode()
     
     override func didMove(to view: SKView) {
+        //textureImage = SKTexture(imageNamed: "test(5)")
+        //coinTexture = SKTexture(imageNamed: "coin.jpg")
+        //carTexture = SKTexture(imageNamed: "Body.png")
+        //wheel1Texture = SKTexture(imageNamed: "Wheel1")
+        //wheel2Texture = SKTexture(imageNamed: "Wheel2")
+        //planetTexture = SKTexture(imageNamed: "test")
+        
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0) //Earth gravity (0, -9.8)
         self.physicsWorld.speed = 0.7
         self.physicsWorld.contactDelegate = self
@@ -69,10 +74,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(carNode)
         self.addChild(sceneNode)
         self.addChild(coinsNode)
-        
-        if UserDefaults.standard.object(forKey: "highScore") != nil {
-            highScore = UserDefaults.standard.object(forKey: "highScore") as! Int
-        }
         
         gameViewControllerBridge.scene?.backgroundColor = SKColor.black
         
@@ -155,10 +156,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let planet = SKCropNode()
         planet.maskNode = planetPath
         
-        let textureImage = SKTexture(imageNamed: "test(5)")
-        planetTexture = tiledFillTexture(imageTexture: textureImage, frameSize: CGSize(width: 4000, height: 4000), tileSize: CGSize(width: 1920, height: 1080))
+        textureImage = SKTexture(imageNamed: "test(6)")
+        planetTexture = tiledFillTexture(imageTexture: textureImage, frameSize: CGSize(width: 1000, height: 1000), tileSize: CGSize(width: 400, height: 403))
         planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.size.width + CGFloat(planetRadius) / 4, height: planetPath.frame.size.height + CGFloat(planetRadius) / 4))
-        planetSprite.alpha = 0.3
+        planetSprite.alpha = 0.5
         
         planet.addChild(planetSprite)
         
@@ -196,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         atmo1.addChild(atmo2)
         atmo2.addChild(atmo3)
         
-        //sceneNode.addChild(atmo1)
+        sceneNode.addChild(atmo1)
         sceneNode.addChild(planet)
         sceneNode.addChild(fieldNode)
         
@@ -365,12 +366,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateScoreLabels() {
-        if highScore < score {
-            highScore = score
+        if Model.sharedInstance.highScore < Model.sharedInstance.score {
+            Model.sharedInstance.highScore = Model.sharedInstance.score
         }
         
-        gameViewControllerBridge.scoreLabel.text = "Score: \(score)"
-        gameViewControllerBridge.hightScoreLabel.text = "Highscore: \(highScore)"
+        gameViewControllerBridge.scoreLabel.text = "Score: \(Model.sharedInstance.score)"
+        gameViewControllerBridge.hightScoreLabel.text = "Highscore: \(Model.sharedInstance.highScore)"
     }
     
     override func didFinishUpdate() {
@@ -421,7 +422,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sceneNode.removeAllChildren()
         coinsNode.removeAllChildren()
         
-        score = 0
+        Model.sharedInstance.score = 0
         
         createGame()
         

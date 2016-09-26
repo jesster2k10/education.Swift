@@ -11,7 +11,6 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hightScoreLabel: UILabel!
 
@@ -24,7 +23,6 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         SwiftSpinner.show("Loading...", animated: true)
-        loadingView.isHidden = false
     
         scene?.gameViewControllerBridge = self
         
@@ -42,8 +40,7 @@ class GameViewController: UIViewController {
         scene!.scaleMode = .aspectFill
         
         textureAtlas.preload(completionHandler: {
-            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-                self.loadingView.isHidden = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                 SwiftSpinner.hide()
                 skView.presentScene(self.scene)
             })
