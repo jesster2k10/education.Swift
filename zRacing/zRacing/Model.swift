@@ -13,7 +13,7 @@ class Model {
     static let sharedInstance = Model() //Singlton
     
     var score = 0
-    var highScore = UserDefaults.standard.object(forKey: "highScore") as! Int
+    var highScore = UserDefaults.standard.object(forKey: "highScore") as? Int ?? 0
     
     func setHighScore() {
         UserDefaults.standard.set(self.highScore, forKey: "highScore")

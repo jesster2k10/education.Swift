@@ -79,6 +79,9 @@ func getRandomColor() -> SKColor{
     
 }
 
+//Tiles
+
+/* To del
 func tiledFillTexture(imageTexture: SKTexture, frameSize: CGSize ,tileSize: CGSize) -> SKTexture {
     let targetSize = CGSize(width: frameSize.width, height: frameSize.height)
     
@@ -91,5 +94,29 @@ func tiledFillTexture(imageTexture: SKTexture, frameSize: CGSize ,tileSize: CGSi
     
     return SKTexture(image: tiledTexture!)
 }
+*/
 
+func getTilePosition(row r:Int, column c:Int, tileSize: CGSize) -> CGPoint
+{
+    let x = 0 + (c * (Int(tileSize.width)))
+    let y = 0 + (r * (Int(tileSize.height)))
+    return CGPoint(x: x, y: y)
+}
+
+func generateTileSprite(texture: SKTexture ,frame: CGRect) -> SKSpriteNode {
+    let rx = Int(frame.width / texture.size().width + 1)
+    let ry = Int(frame.height / texture.size().height + 1)
+    
+    let tempTileSprite = SKSpriteNode()
+    
+    for r in 0...ry {
+        for c in 0...rx {
+            let tile = SKSpriteNode(texture: texture)
+            tile.size = CGSize(width: texture.size().width, height: texture.size().height)
+            tile.position = getTilePosition(row: r, column: c, tileSize: texture.size())
+            tempTileSprite.addChild(tile)
+        }
+    }
+    return tempTileSprite
+}
 

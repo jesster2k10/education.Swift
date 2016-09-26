@@ -27,9 +27,6 @@ func getTilePosition(row r:Int, column c:Int) -> CGPoint
 }
 
 let temp = SKSpriteNode()
-let temp2 = SKSpriteNode()
-let node = SKNode()
-
 
 for r in 0...2 {
     for c in 0...2 {
@@ -39,7 +36,9 @@ for r in 0...2 {
         temp.addChild(tile)
     }
 }
+temp.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
 scene.addChild(temp)
 
-
+var a : Int? = nil
+var b  =  a ?? 0

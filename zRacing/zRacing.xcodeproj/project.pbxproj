@@ -34,6 +34,12 @@
 		20DB93251D87042300BA4DEA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB93231D87042300BA4DEA /* spark.png */; };
 		20DB93361D8B110B00BA4DEA /* GameScene_Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DB93351D8B110B00BA4DEA /* GameScene_Physics.swift */; };
 		20DB93381D8C365100BA4DEA /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DB93371D8C365100BA4DEA /* Animations.swift */; };
+		20EF68B71D99CB4800B84B5D /* test(2).png in Resources */ = {isa = PBXBuildFile; fileRef = 20EF68B61D99CB4800B84B5D /* test(2).png */; };
+		20EF68B91D99CB5300B84B5D /* test(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 20EF68B81D99CB5300B84B5D /* test(1).png */; };
+		20EF68BB1D99D1D100B84B5D /* test(3).png in Resources */ = {isa = PBXBuildFile; fileRef = 20EF68BA1D99D1D100B84B5D /* test(3).png */; };
+		20EF68BD1D99D24F00B84B5D /* test(4).png in Resources */ = {isa = PBXBuildFile; fileRef = 20EF68BC1D99D24F00B84B5D /* test(4).png */; };
+		20EF68BF1D99D4A500B84B5D /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF68BE1D99D4A500B84B5D /* OptionsViewController.swift */; };
+		20EF68C11D99D5DE00B84B5D /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EF68C01D99D5DE00B84B5D /* back.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +73,12 @@
 		20DB93351D8B110B00BA4DEA /* GameScene_Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene_Physics.swift; sourceTree = "<group>"; };
 		20DB93371D8C365100BA4DEA /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zRacing-Bridging-Header.h"; sourceTree = "<group>"; };
+		20EF68B61D99CB4800B84B5D /* test(2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(2).png"; sourceTree = "<group>"; };
+		20EF68B81D99CB5300B84B5D /* test(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(1).png"; sourceTree = "<group>"; };
+		20EF68BA1D99D1D100B84B5D /* test(3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(3).png"; sourceTree = "<group>"; };
+		20EF68BC1D99D24F00B84B5D /* test(4).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test(4).png"; sourceTree = "<group>"; };
+		20EF68BE1D99D4A500B84B5D /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		20EF68C01D99D5DE00B84B5D /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +95,8 @@
 		201C27881D9534AF00C175B9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				20EF68C01D99D5DE00B84B5D /* back.png */,
+				20EF68B51D99CB3600B84B5D /* Planets */,
 				201C27931D953A7000C175B9 /* Buttons */,
 			);
 			name = Images;
@@ -139,6 +153,7 @@
 				202210EC1D7DB473003ADC7D /* GameViewController.swift */,
 				2022111B1D7DC84B003ADC7D /* GameController_ScreenObjects.swift */,
 				201C27A81D95837600C175B9 /* MenuViewController.swift */,
+				20EF68BE1D99D4A500B84B5D /* OptionsViewController.swift */,
 				202210EE1D7DB473003ADC7D /* Main.storyboard */,
 				202210F11D7DB473003ADC7D /* Assets.xcassets */,
 				202210F31D7DB473003ADC7D /* LaunchScreen.storyboard */,
@@ -163,13 +178,24 @@
 		20DB93391D8C367300BA4DEA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */,
-				20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */,
 				20ABF3941D8441DE0064AD7E /* Utils.swift */,
 				20DB93371D8C365100BA4DEA /* Animations.swift */,
 				201C27AA1D95877800C175B9 /* SwiftSpinner.swift */,
+				208E3A6C1D929B5200F3EE6F /* shader_opengl.fsh */,
+				20DB933A1D8C3AD800BA4DEA /* zRacing-Bridging-Header.h */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		20EF68B51D99CB3600B84B5D /* Planets */ = {
+			isa = PBXGroup;
+			children = (
+				20EF68B81D99CB5300B84B5D /* test(1).png */,
+				20EF68B61D99CB4800B84B5D /* test(2).png */,
+				20EF68BA1D99D1D100B84B5D /* test(3).png */,
+				20EF68BC1D99D24F00B84B5D /* test(4).png */,
+			);
+			name = Planets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20DB93241D87042300BA4DEA /* WheelDirtEmitter.sks in Resources */,
+				20EF68B71D99CB4800B84B5D /* test(2).png in Resources */,
 				201C27A31D953A9300C175B9 /* Button_24.png in Resources */,
 				201C27901D95383400C175B9 /* texture.atlas in Resources */,
 				201C279D1D953A9300C175B9 /* Button_14.png in Resources */,
@@ -241,11 +268,15 @@
 				202210F51D7DB473003ADC7D /* LaunchScreen.storyboard in Resources */,
 				201C279F1D953A9300C175B9 /* Button_16.png in Resources */,
 				20DB93251D87042300BA4DEA /* spark.png in Resources */,
+				20EF68BB1D99D1D100B84B5D /* test(3).png in Resources */,
 				201C27A21D953A9300C175B9 /* Button_23.png in Resources */,
 				208E3A6D1D929B5200F3EE6F /* shader_opengl.fsh in Resources */,
 				201C27A51D953A9300C175B9 /* reloadButton.png in Resources */,
+				20EF68B91D99CB5300B84B5D /* test(1).png in Resources */,
 				201C279E1D953A9300C175B9 /* Button_15.png in Resources */,
+				20EF68BD1D99D24F00B84B5D /* test(4).png in Resources */,
 				201C27A41D953A9300C175B9 /* Button_25.png in Resources */,
+				20EF68C11D99D5DE00B84B5D /* back.png in Resources */,
 				201C27A11D953A9300C175B9 /* Button_22.png in Resources */,
 				202210F21D7DB473003ADC7D /* Assets.xcassets in Resources */,
 				202210F01D7DB473003ADC7D /* Main.storyboard in Resources */,
@@ -260,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				202210ED1D7DB473003ADC7D /* GameViewController.swift in Sources */,
+				20EF68BF1D99D4A500B84B5D /* OptionsViewController.swift in Sources */,
 				20ABF3951D8441DE0064AD7E /* Utils.swift in Sources */,
 				201C27AB1D95877800C175B9 /* SwiftSpinner.swift in Sources */,
 				20DB93361D8B110B00BA4DEA /* GameScene_Physics.swift in Sources */,

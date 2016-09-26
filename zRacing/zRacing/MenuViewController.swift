@@ -14,8 +14,6 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
     }
     
     @IBAction func startGame(sender: UIButton) {
@@ -23,6 +21,20 @@ class MenuViewController: UIViewController {
             let gameViewController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
             
             navigationController?.pushViewController(gameViewController, animated: true)
+        }
+    }
+    
+    @IBAction func optionsMenuButton(sender: UIButton) {
+        if let storyboard = storyboard {
+            let optionsViewController = storyboard.instantiateViewController(withIdentifier: "OptionsViewController") as! OptionsViewController
+            
+            let transition = CATransition()
+            transition.duration = 0.2
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionFade
+            navigationController?.view.layer.add(transition, forKey: nil)
+            
+            navigationController?.pushViewController(optionsViewController, animated: false)
         }
     }
     

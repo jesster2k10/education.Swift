@@ -39,12 +39,12 @@ class GameViewController: UIViewController {
         /* Set the scale mode to scale to fit the window */
         scene!.scaleMode = .aspectFill
         
-        textureAtlas.preload(completionHandler: {
+       // textureAtlas.preload(completionHandler: {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                 SwiftSpinner.hide()
                 skView.presentScene(self.scene)
             })
-        })
+       // })
     }
     
     override func viewDidDisappear(_ animated: Bool) {

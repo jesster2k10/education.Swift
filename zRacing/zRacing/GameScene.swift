@@ -59,7 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var cam = SKCameraNode()
     
     override func didMove(to view: SKView) {
-        //textureImage = SKTexture(imageNamed: "test(5)")
+        //textureImage = SKTexture(imageNamed: "test(6)")
         //coinTexture = SKTexture(imageNamed: "coin.jpg")
         //carTexture = SKTexture(imageNamed: "Body.png")
         //wheel1Texture = SKTexture(imageNamed: "Wheel1")
@@ -156,9 +156,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let planet = SKCropNode()
         planet.maskNode = planetPath
         
-        textureImage = SKTexture(imageNamed: "test(6)")
-        planetTexture = tiledFillTexture(imageTexture: textureImage, frameSize: CGSize(width: 1000, height: 1000), tileSize: CGSize(width: 400, height: 403))
-        planetSprite = SKSpriteNode(texture: planetTexture, size: CGSize(width: planetPath.frame.size.width + CGFloat(planetRadius) / 4, height: planetPath.frame.size.height + CGFloat(planetRadius) / 4))
+        textureImage = SKTexture(imageNamed: "test(4)")
+        planetSprite = generateTileSprite(texture: textureImage,frame: planetPath.frame)
+        planetSprite.position = CGPoint(x: planetPath.frame.minX, y: planetPath.frame.minY)
         planetSprite.alpha = 0.5
         
         planet.addChild(planetSprite)
@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         atmo1.addChild(atmo2)
         atmo2.addChild(atmo3)
         
-        sceneNode.addChild(atmo1)
+        //sceneNode.addChild(atmo1)
         sceneNode.addChild(planet)
         sceneNode.addChild(fieldNode)
         
