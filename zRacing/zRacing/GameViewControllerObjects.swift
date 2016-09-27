@@ -35,4 +35,19 @@ extension GameViewController {
         scene?.cam.yScale += 5
         print("cam scale + 5")
     }
+    
+    @IBAction func returnToMenuButton(sender: UIButton) {
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionFade
+        navigationController?.view.layer.add(transition, forKey: nil)
+
+        _ = navigationController?.popViewController(animated: false)
+        navigationController?.dismiss(animated: false, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.scene?.removeAll()
+        }
+    }
 }

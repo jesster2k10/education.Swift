@@ -150,13 +150,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         planetPath = SKShapeNode(path: beizerPath.cgPath)
         planetPath.fillColor = getRandomColor()
-        planetPath.strokeColor = getRandomColor()
-        planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
+        
+        //planetPath.strokeColor = getRandomColor()
+        //planetPath.lineWidth = CGFloat(Int.random(5, upper: 15))
+        
+        planetPath.lineWidth = 100
+        planetPath.strokeTexture = SKTexture(imageNamed: "test")
+        planetPath.strokeColor = SKColor.white
+
         
         let planet = SKCropNode()
         planet.maskNode = planetPath
         
-        textureImage = SKTexture(imageNamed: "test(4)")
+        textureImage = SKTexture(imageNamed: "test(5)")
         planetSprite = generateTileSprite(texture: textureImage,frame: planetPath.frame)
         planetSprite.position = CGPoint(x: planetPath.frame.minX, y: planetPath.frame.minY)
         planetSprite.alpha = 0.5
@@ -236,7 +242,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createCar() {
         carTexture = SKTexture(imageNamed: "Body.png")
         car = SKSpriteNode(texture: carTexture)
-        car.position = CGPoint(x: 600, y: planetPath.frame.maxY + car.frame.height + 100)
+        car.position = CGPoint(x: 600, y: planetPath.frame.maxY + car.frame.height + 50)
         car.physicsBody = SKPhysicsBody(texture: carTexture, size: car.frame.size)
         //car.physicsBody?.dynamic = true
         car.physicsBody?.mass = 0.5
@@ -428,5 +434,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //let camZoom = SKAction.scale(to: 50, duration: 0.1)
         //cam.runAction(camZoom)
+    }
+    
+    func removeAll() {
+        self.removeAllActions()
+        self.removeAllActions()
+        self.removeFromParent()
+        self.view?.removeFromSuperview()
+        
+        gameViewControllerBridge = nil
     }
 }

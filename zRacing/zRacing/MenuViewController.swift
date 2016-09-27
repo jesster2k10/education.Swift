@@ -20,7 +20,7 @@ class MenuViewController: UIViewController {
         if let storyboard = storyboard {
             let gameViewController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
             
-            navigationController?.pushViewController(gameViewController, animated: true)
+            navigationController?.pushViewController(gameViewController, animated: false)
         }
     }
     

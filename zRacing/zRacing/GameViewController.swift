@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hightScoreLabel: UILabel!
+    @IBOutlet weak var loadImageView: UIImageView!
 
     var scene = GameScene(fileNamed:"GameScene")
     var gasButtonState = false
@@ -22,8 +23,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadImageView.isHidden = false
         SwiftSpinner.show("Loading...", animated: true)
-    
+        
         scene?.gameViewControllerBridge = self
         
         // Configure the view.
@@ -42,6 +44,7 @@ class GameViewController: UIViewController {
        // textureAtlas.preload(completionHandler: {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                 SwiftSpinner.hide()
+                self.loadImageView.isHidden = true
                 skView.presentScene(self.scene)
             })
        // })

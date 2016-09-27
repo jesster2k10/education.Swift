@@ -42,3 +42,35 @@ scene.addChild(temp)
 
 var a : Int? = nil
 var b  =  a ?? 0
+
+let texture = SKTexture(imageNamed: "test")
+let shape = SKShapeNode(circleOfRadius: 100)
+shape.position = CGPoint(x: 200, y: 400)
+shape.fillColor = SKColor.green
+shape.fillTexture = texture
+
+//shape.strokeTexture = texture
+
+shape.lineWidth = 20
+
+scene.addChild(shape)
+
+let beizerPath = UIBezierPath()
+
+beizerPath.move(to: CGPoint(x: 400, y: 400))
+beizerPath.addLine(to: CGPoint(x: 450, y: 400))
+beizerPath.addLine(to: CGPoint(x: 450, y: 550))
+beizerPath.close()
+
+
+let shape2 = SKShapeNode(path: beizerPath.cgPath)
+shape2.strokeColor = SKColor.red
+shape2.strokeTexture = SKTexture(imageNamed: "test")
+shape2.lineWidth = 20
+
+let sprite = SKSpriteNode(texture: view.texture(from: shape))
+sprite.position = CGPoint(x: 500, y: 200)
+
+scene.addChild(sprite)
+scene.addChild(shape2)
+
